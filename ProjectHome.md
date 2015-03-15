@@ -1,0 +1,1 @@
+So basically this is going to be my dumping ground for all of my Ragnarok online creations feel free to pick some out and test them, and give me feedback if you can.
