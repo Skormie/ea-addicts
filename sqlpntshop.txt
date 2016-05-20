@@ -1,0 +1,42 @@
+//ALTER TABLE `char` ADD `pontos` int(11) unsigned NOT NULL default '0';
+
+-	shop	custom_seller1	-1,501:50
+morocc,159,97,5	script	SQL NPC Shop	60,{
+mes "Welcome to my shop!";
+callshop "custom_seller1",1;
+npcshopattach "custom_seller1";
+end;
+OnBuyItem:
+for(set @i,0; .shop_list[@i]; set @i,@i+1) {
+	for(set @d,0; @d<getarraysize(@bought_nameid); set @d,@d+1){
+		set .@shpl,	.shop_list[@i];
+		set .@pril,	.price_list[@i];
+		set .@boun,	@bought_nameid[@d];
+		set .@bouq,	@bought_quantity[@d];
+		if(.@boun==.@shpl) {
+			if(checkweight(.@shpl,.@bouq)){
+				if(query_sql("SELECT `pontos` FROM `char` WHERE `char_id` = "+getcharid(0)+" AND `pontos` -"+( .@pril*.@bouq )+"  > 0 FOR UPDATE;",.@a)){
+					query_sql("UPDATE `char` SET `pontos` = `pontos` -"+( .@pril*.@bouq )+" WHERE `char_id` = "+getcharid(0)+";");
+					getitem .@shpl,.@bouq;
+					dispbottom "Transaction complete you have "+(.@a-(.@pril*.@bouq))+" points left.";
+				} else { dispbottom "I'm sorry you don't have enough points for "+getitemname(.@shpl)+"s."; }
+			} else { dispbottom "I'm sorry but you can't hold that many "+getitemname(.@shpl)+"s."; }
+		}
+	}
+}
+
+deletearray @bought_quantity, getarraysize(@bought_quantity);
+deletearray @bought_nameid, getarraysize(@bought_nameid);
+close;
+
+OnInit:
+//=================Configuration================
+//Itemlist
+setarray .shop_list,607,678;
+setarray .price_list,20,15;
+//=================================================
+
+npcshopdelitem "custom_seller1",501;
+for(set .i,0; .i<getarraysize(.shop_list); set .i,.i+1) npcshopadditem "custom_seller1",.shop_list[.i],.price_list[.i];
+end;
+}

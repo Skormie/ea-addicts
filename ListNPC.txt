@@ -1,0 +1,49 @@
+//By Skorm
+prontera,95,98,5	script	ID_List	100,{
+L_Main:
+set .@menu$,"";
+for(set .@b,1; .@b <= 5; set .@b,.@b + 1) {
+	set .@menu$, .@menu$ + "( " + .@b + ") " + getd("slistn"+.@b+"$") + ":";
+}
+select .@menu$;
+if(getd("slistn"+@menu+"$")==""){ mes "What would you like to call this list?"; input(@name$); setd "slistn"+@menu+"$",@name$; }
+set .@m,@menu;
+for(set .@b,1; .@b <= 10; set .@b,.@b + 1) {
+	setarray .@foobar[.@b],getd(.@m+"sitemid"+.@b);
+	setarray .@foobarq[.@b],getd(.@m+"sitemq"+.@b);
+}
+L_list:
+set .@menu$,"";
+mes "Select to edit the list.";
+for(set .@b,1; .@b <= 10; set .@b,.@b + 1) {
+	set .@menu$, .@menu$ + "( " + .@b + ") " + ((getitemname(.@foobar[.@b])!="null")? getitemname(.@foobar[.@b])+ " x" + .@foobarq[.@b]:"Empty!") + ":";
+}
+set .@menu$, .@menu$ + "Save:Rename:Back";
+select(.@menu$);
+if(@menu<=10){
+	mes "Item ID"; input(@itemid); mes "Item Quantity"; input(@itemq);
+	setarray .@foobar[@menu],@itemid;
+	setarray .@foobarq[@menu],@itemq;
+	next;
+	goto L_list;
+}
+if(@menu==11){
+	for(set .@b,1; .@b <= 10; set .@b,.@b + 1) {
+		if(.@foobar[.@b]) setd .@m + "sitemid" + .@b, .@foobar[.@b];
+		if(.@foobarq[.@b]) setd .@m + "sitemq" + .@b, .@foobarq[.@b];
+	}
+	next;
+	goto L_list;
+}
+if(@menu==12){
+	mes "Please input a new name.";
+	input(@newn$);
+	setd "slistn"+.@m+"$",@newn$;
+	next;
+	goto L_Main;
+}
+if(@menu>=13){
+	next;
+	goto L_Main;
+}
+}

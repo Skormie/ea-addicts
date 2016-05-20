@@ -1,0 +1,53 @@
+//By Skorm
+prontera,95,100,5	script	Noobie Guide#01	100,0,0,{
+goto OnTouch;
+OnPCLoginEvent:
+if(logincount) end;
+OnTouch:
+set .@z,1;//Controls Rule Read Restriction. 1=on 0=off
+if(!.@z) set logincount,1;
+set .@a$,"[Noobie Guide]";
+    mes "Hey whats up, make sure to view the rules!";
+    mes "What do you want to do?";
+    //next;
+    switch(select("Rules "+((!.@z)?"":((!logincount)?"*^FF0000NEW!^000000*":"*^0000FFOLD.^000000*"))+":Tour:Cancel")) {
+       case 1:
+        mes .@a$;
+        mes "1st No Loitering!";
+		mes "2nd No Chewing Gum!";
+		mes "3rd Lemon Drops!";
+		mes "4th No Spamming!";
+		mes "5th No Flaming!";
+		mes "6th No Public Nudity!";
+		if(.@z) set logincount,1;
+        close;
+       case 2:
+        mes .@a$;
+        mes "I'm going on a tour would you like to come?";
+		if(select("Yes:No")-1) close;
+		getmapxy(.@map$,.@x,.@y,0);
+		//first warp
+		warp "prontera",0,0;
+		sleep2 3000;
+		mes "This is Prontera.";
+		sleep2 3000;
+		mes "Warping...";
+		sleep2 2000;
+		//second warp
+		warp "izlude",0,0;
+		sleep2 3000;
+		mes "This is Izlude.";
+		sleep2 3000;
+		mes "Warping...";
+		sleep2 2000;
+		//home warp
+		warp .@map$,.@x,.@y;
+		sleep2 3000;
+		mes "And we're back.";
+        close;
+       case 3:
+        mes .@a$;
+        mes "Seeya!";
+        close;
+    }
+}

@@ -1,0 +1,25 @@
+prontera,154,174,5    script    Refiner#d    100,{
+mes "Input refine count.";
+set @menu$,"";
+while(!.@c){input(.@c);}
+if(select("Increase:Decrease")==1){set .@a$,"+";} else {set .@a$,"-";}
+setarray .@slots$[1],"Upper headgear","Armor","Left hand","Right hand","Garment","Footgear","Accessory 1","Accessory 2","Middle Headgear","Lower Headgear";
+setarray .@slots2[1],256,16,32,2,4,64,8,128,512,1;
+for(set .@a,1; .@a<getarraysize(.@slots$); set .@a,.@a+1){
+set @menu$,@menu$+.@slots$[.@a]+" ("+getequipname(.@a)+"):";
+}
+next;
+mes "Select the item you want to apply this status to.";
+select(@menu$);
+if(atoi(getequipname(@menu))==-1){mes "I'm sorry you don't have an item equipped there."; close;}
+if(getequiprefinerycnt(@menu)>=100){mes "I'm sorry your item is already at the maximum refine rate."; close;}
+if(.@a$=="+"){
+for(set .@a,1; .@a!=.@c&&getequiprefinerycnt(@menu)<100;set .@a,.@a+1){
+successrefitem(@menu);
+}
+} else {
+atcommand "@refine "+.@slots2[@menu]+" "+.@a$+.@c;
+}
+mes "done";
+close;
+}

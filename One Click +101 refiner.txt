@@ -1,0 +1,16 @@
+new_1-2,95,71,4	script	+101 Refiner	100,{
+	for ( .@i = 1; .@i <= 10; .@i++ ) {
+		if ( getequipisequiped(.@i) && getequipisenableref(.@i) ) {
+			.@id = getequipid(.@i);
+			.@ref = getequiprefinerycnt(.@i);
+			.@card1 = getequipcardid( .@i, 0 );
+			.@card2 = getequipcardid( .@i, 1 );
+			.@card3 = getequipcardid( .@i, 2 );
+			.@card4 = getequipcardid( .@i, 3 );
+			delitem2 .@id, 1, 1, .@ref, 0, .@card1, .@card2, .@card3, .@card4;
+			getitem2 .@id, 1, 1, 101, 0, .@card1, .@card2, .@card3, .@card4;
+			equip .@id;
+		}
+	}
+	end;
+}

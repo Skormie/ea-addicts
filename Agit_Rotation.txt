@@ -1,0 +1,133 @@
+//By Skorm
+//callfunc "Agitwarps";
+//prontera,165,210,4
+-	script	Agit_Rotation	111,{
+OnPCLoadMapEvent:
+	getmapxy(.@map$,.@x,.@y,0);
+	if(.@map$!="prontera") { end; }
+	//Flag Name Array
+	setarray .@FlagName1$[0],"Kriemhild Castle","Swanhild Castle","Fadhgridh Castle","Skoegul Castle","Gondul Castle";
+	setarray .@FlagName2$[0],"Repherion Castle","Eeyolbriggar Castle","Yesnelph Castle","Bergel Castle","Mersetzdeitz Castle";
+	setarray .@FlagName3$[0],"BrightArbor Castle","ScarletPalace Castle","HolyShadow Castle","SacredAltar Castle","BambooGroveHill Castle";
+	setarray .@FlagName4$[0],"Neuschwanstein Castle","Hohenschwangau Castle","Nuenber Castle","Wuerzburg Castle","Rothenburg Castle";
+	//Disables All Flags
+	set $arraysize,getarraysize(.@FlagName1$);
+	set $disabletimes,0;
+	do {
+		disablenpc ""+.@FlagName1$[$disabletimes];
+		disablenpc ""+.@FlagName2$[$disabletimes];
+		disablenpc ""+.@FlagName3$[$disabletimes];
+		disablenpc ""+.@FlagName4$[$disabletimes];
+		set $disabletimes,$disabletimes+1;
+	} while ($disabletimes <= $arraysize);
+	enablenpc ""+.@FlagName1$[$AgitRtime];
+	enablenpc ""+.@FlagName2$[$AgitRtime];
+	enablenpc ""+.@FlagName3$[$AgitRtime];
+	enablenpc ""+.@FlagName4$[$AgitRtime];
+	end;
+
+OnClock2100:
+
+OnAgitInit:
+	if((gettime(4)==0) && (gettime(3)==21)) goto Clockon;
+	if((gettime(4)==5) && (gettime(3)==21)) goto Clockon;
+	end;
+
+Clockon:
+	//Flag Name Array
+	setarray .@FlagName1$[0],"Kriemhild Castle","Swanhild Castle","Fadhgridh Castle","Skoegul Castle","Gondul Castle";
+	setarray .@FlagName2$[0],"Repherion Castle","Eeyolbriggar Castle","Yesnelph Castle","Bergel Castle","Mersetzdeitz Castle";
+	setarray .@FlagName3$[0],"BrightArbor Castle","ScarletPalace Castle","HolyShadow Castle","SacredAltar Castle","BambooGroveHill Castle";
+	setarray .@FlagName4$[0],"Neuschwanstein Castle","Hohenschwangau Castle","Nuenber Castle","Wuerzburg Castle","Rothenburg Castle";
+	//Disables All Flags
+	set $arraysize,getarraysize(.@FlagName1$);
+	set $disabletimes,0;
+	do {
+		disablenpc ""+.@FlagName1$[$disabletimes];
+		disablenpc ""+.@FlagName2$[$disabletimes];
+		disablenpc ""+.@FlagName3$[$disabletimes];
+		disablenpc ""+.@FlagName4$[$disabletimes];
+		set $disabletimes,$disabletimes+1;
+	} while ($disabletimes <= $arraysize);
+	enablenpc ""+.@FlagName1$[$AgitRtime];
+	enablenpc ""+.@FlagName2$[$AgitRtime];
+	enablenpc ""+.@FlagName3$[$AgitRtime];
+	enablenpc ""+.@FlagName4$[$AgitRtime];
+	//Clock
+	if (agitcheck()) {
+		set $Agittimes,$Agittimes+1;
+		if($Agittimes>=2) { set $AgitRtime,$AgitRtime+1; set $Agittimes,0; }
+		if($AgitRtime>=6) { set $AgitRtime,0; }
+		end;
+		
+	}
+
+}
+
+function	script	Agitwarps	{
+	//Flag Activation
+	enablenpc ""+.@FlagName1$[$AgitRtime];
+	enablenpc ""+.@FlagName2$[$AgitRtime];
+	enablenpc ""+.@FlagName3$[$AgitRtime];
+	enablenpc ""+.@FlagName4$[$AgitRtime];
+	//Arrays
+	setarray .@FlagName1$[0],"Kriemhild Castle","Swanhild Castle","Fadhgridh Castle","Skoegul Castle","Gondul Castle";
+	setarray .@FlagName2$[0],"Repherion Castle","Eeyolbriggar Castle","Yesnelph Castle","Bergel Castle","Mersetzdeitz Castle";
+	setarray .@FlagName3$[0],"BrightArbor Castle","ScarletPalace Castle","HolyShadow Castle","SacredAltar Castle","BambooGroveHill Castle";
+	setarray .@FlagName4$[0],"Neuschwanstein Castle","Hohenschwangau Castle","Nuenber Castle","Wuerzburg Castle","Rothenburg Castle";
+	setarray .@warp1$[0],"prtg_cas01","prtg_cas02","prtg_cas03","prtg_cas04","prtg_cas05";
+	setarray .@warp2$[0],"gefg_cas01","gefg_cas02","gefg_cas03","gefg_cas04","gefg_cas05";
+	setarray .@warp3$[0],"payg_cas01","payg_cas02","payg_cas03","payg_cas04","payg_cas05";
+	setarray .@warp4$[0],"aldeg_cas01","aldeg_cas02","aldeg_cas03","aldeg_cas04","aldeg_cas05";
+	//Warps
+	switch(select("Prontera- "+.@FlagName1$[$AgitRtime],"Geffen- "+.@FlagName2$[$AgitRtime],"Payon- "+.@FlagName3$[$AgitRtime],"Aldebaran- "+.@FlagName4$[$AgitRtime],"Cancel")) {
+	case 1:
+		if (getcharid(2) == GetCastleData(""+.@warp1$[$AgitRtime],1)) {
+			setarray .@gldcordsx1$[0],"96","71","181","258","52";
+			setarray .@gldcordsy1$[0],"173","36","215","247","41";
+			warp ""+.@warp1$[$AgitRtime],.@gldcordsx1$[$AgitRtime],.@gldcordsy1$[$AgitRtime];
+			end;
+		} else
+			setarray .@cordsx1$[0],"99","43","168","86","17";
+			setarray .@cordsy1$[0],"32","229","12","13","235";
+			warp ""+.@warp1$[$AgitRtime],.@cordsx1$[$AgitRtime],.@cordsy1$[$AgitRtime];
+			end;
+	case 2:
+		if (getcharid(2) == GetCastleData(""+.@warp2$[$AgitRtime],1)) {
+			setarray .@gldcordsx1$[0],"83","23","116","59","61";
+			setarray .@gldcordsy1$[0],"47","66","89","70","52";
+			warp ""+.@warp2$[$AgitRtime],.@gldcordsx1$[$AgitRtime],.@gldcordsy1$[$AgitRtime];
+			end;
+		} else
+			setarray .@cordsx1$[0],"34","70","90","24","99";
+			setarray .@cordsy1$[0],"136","143","158","149","200";
+			warp ""+.@warp2$[$AgitRtime],.@cordsx1$[$AgitRtime],.@cordsy1$[$AgitRtime];
+		end;
+	case 3:
+		if (getcharid(2) == GetCastleData(""+.@warp3$[$AgitRtime],1)) {
+			setarray .@gldcordsx1$[0],"212","22","9","40","276";
+			setarray .@gldcordsy1$[0],"108","275","263","235","227";
+			warp ""+.@warp3$[$AgitRtime],.@gldcordsx1$[$AgitRtime],.@gldcordsy1$[$AgitRtime];
+			end;
+		} else
+			setarray .@cordsx1$[0],"214","272","226","252","62";
+			setarray .@cordsy1$[0],"48","57","26","271","225";
+			warp ""+.@warp3$[$AgitRtime],.@cordsx1$[$AgitRtime],.@cordsy1$[$AgitRtime];
+			end;
+	case 4:
+		if (getcharid(2) == GetCastleData(""+.@warp4$[$AgitRtime],1)) {
+			setarray .@gldcordsx1$[0],"218","84","118","45","31";
+			setarray .@gldcordsy1$[0],"170","74","76","88","190";
+			warp ""+.@warp4$[$AgitRtime],.@gldcordsx1$[$AgitRtime],.@gldcordsy1$[$AgitRtime];
+			end;
+		} else
+			setarray .@cordsx1$[0],"34","88","114","149","216";
+			setarray .@cordsy1$[0],"248","163","286","17","104";
+			warp ""+.@warp4$[$AgitRtime],.@cordsx1$[$AgitRtime],.@cordsy1$[$AgitRtime];
+			end;
+	case 5:
+		close;
+	}
+}
+
+prontera	mapflag	loadevent

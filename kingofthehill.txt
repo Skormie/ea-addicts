@@ -1,0 +1,121 @@
+//By Skorm
+prontera.gat,207,143,5	script	Koh	120,{
+if(!getgmlevel()) end;
+if(select("Start KOH:NO")==1){
+donpcevent "King Of The Hill::OnClock1230";
+}
+close;
+}
+
+pvp_n_1-1,89,39,5	script	King Of The Hill	111,{
+end;
+OnClock1230:
+OnClock1430:
+OnClock1630:
+OnClock1830:
+stopnpctimer;
+set $koh,0;
+cleararray $@kohplayers[0],0,100;
+set $in,0;
+set $koht,1;
+announce "King of The Hill will start in Pvp1 in 3 minutes!",0;
+sleep 60000;
+announce "King of The Hill will start in 2 minutes!!",0;
+sleep 60000;
+announce "King of The Hill will start 1 minute!!",0;
+set $x,rand(65,110);
+set $y,rand(15,63);
+set $koh,1;
+sleep 60000;
+setnpctimer 0;
+startnpctimer;
+end;
+OnPCLoadMapEvent:
+if(strcharinfo(3)!="pvp_n_1-1")end;
+/*
+for(set .@t,0; .@t<getarraysize($@kohplayers); set .@t,.@t+1){
+	if($@kohplayers[.@t]==getcharid(3)){
+		set $in,$in-1;
+	}
+}*/
+if(!$koht) end;
+set $in,$in+1;
+set $@kohplayers[$in],getcharid(3);
+mapannounce "pvp_n_1-1",""+strcharinfo(0)+" has joined King of the Hill.",0;
+callfunc "frequency",$@kohplayers,$in;
+end;
+OnTimer10000:
+announce "King of the hill has started!",0,0xFFAB54;
+while(getmapusers("pvp_n_1-1")&&$koh){
+	sleep 1000;
+	for(set .@f,0;.@f<getarraysize($@kohplayers);set .@f,.@f+1){
+		attachrid($@kohplayers[$in]);
+		getmapxy(.@maps$,.@sx,.@sy,0);
+		while(.@maps$=="pvp_n_1-1"&&$koh){
+			getmapxy(.@maps$,.@sx,.@sy,0);
+			for(set .@d,0; .@d < 5;set .@d,.@d+1){
+				sleep2 500;
+				npcskilleffect 483,0,$x,($y+.@d);
+				npcskilleffect 483,0,($x+.@d),($y+5);
+				npcskilleffect 483,0,($x+5),(($y+5)-.@d);
+				npcskilleffect 483,0,(($x+5)-.@d),$y;
+			}
+		}
+		detachrid;
+	}
+}
+announce "Not enough players King of the hill has ended!",0,0xFFAB54;
+stopnpctimer;
+set $koht,0;
+set $koh,0;
+cleararray $@kohplayers[0],0,100;
+set $in,0;
+end;
+OnTimer16000:
+if($koh!=1){ stopnpctimer; end; }
+sleep rand(30000,60000);
+set $x,rand(65,110);
+set $y,rand(15,63);
+mapannounce "pvp_n_1-1","The Hill has moved!",0,0xFFAB54;
+setnpctimer 15000;
+startnpctimer;
+}
+
+function	script	frequency	{
+attachrid(getelementofarray(getarg(0),getarg(1)));
+getmapxy(.@map$,.@x,.@y,0);
+//initnpctimer;
+while(.@map$=="pvp_n_1-1"){
+	sleep2 1;
+	getmapxy(.@map$,.@x,.@y,0);
+	while(.@x<=($x+5)&&.@y<=($y+5)&&.@x>=$x&&.@y>=$y&&Hp!=0){
+		getmapxy(.@map$,.@x,.@y,0);
+		sleep2 500;
+		if(!@c)mapannounce "pvp_n_1-1",""+strcharinfo(0)+" has gained control of the hill.",0;
+		set @c,1;
+		set $@kohpoints[getarg(1)],$@kohpoints[getarg(1)]+1;
+		dispbottom "You've "+$@kohpoints[getarg(1)]+" points";
+		if($@kohpoints[getarg(1)]>=300){
+			announce ""+strcharinfo(0)+" is King of the Hill",0;
+			stopnpctimer;
+			set $koht,0;
+			set $koh,0;
+			set @c,0;
+			cleararray $@kohplayers[0],0,100;
+			set $in,0;
+			end;
+		}
+	}
+	if(@c) mapannounce "pvp_n_1-1",""+strcharinfo(0)+" has lost control of the hill.",0; set @c,0;
+}
+OnTimer10000:
+for(set .@u,0; .@u < getarraysize($@kohpoints);set .@u,.@u+1){
+set $@winningpoints,0;
+if($@kohpoints[.@u]>$@winningpoints){
+	set $@winningpoints,.@u;
+	mapannounce "pvp_n_1-1",""+rid2name(getelementofarray(getarg(0),.@u))+" is in the lead with "+ $@kohpoints[.@u] +".",0;
+}
+}
+}
+
+pvp_n_1-1	mapflag	loadevent

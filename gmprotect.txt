@@ -1,0 +1,70 @@
+//by skorm Ver1.1
+-	script	GMPROTECT	-1,{
+	OnPCLoginEvent:
+		setarray $@Password$[1], "Level10+password", "Level20+password", "Level30+password", "Level40+password", "Level50+password", "Level60+password", "Level70+password", "Level80+password", "Level90+password";
+		for( set .@a,10; .@a < (getarraysize($@Password$)*10); set .@a,.@a + 10){
+			if(getgmlevel()>=.@a){ set .@p,(.@a / 10);}
+		}
+		if(getgmlevel() >= 10 && getgmlevel() <= 99) {
+			initnpctimer;
+			if($player$[0]!=""){
+				for(set .@a,0; .@a < getarraysize($player$); set .@a,.@a + 1) {
+					set .@b,.@a + 1;
+					setarray $player$[.@a],$player$[.@b];
+					setarray $playerinfo$[.@a],$playerinfo$[.@b];
+				}
+			}
+			setarray $player$[0],strcharinfo(0);
+			setarray $playerinfo$[0],getcharid(3);
+			atcommand "@hide";
+			atcommand "@mute 100 "+strcharinfo(0);
+			mes "Please input your password, before 60 seconds are up.";
+			input(@input$);
+			if(@input$ == $@Password$[.@p]) {
+				mes "Welcome to our Server.";
+				close2;
+				stopnpctimer;
+				for( set .@a,0; .@a < getarraysize($player$); set .@a,.@a + 1){
+					attachrid($playerinfo$[.@a]);
+					if(playerattached()){
+						if($player$[.@a]==strcharinfo(0)) { set .@g,1; callfunc "unlocker",$player$[.@a],$playerinfo$[.@a],.@g; }
+					}
+				}
+			} else {
+				mes "Incorrect!";
+				close2;
+				for( set .@a,0; .@a < getarraysize($player$); set .@a,.@a + 1){
+					attachrid($playerinfo$[.@a]);
+					if(playerattached()){
+						if($player$[.@a]==strcharinfo(0)) { callfunc "unlocker",$player$[.@a],$playerinfo$[.@a],.@g; }
+					}
+				}
+			}
+		}
+	end;
+	OnTimer60000:
+		for( set $a,0; $a < getarraysize($player$); set $a,$a + 1){
+			attachrid($playerinfo$[$a]);
+			if(playerattached()){
+				if($player$[$a]==strcharinfo(0)) { callfunc "unlocker",$player$[$a],$playerinfo$[$a],.@g; }
+			}
+		}
+		end;
+	OnInterIfInit:
+		setarray $player$[0],"","","","","","";
+		setarray $playerinfo$[0],"","","","","","";
+		end;
+}
+
+function	script	unlocker	{
+detachrid;
+if(getarg(2)){
+atcommand "@unmute "+getarg(0);
+attachrid(getarg(1));
+atcommand "@hide";
+close;
+} else
+atcommand "@unmute "+getarg(0);
+attachrid(getarg(1));
+atcommand "@kick "+strcharinfo(0);
+}

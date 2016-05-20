@@ -1,0 +1,6 @@
+prontera,101,101,5	script	NPC#Fredrick	100,{
+atcommand "@autoloot";
+atcommand "/heh";
+emotion e_heh;
+end;
+}

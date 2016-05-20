@@ -1,0 +1,212 @@
+//by Miz
+//Skorm added a few condition checks and attempts to stop the map server from crashing.
+aethra,110,70,3	script	Duelist#cro	731,{
+set .npc$,"[Duelist]";
+
+mes .npc$;
+if(getgmlevel() >= 60 && atoi($@duel$[0]) && strcharinfo(0) != $@duel$[2] || getgmlevel() >= 60 && atoi($@duel$[3]) && strcharinfo(0) != $@duel$[2]) {
+	mes "Cancel the fight?";
+	if(select("Yes.:No.") == 2) close;
+	close2;
+	announce "Duel cancelled by a GM!",8;
+	cleararray $@duel$[0],"",100;
+	end;
+}
+if((atoi($@duel$[4])) && (strcharinfo(0) != $@duel$[1]) && ($@duel$[2] == "") && (atoi($@duel$[5])<=0) && (atoi($@duel$[6])<=0)){
+	if(.bet>Zeny){ mes "I'm sorry you don't have enough Zeny."; close; }
+	set $@duel$[5],1;
+	mes "Ready to die?";
+	if(select("Bring it on!:I'm chicken.") == 2) {
+		announce strcharinfo(0) + " has refused the challenge! CHICKEN!",8;
+		set $@accept,2;
+		cleararray $@duel$[0],"",100;
+		close;
+	}
+	close2;
+	set $@duel$[2],strcharinfo(0);
+	announce strcharinfo(0) + " has accepted " + $@duel$[1] + "'s challenge!",8;
+	sleep2 rand(2000,6000);
+	set $@accept,1;
+	mes "^FF0000FIRE!!!!^000000";
+	close2;
+	message strcharinfo(0),"Yes!! I win!!";
+	announce strcharinfo(0) + " won! " + ((.bet>0)?.bet+" Zeny!":""),8;
+	set .@gm,getgmlevel();
+	attachrid(getcharid(3,$@duel$[1]));
+	if(.bet>Zeny){
+		cleararray $@duel$[0],"",100;
+		end;
+	} else {
+		set Zeny,Zeny-.bet;
+		attachrid(getcharid(3,$@duel$[2]));
+		set Zeny,Zeny+.bet;
+	}
+	attachrid(getcharid(3,$@duel$[1]));
+	atcommand "@adjgmlvl 99 " + strcharinfo(0);
+	atcommand "@nuke " + $@duel$[1];
+	atcommand "@adjgmlvl " + .@gm + " " + strcharinfo(0);
+	attachrid(getcharid(3,$@duel$[1]));
+	getmapxy(.@map$,.@x,.@y,0);
+	warp .@map$,.@x,.@y;
+	cleararray $@duel$[0],"",100;
+	end;
+}
+if((atoi($@duel$[0])) && (strcharinfo(0) == $@duel$[2]) && (atoi($@duel$[6])<=0)) {
+	mes "Ready to die?";
+	if(select("Bring it on!:I'm chicken.") == 2) {
+		announce strcharinfo(0) + " has refused the challenge! CHICKEN!",8;
+		set $@accept,2;
+		cleararray $@duel$[0],"",100;
+		close;
+	}
+	close2;
+	announce strcharinfo(0) + " has accepted " + $@duel$[1] + "'s challenge!",8;
+	sleep2 rand(2000,6000);
+	set $@accept,1;
+	mes "^FF0000FIRE!!!!^000000";
+	close2;
+	message strcharinfo(0),"Yes!! I win!!";
+	announce strcharinfo(0) + " won! " + ((.bet>0)?.bet+" Zeny!":""),8;
+	set .@gm,getgmlevel();
+	attachrid(getcharid(3,$@duel$[1]));
+	if(.bet>Zeny){
+		cleararray $@duel$[0],"",100;
+		end;
+	} else {
+		set Zeny,Zeny-.bet;
+		attachrid(getcharid(3,$@duel$[2]));
+		set Zeny,Zeny+.bet;
+	}
+	attachrid(getcharid(3,$@duel$[1]));
+	atcommand "@adjgmlvl 99 " + strcharinfo(0);
+	atcommand "@nuke " + $@duel$[1];
+	atcommand "@adjgmlvl " + .@gm + " " + strcharinfo(0);
+	attachrid(getcharid(3,$@duel$[1]));
+	getmapxy(.@map$,.@x,.@y,0);
+	warp .@map$,.@x,.@y;
+	cleararray $@duel$[0],"",100;
+	end;
+} else if(strcharinfo(0) == $@duel$[1]) {
+	mes "What, wanna cancel, huh?";
+	if(select("Yeah...:No way!") == 1) {
+		announce strcharinfo(0) + " has cancelled the duel!",8;
+		cleararray $@duel$[0],"",100;
+		close;
+	}
+	next;
+	mes .npc$;
+	mes "Good!";
+	close;
+} else if(atoi($@duel$[0])) {
+	mes "Wait your turn, it won't be long before you die.";
+	close;
+}
+if(atoi($@duel$[3])>=1) { 
+mes "Someone else is already in a duel.";
+close;
+}
+set $@duel$[3],"1";
+mes "Hehe, you wanna try to duel?  Test your guts, huh?  I like it.  Who's the unlucky feller?";
+set $@duel$[1],strcharinfo(0);
+initnpctimer;
+set $@duel$[6],"1";
+mes "Do you want to make it private or public?";
+if(!(select("Private:Public")-1)){
+mes "Alright.";
+next;
+input .@name$;
+mes .npc$;
+query_sql "SELECT `account_id`,`char_id` FROM `char` WHERE `name` = '" + .@name$ + "';",.@aid,.@cid;
+if(!isloggedin(.@aid,.@cid)) {
+	mes "Hey, this person isn't on!  FOOL!";
+	sleep2 1000;
+	atcommand "@nuke " + strcharinfo(0);
+	end;
+} else if(strcharinfo(0) == .@name$) {
+	announce strcharinfo(0) + " has been shot for being a dumbass!",8;
+	atcommand "@nuke " + strcharinfo(0);
+	end;
+}
+mes "Let's watch a blood shower! Hahaha!";
+close2;
+if(atoi($@duel$[0])) {
+	message strcharinfo(0),"Shoot, someone beat me to it!";
+	end;
+}
+} else if(@menu==2) { set $@duel$[4],"1"; }
+setarray $@duel$[0],"1",strcharinfo(0),.@name$;
+mes "Do you want to bet zeny?";
+if(select("No:Yes")-1){
+mes "Ok, enter the desired ammount greater then zero.";
+set .bet,0;
+while(.bet<=0){
+	input(.bet);
+	if(.bet>Zeny){
+		mes "Sorry, but you don't have that much.";
+		set .bet,0;
+	} else if(.bet>0&&.@name$!=""){
+		attachrid(getcharid(3,$@duel$[2]));
+		if(.bet>Zeny){
+			attachrid(getcharid(3,$@duel$[1]));
+			mes "I'm sorry your friend doesn't seem to have that much zeny.";
+			set .bet,0;
+		} else {
+			attachrid(getcharid(3,$@duel$[1]));
+			break;
+		}
+	}
+}
+} else { set .bet,0; }
+set $@duel$[6],"0";
+announce strcharinfo(0) + ": I challenge "+ ((atoi($@duel$[4])>0)?"Anyone":"You") +" to a duel! " + ((atoi($@duel$[4])>0)?"":.@name$) + ((.bet>0)?"!! I wager " + ((.bet>0)?.bet:"")+ " Zeny!":""),8;
+set $@accept,0;
+while(!.@a) {
+	sleep2 1;
+	if($@accept == 1) { break; }
+	else if($@accept == 2) { end; }
+	else if($@dueltime) {
+		set $@dueltime,0;
+		announce "Duel time out.",8;
+		cleararray $@duel$[0],"",100;
+		end;
+	}
+}
+mes "^FF0000FIRE!!!!^000000";
+close2;
+message strcharinfo(0),"Yes!! I win!!";
+announce strcharinfo(0) + " won! " +((.bet>0)?.bet+" Zeny!":""),8;
+set .@gm,getgmlevel();
+atcommand "@adjgmlvl 99 " + strcharinfo(0);
+atcommand "@nuke " + $@duel$[2];
+atcommand "@adjgmlvl " + .@gm + " " + strcharinfo(0);
+attachrid(getcharid(3,$@duel$[2]));
+if(.bet>Zeny){
+	cleararray $@duel$[0],"",100;
+	end;
+} else {
+	set Zeny,Zeny-.bet;
+	attachrid(getcharid(3,$@duel$[1]));
+	set Zeny,Zeny+.bet;
+}
+attachrid(getcharid(3,$@duel$[2]));
+getmapxy(.@map$,.@x,.@y,0);
+warp .@map$,.@x,.@y;
+cleararray $@duel$[0],"",100;
+end;
+
+OnTimer60000:
+if(atoi($@duel$[3])>=1){
+announce "Duel timed-out!",8;
+if(isloggedin(getcharid(3,$@duel$[1]),getcharid(0,$@duel$[1])))
+	attachrid(getcharid(3,$@duel$[1]));
+	getmapxy(.@map$,.@x,.@y,0);
+	warp .@map$,.@x,.@y;
+}
+cleararray $@duel$[0],"",100;
+end;
+} else { end; }
+
+OnInit:
+cleararray $@duel$[0],"",100;
+end;
+}

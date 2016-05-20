@@ -1,0 +1,501 @@
+//By Skorm
+//(That doesn't include the hangman part of this NPC I only added it as a mini-game no idea who the original artist is message me if you know and I'll add the details.)
+aethra,142,77,2	script	Teresa	482,{
+if(checkquest(70009)==1||checkquest(70009)==0){ mes "[Teresa]"; mes "..."; close;}
+if(checkquest(70008)==1||checkquest(70008)==0||countitem(6078)<5){ mes "[Teresa]"; mes "My best guess, it's in that castle somewhere."; close;}
+if(checkquest(70008)==2){
+mes "*The stones seem to be reacting to Teresa*";
+sleep2 1000;
+mes "*All you can do is watch as Teresa turns to stone...*";
+mes "[Teresa]";
+mes "...";
+delitem 6078,5;
+getitem 32019,1;
+setquest(70009);
+close;
+}
+if(checkquest(70007)==1||checkquest(70007)==0){ mes "[Teresa]"; mes "I think it's somewhere around Alberta. Just look for a sunken ship."; close;}
+if(checkquest(70007)==2){
+setquest(70008);
+mes "[Teresa]";
+mes "You don't look to good.";
+mes "That must've been a tough one, but we can't stop now.";
+mes "There's only one more.";
+mes "It was given to the King and Queen of Amatsu ages ago, and hasn't been seen since that means its has to still be there somewhere!";
+}
+if(checkquest(70006)==1||checkquest(70006)==0){ mes "[Teresa]"; mes "Sorry I keep sending you back to Niflheim, I know it's creepy there, but this has to be done!"; close;}
+if(checkquest(70006)==2){
+setquest(70007);
+mes "[Teresa]";
+mes "I'm not sure how you did it, and I know it wasn't easy, but thank you kindly.";
+next;
+mes "[Teresa]";
+mes "I've managed to locate the next fragment on a wrecked ship somewhere outside of Alberta, but be carful that place has to be lined with traps.";
+close;
+}
+if(checkquest(70005)==1||checkquest(70005)==0){ mes "[Teresa]"; mes "Were you able to find it yet?"; mes "No? Aww."; close;}
+if(checkquest(70005)==2){
+setquest(70006);
+mes "[Teresa]";
+mes "You-you actually managed to find it! This is amazing!";
+mes "There isn't much information on the next one only that it was given to the king of Niflheim sometime ago... He's probably dead by now, or maybe he was already undead.";
+close;
+}
+if(checkquest(70004)==1||checkquest(70004)==0){ mes "[Teresa]"; mes "What's taking you so long. I didn't think the first one was going to be hard."; close; }
+if(checkquest(70004)==2){
+setquest(70005);
+mes "[Teresa]";
+mes "That was fast! Maybe this is going to be easy after all.";
+mes "Original there were two fragments buried with the old blacksmith, but seeing as you've only come back with one the rumors must be true.";
+mes "His grave was robbed and the theif stashed it some where in Niflheim. Try looking under rocks or in trees maybe even under bridges. it's gotta be there somewhere.";
+}
+mes "[Teresa]";
+mes "I'm Teresa wondering woman of the far south.";
+mes "My journeys have brought me here insearch of the legendary blade.";
+mes "Everything was going well untill I got caught snooping around in Aethera's royal library for more information, now I'm unable to leave untill I can provied proof of the swords existance.";
+next;
+mes "[Teresa]";
+mes "Maybe you could help me!";
+if(select("Yes:No")-1){ close; }
+setquest(70004);
+mes "Wow, thank you so mushie!";
+mes "Before I was so rudly evicted from the library. I managed to dig up some information on these five stone fragments that I beleive may be the key to finding the sword.";
+next;
+mes "[Teresa]";
+mes "I want you to find these five fragments and bring them here.";
+mes "Lets start with the easist and most obvious.";
+mes "The old blacksmith took one of the fragments with him to his grave in Prontera Cemetery.";
+mes "Good Luck.";
+close;
+
+OnInterIfInit:
+if(checkquest(70009)==1||checkquest(70009)==0||checkquest(70009)==2) end;
+showevent 1, 2;
+end;
+
+OnNPCKillEvent:
+if(isequipped(32017)){
+setarray .@vesselid_array[0],32002,32003,32004,32005,32006,32007,32008,32009;
+	for(set .@a,0;.@a<getarraysize(.@vessel_array);set .@a,.@a+1){
+		if(countitem(.@vesselid_array[.@a])){ setarray .@vessel_array[.@a],1;} else { setarray .@vessel_array[.@a],10; }
+	}
+	for(set .@a,0;.@a<getarraysize(.@vessel_array);set .@a,.@a+1){
+		if(.@vessel_array[.@a]==1){
+			switch(.@a){
+				case 1:
+					if(.@a==1) set v1,1;
+				case 2:
+					if(.@a==2) set v2,1;
+				case 3:
+					if(.@a==3) set v3,1;
+				case 4:
+					if(.@a==4) set v4,1;
+				case 5:
+					if(.@a==5) set v5,1;
+				case 6:
+					if(.@a==6) set v6,1;
+				case 7:
+					if(.@a==7) set v7,1;
+				case 8:
+					if(.@a==8) set v8,1;
+			}
+		}
+	}
+} end;
+
+}
+
+prontera,274,342,2	script	Headstone#Fragment01	111,{
+if(checkquest(70004)==2||checkquest(70004)==-1){ mes "Nothing's here..."; }
+if(checkquest(70004)==1||checkquest(70004)==0){ mes "*Moves tombstone*"; next; mes "*ruffling noises*"; next; getitem 6078,1; completequest 70004;}
+close;
+}
+
+niflheim,45,134,2	script	Hollow Tree#Fragment02	111,{
+if(checkquest(70005,HUNTING)==-1){ mes "Nothing's here..."; }
+if(checkquest(70005,HUNTING)==2){ mes "After the butt kicking I don't think they'll be back."; }
+if(checkquest(70005,HUNTING)==1||checkquest(70005,HUNTING)==0){ mes "*Searchs Hollow Tree*"; next; mes "Hey! Get out of our stash!!!!"; areamonster "niflheim",41,138,48,131,"Grave Robber",1985,5; next; mes "It's an ambush!"; getitem 6078,1; completequest 70005;}
+close;
+}
+
+niflheim,209,99,2	script	Headstone#Fragment03	111,{
+mes "*You reach for the tombstone but suddenly your hand stops.*";
+next;
+
+
+	//=== Configurations ======================================================================
+
+		set .@npc$ , "^0000FF[Former Kings Ghost]^000000" ; // Nom du NPC.
+		set .@minlength , 4  ;                // minimum char in the word
+		set .@maxlength , 12 ;               // we can't see more than 12 characters in a chatroom...
+		set .@color$ , "^792d5b" ;          // A color to colorise the texte °°
+		set .@rungame , 0 ;                // Minimum GM level to configure the NPC (default 0)
+		set .@logword , 0 ;               // Log the word enter by people ? 0 = no  1 = yes (logmes + debugmes)
+		set .check_gotocount, 2048 ;     // Limit to infinity loop
+		set .autoevent , 0 ;            // Per default all 30 minutes.
+		set .cutinposition , 2 ;      //   0, 1 , 2 , 3 , 4  (see the doc)
+	//=========================================================================================
+
+	//=== Functions ============================================================================
+		function change_case  ;              // Function to change the case of a letter.
+		function array_search ;            // Return where is store a value in an array.
+		function str_to_array ;           // Change a string to a variable .
+		function implode ;               // Change a variable to a string.
+		function load_cutin ;
+	//========================================================================================
+
+mes .@npc$;
+mes "What the heck do you think you're doing?";
+next;
+mes .@npc$;
+mes "You think it's alright to wonder into my realm and defile my grave? Well think again!";
+next;
+mes .@npc$;
+mes "I'm a nice guy, so here's what'll do. If you can break the seal on my grave I'll let you have whatever it is you came here for.";
+next;
+			set .@i , rand ( 0 , getarraysize( .wordlist$ ) - 1 ) ;
+			str_to_array( .wordlist$[.@i]  , ".letter$" ) ;
+			set .@string$ , .wordlist$[.@i] ;
+			AutoSelect:
+					set .lettercount , getarraysize( .letter$ ) - 1 ;    // Char number.
+					set .wordsearch$ , .@string$ ;                        // Save in a "." var.
+					if ( .@logword && playerattached() ) // To prevent an error if it's an autoevent (player is not attached)
+					{
+
+						logmes "[HangMan] : " + strcharinfo(0)+ " input the word : " + .@string$ ;
+						debugmes "[HangMan] : " + strcharinfo(0) + " input the mot : " + .@string$ ;
+
+					}
+					
+					for ( set .@i , 0 ; .@i < .lettercount ; set .@i , .@i + 1 ) // We create the " _ _ _ _" string.
+					{
+						set .letterhide$[ .@i ] , " _" ;
+					}
+					set .letterhide$[ 0 ], .letter$[ 0 ] ;                        // We show the first letter.
+					set .letterhide$[ .lettercount ], .letter$[ .lettercount ] ;  // We show the last letter.
+					for ( set .@i , 0 ; .@i < .lettercount ; set .@i , .@i + 1 )
+					{
+						set .@j , ( array_search ( .letter$[ 0 ] , ".letter$" , .@i , .lettercount ) ) ;
+						if ( .@j + 1 )
+						{
+							set .letterhide$[ .@j ], .letter$[ .@j ] ;
+							set .@i , .@j ;
+						}
+					}
+					for ( set .@i , 0 ; .@i < .lettercount ; set .@i , .@i + 1 )
+					{
+						set .@j, ( array_search( .letter$[ .lettercount ] , ".letter$" ,	.@i , .lettercount ) ) ;
+						if ( .@j + 1 )
+						{
+							set .letterhide$[ .@j ], .letter$[ .@j ] ;
+							set .@i, .@j ;
+						}
+					}
+					set .wordfind$ , implode( "" , ".letterhide$" ) ;
+					initnpctimer ;
+					delwaitingroom ;
+					waitingroom .wordfind$ , 0 ;   // Create the Chat-Room
+					set .block , 3 ;               // UnBlock the game.
+				if ( playerattached() )
+					close ;
+				else
+					end ;
+					do
+					{
+						if ( .wordfind$ == "" )
+						{
+							close2;
+							cutin "" , 255 ;
+							end;
+						}
+						mes .@npc$ ;
+						mes .wordfind$ ;   // We show the word.
+						load_cutin() ;
+						mes "Letter already used : " + .@color$ + ( implode( " " , ".blacklist$" ) ) + "^000000." ; //we show the list.
+						next ;
+						if ( select( " -  Choose a letter.: -  Try a word" ) - 1 )
+						{
+							// input a word.
+							mes .@npc$ ;
+							mes "Please input a word (" +  .@color$ + "not case sensitive^000000 !)" ;
+							next ;
+							input @string$ ;
+							if ( compare( "_|~key~|_" + @string$ + "_|~key~|_" , "_|~key~|_" + .wordsearch$ + "_|~key~|_" ) )
+							{
+								announce strcharinfo( 0 ) + " just find the word : " + .wordsearch$ + " !", bc_blue | bc_map ;
+								donpcevent strnpcinfo( 0 ) + "::OnInit" ;    //On Reset.
+								mes .@npc$ ;
+								mes "Congratulations!" ;
+								if(checkquest(70006)==2||checkquest(70006)==-1){ mes "It's cool that you won and all, but I have nothing left to give, good luck."; }
+								if(checkquest(70006)==1||checkquest(70006)==0){ mes "Alright, you win you can proceed"; next; mes "*Moves tombstone*"; getitem 6078,1; completequest 70006;}
+								close2 ;
+								cutin "" , 255 ;
+								end ;
+							}
+							else
+							{
+								mes .@npc$ ;
+								mes "The word isn't correct." ;
+								load_cutin( 1 ) ;
+								next ;
+								continue ;
+							}
+
+						}
+						// Input letter :
+						mes .@npc$ ;
+						mes "Choose a letter" ;
+						mes "(" +.@color$ + " 0^000000 to exit. )" ;
+						next ;
+						if ( input( @string$ , 1 , 1 ) )
+						{
+
+							mes .@npc$ ;
+							mes "Just one letter at time." ;
+							mes "Thank you~" ;
+							next ;
+							continue ;
+
+						}
+						if ( @string$ == "0" )
+						{
+							close2 ;
+							cutin "" , 255 ;
+							end ;
+						}
+						set @string$ , change_case( @string$ ) ;
+						if ( @string$ == "0" ) // If it isn't a letter (alphabet aA-zZ)
+						{
+							mes .@npc$ ;
+							mes "Character prohibit." ;
+							next ;
+							continue ;
+						}
+						else if ( array_search ( @string$ , ".blacklist$") + 1 )   // Letter already used.
+						{
+
+							mes .@npc$ ;
+							mes "This letter is already input (see the list)" ;
+							mes "Thanks to choose an other." ;
+							next ;
+							continue ;
+
+						}
+						set .blacklist$[ getarraysize( .blacklist$ ) ] , @string$ ;    // We put the letter in the list.
+						set @i , array_search( @string$, ".letter$") ;
+						if ( @i == -1 )    // The letter isn't in the word.
+						{
+							heal - MaxHP / 5 , 0 ; //Life divised by 5.
+							mes .@npc$ ;
+							mes "Can't find the letter in the word..." ;
+							load_cutin( 1 ) ;
+							next ;
+							continue ;
+						}
+						else
+						{
+							mes .@npc$ ;
+							mes "Letter is in the word !" ;
+							for ( set @i , 0 ; @i < .lettercount ; set @i , @i + 1 )
+							{
+								set @j , ( array_search( @string$ , ".letter$" ,	@i , .lettercount ) ) ;
+								if ( @j + 1 )
+								{
+									set .letterhide$[ @j ], .letter$[ @j ] ;
+									set @i, @j ;
+								}
+							}
+							set .wordfind$ , implode( " " , ".letterhide$" ) ;
+							delwaitingroom ;   // we update the chat-room name
+							waitingroom .wordfind$ , 0 ;
+							if ( array_search( " _" , ".letterhide$" ) == -1 )    //If all letters are find.
+							{
+
+								announce strcharinfo( 0 ) + " just find the word : " + .wordsearch$ + " !", bc_blue | bc_map ;
+								donpcevent strnpcinfo( 0 ) + "::OnInit" ;
+								close2 ;
+								cutin "" , 255 ;
+								end ;
+
+							}
+							next ;
+							if ( select( " -  Continue: -  Exit" ) - 1 )
+							{
+								close2 ;
+								cutin "" , 255 ;
+								end ;
+							}
+						}
+					} while( HP ) ;
+					// The player is dead x)
+					mes .@npc$ ;
+					mes "Loooooose" ;
+					announce "Hangman :" + strcharinfo( 0 ) + " has just been killed" , bc_blue | bc_area ;
+					close2 ;
+					cutin "" , 255 ;
+					end ;
+	OnInit:
+		delwaitingroom ;
+		set .block , 0 ;
+		set .init  , 1 ;
+		set .stat , 0 ;
+		cleararray .letter$[ 0 ]     , "" , 128 ;
+		cleararray .blacklist$[ 0 ]  , "" , 128 ;
+		cleararray .letterhide$[ 0 ] , "" , 128 ;
+		set .lettercount , 0  ;
+		set .wordfind$   , "" ;
+		set .wordsearch$ , "" ;
+		setarray .wordlist$[0], //Please just use Aa-Zz characters !
+		"salamander",
+		"bored",
+		"keyworld",
+		"kissme",
+		"brightsidero",
+		"poring",
+		"lunatic",
+		"fabre",
+		"noidea";
+		end ;
+	//OnMinute00:
+	//OnMinute30:
+	if ( .autoevent )
+	{
+		set .@i , rand ( 0 , getarraysize( .wordlist$ ) - 1 ) ;
+		str_to_array( .wordlist$[.@i]  , ".letter$" ) ;
+		set .@string$ , .wordlist$[.@i] ;
+		callsub AutoSelect;
+	}
+	//Debug
+	OnTimer120000:
+		if ( .block - 1 )
+			end ;
+		else
+		{
+			set .block , 0 ;
+			stopnpctimer ;
+		}
+	OnTimer600000:
+		donpcevent strnpcinfo(0) + "::OnInit" ;
+		stopnpctimer ;
+		end ;
+	//=== FUNCTIONS ===========================================================================
+	function	load_cutin	{
+		if ( getarg( 0 , 0 ) )
+			set .stat , .stat + 1 ;
+		cutin "hangman_" + .stat , .cutinposition ;
+		if ( .stat >= 10 )
+		{
+			announce "[Hangman] : Nobody find the word ! Mwahaha ! " , bc_blue | bc_area ;
+			donpcevent strnpcinfo(0) + "::OnInit" ;
+		}
+		return ;
+	}
+	
+	function	change_case	{
+		setarray .@char$[ 0 ],
+		"A" , "B" , "C" , "D" , "E" , "F" , "G",
+		"H" , "I" , "J" , "K" , "L" , "M" , "N" ,
+		"O" , "P" , "Q" , "R" , "S" , "T" , "U" ,
+		"V" , "W" , "X" , "Y" , "Z" ;
+		for( set .@i , 0 ; .@i < 26 ; set .@i, .@i + 1 )
+		{
+			if ( compare( getarg( 0 ) , .@char$[ .@i ] ) )
+			{
+				return .@char$[ .@i ] ;
+			}
+		}
+		return "0" ;
+	}
+
+	function	array_search	{
+		for ( set .@i , getarg(2,0) ; .@i < getarg( 3, getarraysize( getd( getarg(1) ) )  ) ; set .@i , .@i + 1 )
+		{
+			if ( getd( getarg( 1 ) + "[" + .@i + "]" ) == getarg( 0 ) )
+			{
+				return .@i ;
+			}
+		}
+		return -1 ;
+	}
+	
+	function	str_to_array	{
+		if ( getstrlen( getarg(0) ) >= 110 )
+		{
+			return 0 ;
+		}
+		if ( atoi( getd( getarg(1) ) ) )
+		{
+			cleararray getd( getarg(1) + "[ 0 ]" ) , 0 , 128 ;
+		}
+		else
+		{
+			cleararray getd( getarg(1) + "[ 0 ]" ) , "" , 128 ;
+		}
+		setarray .@char$[ 0 ],
+		"A" , "B" , "C" , "D" , "E" , "F" , "G",
+		"H" , "I" , "J" , "K" , "L" , "M" , "N" ,
+		"O" , "P" , "Q" , "R" , "S" , "T" , "U" ,
+		"V" , "W" , "X" , "Y" , "Z" ;
+		set .@j , 0 ;
+		set .@str_temp$, "_|~key~|_" + getarg(0) + "_|~key~|_" ;
+		while( ! compare ( "_|~key~|_" + .@str$ + "_|~key~|_" , .@str_temp$ ) )
+		{
+			set .@j , .@j + 1 ;
+			for ( set .@i , 0 ; .@i <= getarraysize(.@char$) ; set .@i , .@i + 1 )
+			{
+				if ( compare( .@str_temp$ , "_|~key~|_" + .@str$ + .@char$[ .@i ] ) )
+				{
+					set .@str$ , .@str$ + .@char$[ .@i ] ;
+					setd getarg(1) + "[" + getarraysize( getd( getarg(1) ) ) + "]" , .@char$[ .@i ] ;
+					break;
+				}
+			}
+			// Character not found.
+			if ( .@i == getarraysize( .@char$ ) )
+				return 0 ;
+			if ( .@j >= .check_gotocount / getarraysize(.@char$) - 1 )
+			{
+				sleep2( 1 ) ;
+				set .@j , 0 ;
+			}
+		}
+		return 1 ;
+	}
+
+	function	implode	{
+		set .@str_temp$ , "" ;
+		for ( set .@i , 0 ; .@i < getarraysize( getd( getarg(1) ) ) ; set .@i , .@i + 1 )
+		{
+			set .@str_temp$ , .@str_temp$ + getarg( 0 , "" ) + getd( getarg( 1 ) + "[" + .@i + "]" ) ;
+		}
+		return .@str_temp$;
+	}
+}
+
+alb2trea,99,85,2	script	Shipwrecked Cargo#Frag04	111,{
+if(checkquest(70007)==2||checkquest(70007)==-1){ mes "Nothing's here..."; close; }
+if(rand(1,100)==1){
+mes "You disarmed the trap!";
+if(checkquest(70007)==1||checkquest(70007)==0){ mes "*Removes fragment from the parcel.*"; next; getitem 6078,1; completequest 70007; close;}
+}
+mes "The small contraption explodes in your face!.";
+heal - MaxHP / 50 , 0 ; //Life divised by 5.
+close;
+}
+
+ama_in02,138,186,5	script	Olde Box#Fragment05	111,{
+if(checkquest(70007)==2){
+	if(checkquest(70008)==-1){
+		mes "It's no use the box won't open.";
+		next;
+		mes "Oh, wait there's a timer with the picture of a peach tree and the number 500 on it.";
+		mes "Do you want to set the timer?";
+		if(select("Yes:No")-1) close;
+		setquest(70008);
+	}
+}
+if(checkquest(70008,PLAYTIME)==2){ mes "The timer has stopped and the box is still locked."; mes "Do you want to reset the timer?"; if(select("Yes:No")-1){ close; } erasequest(70008); setquest(70008); }
+if(checkquest(70008,PLAYTIME)==0){ mes "The timer's still going."; }
+if(checkquest(70008,PLAYTIME)==1){ mes "*Removes fragment from dusty box.*"; next; getitem 6078,1; completequest 70008;}
+close;
+}

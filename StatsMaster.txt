@@ -1,0 +1,226 @@
+//===== eAthena Script ======================================= 
+//= Build Swapper
+//===== By: ================================================== 
+//= Zzz
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//=
+//===== Description: ========================================= 
+//= Players can save and swap a build!
+//= (all their stats)
+//===== Additional Comments: ================================= 
+//=Skorm Modified it to Reset stats to save space in main towns ^_^
+//=and removed the exploit!!!!
+//============================================================
+aethra,122,73,4	script	Stats Master Senpai	953,{
+//CUSTOMIZE THE FEE TO LOAD A BUILD
+set @fee, 20000;  //zeny
+// -- MENU --
+L_start:
+mes "[Stats Master]";
+mes "I can Save your builds and reset your stats But all for a small fee.";
+menu "Load a build (" + @fee + "z)", L_load,   "View a build", L_view,   "Save your actual build", L_save,   "Reset Your ^FF0000Skills^000000 (5,000z)", SkillReset,   "Reset Your ^0000FFStats^000000 (5,000z)", ResetStats,   "Reset Your Skills&Stats (9,000z)", ResetBoth,   "Exit",L_exit;
+close;   //security
+// -- SAVE -- 
+
+L_save:
+mes "Choose the position of your new build:";
+menu  "(1) "+build_name0$, L_save0,   "(2) "+build_name1$, L_save1,   "(3) "+build_name2$, L_save2,   
+      "(4) "+build_name3$, L_save3,   "Back to menu", L_start;
+close;   //security
+
+L_save0:
+set @id, 0;
+goto L_save_step2;
+L_save1:
+set @id, 1;
+goto L_save_step2;
+L_save2:
+set @id, 2;
+goto L_save_step2;
+L_save3:
+set @id, 3;
+goto L_save_step2;
+
+//Ask name, save build and show confirm message
+L_save_step2:
+next;
+mes "[Build Swapper]";
+mes "Choose a name for your build!";
+input @name$;
+setd  "build_name" + @id + "$", @name$;
+setd  "build_str" + @id, readparam(bStr);
+setd  "build_agi" + @id, readparam(bAgi);
+setd  "build_vit" + @id, readparam(bVit);
+setd  "build_int" + @id, readparam(bInt);
+setd  "build_dex" + @id, readparam(bDex);
+setd  "build_luk" + @id, readparam(bLuk);
+set @id, 9;
+mes "Your build is saved!";
+next;
+goto L_start;
+close;   //security
+// -- VIEW --
+
+L_view:
+next;
+mes "[Build Swapper]";
+mes "Which build do you want to view?";
+menu  "(1) "+build_name0$, L_view0,   "(2) "+build_name1$, L_view1,   "(3) "+build_name2$, L_view2,   
+      "(4) "+build_name3$, L_view3,   "Back to menu", L_start;
+close;   //security
+
+L_view0:
+set @id, 0;
+goto L_view_step2;
+L_view1:
+set @id, 1;
+goto L_view_step2;
+L_view2:
+set @id, 2;
+goto L_view_step2;
+L_view3:
+set @id, 3;
+goto L_view_step2;
+
+//View build info
+L_view_step2:
+mes "Here is your build number " + (@id + 1) + ":";
+mes "NAME: " + getd("build_name"+@id+"$");
+mes "Str " + getd("build_str"+@id);
+mes "Agi " + getd("build_agi"+@id);
+mes "Vit " + getd("build_vit"+@id);
+mes "Int " + getd("build_int"+@id);
+mes "Dex " + getd("build_dex"+@id);
+mes "Luk " + getd("build_luk"+@id);
+next;
+goto L_start;
+close;   //security
+// -- LOAD --
+L_load:
+mes "Which build do you want to load?";
+menu  "(1) "+build_name0$, L_load0,   "(2) "+build_name1$, L_load1,   "(3) "+build_name2$, L_load2,   
+      "(4) "+build_name3$, L_load3,   "Back to menu", L_start;
+close;   //security
+L_load0:
+set @id, 0;
+goto L_load_step2;
+L_load1:
+set @id, 1;
+goto L_load_step2;
+L_load2:
+set @id, 2;
+goto L_load_step2;
+L_load3:
+set @id, 3;
+goto L_load_step2;
+
+//Load build
+L_load_step2:
+   next;
+   //Control zeny
+   if (Zeny < @fee)
+   {mes "[Build Swapper]"; mes "Sorry, but you don't have enough zeny!"; next; goto L_start;}
+   resetstatus; //reset stats
+   //str
+   set @x, 0;  //reset counter
+   C_str:
+   if( @x < (getd("build_str"+@id)-1) ){
+       statusup bStr;       // increase stat
+       set @x, @x+1;        // increase counter
+       goto C_str;          // continue the cicle
+   }
+   //agi
+   set @x, 0;  //reset counter
+   C_agi:
+   if( @x < (getd("build_agi"+@id)-1) ){
+       statusup bAgi;       // increase stat
+       set @x, @x+1;        // increase counter
+       goto C_agi;          // continue the cicle
+   }
+   //vit
+   set @x, 0;  //reset counter
+   C_vit:
+   if( @x < (getd("build_vit"+@id)-1) ){
+       statusup bVit;       // increase stat
+       set @x, @x+1;        // increase counter
+       goto C_vit;          // continue the cicle
+   }
+   //int
+   set @x, 0;  //reset counter
+   C_int:
+   if( @x < (getd("build_int"+@id)-1) ){
+       statusup bInt;       // increase stat
+       set @x, @x+1;        // increase counter
+       goto C_int;          // continue the cicle
+   }
+   //dex
+   set @x, 0;  //reset counter
+   C_dex:
+   if( @x < (getd("build_dex"+@id)-1) ){
+       statusup bDex;       // increase stat
+       set @x, @x+1;        // increase counter
+       goto C_dex;          // continue the cicle
+   }
+
+   //luk
+   set @x, 0;  //reset counter
+   C_luk:
+   if( @x < (getd("build_luk"+@id)-1) ){
+       statusup bLuk;       // increase stat
+       set @x, @x+1;        // increase counter
+       goto C_luk;          // continue the cicle
+   }
+
+  //payment
+  set Zeny, Zeny - @fee;
+
+mes "[Build Swapper]";
+mes "Build loaded!";
+next;
+
+goto L_start;
+close;   //security
+//-- Reset Skills --
+
+SkillReset:
+	mes "[Stats Master]";
+	if (Zeny < 5000) {
+		mes "Sorry, you don't have enough Zeny.";
+		close;
+	}
+	mes "Alright, here we go now.. Remember, changes won't take effect until you log back on!";
+	set Zeny,zeny-5000;
+	ResetSkill;
+	close;
+//-- Reset Stats --
+ResetStats:
+	mes "[Stats Master]";
+	if (Zeny < 5000) {
+		mes "Sorry, you don't have enough Zeny.";
+		close;
+	}
+	mes "Alright, here we go now.. Remember, changes won't take effect until you log back on!";
+	set Zeny,zeny-5000;
+	ResetStatus;
+	close;
+//-- Reset Both --
+ResetBoth:
+	mes "[Stats Master]";
+	if (Zeny < 9000) {
+		mes "Sorry, you don't have enough Zeny.";
+		close;
+	}
+	mes "Alright, here we go now.. Remember, changes won't take effect until you log back on!";
+	set Zeny,zeny-9000;
+	ResetSkill;
+	ResetStatus;
+	close;
+// --  EXIT --
+L_exit:
+mes "Bye!";
+close;
+end;
+}
+nameless_i,182,193,6	duplicate(Stats Master)	Stats Master#it	919

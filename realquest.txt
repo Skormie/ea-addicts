@@ -1,0 +1,154 @@
+//By Skorm
+aethra,168,42,3	script	Geoffrey#01	904,8,8,{
+//prontera,175,153,3	script	Geoffrey#01	904,8,8,{
+set .@a$,"Geoffrey";
+if(checkquest(70000)==0||checkquest(70000)==1){ if(countitem(6000)>=10) { mes "Can I have the "+getitemname(6000)+"."; if(select("Sure:Nah.")-1){ close; } else { goto(L_0); }} else { mes "You know I'm still waiting on those 10 "+getitemname(6000)+"."; close; }}
+if(checkquest(70000)==-1){
+	if(@tmp){ mes "["+.@a$+"]";	mes "Oh, Your back- I'm sorry about what I said before, will you help me?"; if(select("Sure:Nah")-1){ next; mes "["+strcharinfo(0)+"]"; mes "Nah!"; close2; emotion e_sob; end; } next; mes "["+.@a$+"]"; mes "Ok, all you need to do is collect 10 "+getitemname(6000)+". Just stop by when you've got them, I'll be waiting!"; close2; emotion e_thx; end; }
+	mes "["+.@a$+"]";		mes "Hello, I'm "+.@a$+", and it seems I'm in a bit of a predicament.";
+	next; mes "["+.@a$+"]";	mes "You see my employer, Mr. Vermillion, has lost his mind.";
+	next; mes "["+.@a$+"]";	mes "He's always saying things like, '"+.@a$+", get me some "+getitemname(6000)+", and don't come back until you do!'";
+	next; mes "["+.@a$+"]";	mes "I-I don't know where to get that kind of thing, and even if I did. I wouldn't make it back in one piece that's for sure.";
+	next; mes "["+.@a$+"]";	mes "What do you say Mr. ...uhm... I'm so sorry in all my fuss it seems I've forgotten to ask your name... Would you mind telling it to me?";
+	select("Tell the truth.:Tell a lie.:Walk away.");
+	if(@menu-1){
+		if(@menu-2){ next; mes "*You walk away like nothing ever happend.*"; close2; emotion e_sob; npctalk "NOOO, I'm a dead man!!!!"; end;}
+		input(fname$);
+	}
+	if(select("It's "+strcharinfo(0)+((!(@menu-2)||fname$!="")?":It's "+fname$+"":""))){
+		set @tmp,1;
+		if(!(@menu-1)) set fname$,"";
+		next;	mes "["+strcharinfo(0)+"]";	mes "It's "+((fname$!="")?fname$:strcharinfo(0))+".";
+		next;	mes "["+.@a$+"]";			mes "Alright, Mr. "+((fname$!="")?fname$:strcharinfo(0))+", will you help me?";
+		if(select("Sure:Nah, I've got better things to do.")-1) { next; mes "["+strcharinfo(0)+"]"; mes "Nah, I've got better things to do."; mes "*You walk away like nothing ever happend.*"; close2; emotion e_sob; npctalk "I didn't need your help anyways!!!"; end; }
+		setquest(70000);
+		next; mes "["+.@a$+"]"; mes "Ok, all you need to do is collect 10 "+getitemname(6000)+". Just stop by when you've got them, I'll be waiting!"; close2; emotion e_thx; end;
+	}
+}
+
+OnTouch:
+if(checkquest(70000)==-1){
+	showevent 1,0;
+	npctalk "Hey, Sir!";
+}
+if(checkquest(70000)==0||checkquest(70000)==1){
+	if(countitem(6000)>=10){
+		npctalk "Oh, It looks like you have the "+getitemname(6000)+". Would you like me to take them for you?";
+	} else {
+		npctalk "I'm still waiting, you know I can't go in unless you get those 10 "+getitemname(6000)+".";
+	}
+}
+if(checkquest(70000)==2){
+	npctalk "Mr. Vermillion wishes to speak with you.";
+	//npctalk getareadropitem("prontera",176,150,181,144,512);
+}
+end;
+L_0:
+if(checkquest(70000)==0||checkquest(70000)==1){
+	delitem(6000,10);
+	npctalk "Thank you so much, I'll tell the master immediately, please wait here a second!";
+	completequest(70000);
+	close2;
+	disablenpc "Geoffrey#01";
+	sleep2 5000;
+	enablenpc "Geoffrey#01";
+	npctalk "Mr. Vermillion wishes to speak with you.";
+	end;
+}
+//	2  = Quest comepleted
+//OnInit:
+//	defpattern 1, "([^:]+): .*[yY]+[eE]+[sS]+.*","L_0";
+//	defpattern 1, "([^:]+): .*[sS]+[uU]+[rR]+[eE]+.*","L_0";
+//	defpattern 1, "([^:]+): .*[oO]+[kK]+.*","L_0";
+//	activatepset 1;
+//	end;
+}
+/*
+Warpinto sec_in01 38 88
+
+
+*getareadropitem("<map name>",<x1>,<y1>,<x2>,<y2>,<item>)
+
+This function will count all the items with the specified ID number lying on the 
+ground on the specified map within the x1/y1-x2/y2 square on it and return that 
+number.
+
+This is the only function around where a parameter may be either a string or a 
+number! If it's a number, it means that only the items with that item ID number 
+will be counted. If it is a string, it is assumed to mean the 'english name' 
+field from the item database. If you give it an empty string, or something that 
+isn't found from the item database, it will count items number '512' (apples).
+
+
+
+---------------------------
+areawarp "place",10,10,120,120,"place2",150,150;
+areamonster "<map name>",<x1>,<y1>,<x2>,<y2>,"<name to show>",<mob id>,<amount>{,"<event label>"};
+mobcount("<map name>","<event label>")
+*disablenpc "<NPC object name>";
+*enablenpc "<NPC object name>";
+*setnpcdisplay("<npc name>", "<display name>")
+
+
+<NPC Header> {
+	dispbottom "Starting a 5 second timer...";
+	addtimer 5000, strnpcinfo(3)+"::On5secs";
+	end;
+On5secs:
+	dispbottom "5 seconds have passed!";
+	end;
+}
+
+npctalk "I cant talk right now, give me 10 seconds";
+sleep2 {<milliseconds>};
+specialeffect EF_HIT1,AREA,"John Doe#1";
+effect 12.	Yellow cast aura
+effect 58 holy element
+effect 60 casting ring on target
+area cast 513
+release of energy effect 514
+599.	Cast Time Sound and Flashing Animation on Player
+610.	Success
+611.	Failed
+140.	Ressurection Aura
+166.	Energy Coat (Visual Effect) walking shadow effect
+754 really cool summon green glow effect
+757 cascading blue glow effect
+852 set fairys free
+897 collecting light (Charging)
+908 collecting light charging
+909 collecting light charging
+910 collecting light charging
+
+sec_in01 29 77 hidden npc spell circle 
+
+
+setitemscript 12740,"{ new script }",0;
+-----items used in quest-----
+Acid Bottle    Item ID# 7136 (Acid_Bottle)	
+Obtained from	Old Blue Box, Old Violet Box
+//
+Alice's Apron    Item ID# 7047 (Alice's_Apron)	
+Dropped By	Alice(25%) Aliza(0.05%)
+Obtained from	Old Blue Box, Old Violet Box
+//
+Aloe    Item ID# 704 (Aloe)	
+Dropped By	Green Plant(0.5%)Flora(0.1%)
+Obtained from	Old Blue Box, Old Violet Box
+//
+Have to make a second npc to give play this item
+Ancient Language Document    Item ID# 7914 (Ancient_Document_TW)	
+Dropped By	No Result
+//
+Black Dyestuffs    Item ID# 983 (Black_Dyestuffs)	
+Dropped By		Deviling(1%)
+Obtained from	Old Blue Box, Old Violet Box, Gift Box
+//
+Blank Scroll    Item ID# 7433 (Scroll)	
+vender at yuno_in03 (176, 22) 
+//After first failed attempt
+Baphomet Doll    Item ID# 750 (Baphomet_Doll)	
+Dropped By		Baphomet(5%) [mvp drop]
+Obtained from	Old Blue Box, Old Violet Box, Gift Box
+//
+*/

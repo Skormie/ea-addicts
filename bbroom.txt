@@ -1,0 +1,82 @@
+//by skorm
+aethra,145,59,3	script	Bloody Branch Room	77,{
+setarray $@maps$[1], "nameless_i", "06guild_08", "pvp_y_7-1", "pvp_y_7-2", "pvp_y_7-3", "pvp_y_7-4", "pvp_y_8-5";
+for(set .@b,1; .@b < getarraysize($@maps$); set .@b,.@b + 1) {
+	if(.@b==1){ set .@menu$, .@menu$  + "Public- "+((getmapusers($@maps$[.@b])>=30)?"^CD0000Closed^000000("+getmapusers($@maps$[.@b])+")":"^007700Open^000000("+getmapusers($@maps$[.@b])+")")+":"; } else { set .@menu$, .@menu$  + "Private["+(.@b-1)+"]- "+((getmapusers(""+$@maps$[.@b]+"")>=5)?"^CD0000Closed^000000("+getmapusers($@maps$[.@b])+")":"^007700Open^000000("+getmapusers($@maps$[.@b])+")")+":"; }
+}
+if(select(.@menu$)) { callfunc "GRfunction",$@maps$[@menu],@menu; }
+}
+
+function	script	GRfunction	{
+if(getmapusers(getarg(0))<=30&&getarg(1)==1){
+	warp getarg(0),0,0; end;
+}
+if(!getmapusers(getarg(0))){
+	mes "Input a new password.";
+	input($password$[getarg(1)]);
+	next; warp getarg(0),((getarg(0)=="nameless_i")?156:0),((getarg(0)=="nameless_i")?185:0);
+	end;
+}
+if(getmapusers(getarg(0))<=5&&getarg(1)!=1) {
+	mes "This room is password protected please input the password now.";
+	input(@name$);
+	if(@name$==$password$[getarg(1)]){
+		mes "correct!"; next; warp getarg(0),((getarg(0)=="nameless_i")?156:0),((getarg(0)=="nameless_i")?185:0); end;
+	} else {
+		mes "Incorrect!";
+		close;
+	}
+} else {
+	mes "I'm sorry this room is full.";
+	close;
+}
+}
+// MAPFLAGS
+nameless_i	mapflag	nomemo
+nameless_i	mapflag	pvp	off
+nameless_i	mapflag	nosave	SavePoint
+nameless_i	mapflag	noteleport
+nameless_i	mapflag	nowarp
+nameless_i	mapflag	nowarpto
+//----
+06guild_08	mapflag	nomemo
+06guild_08	mapflag	pvp	off
+06guild_08	mapflag	nosave	SavePoint
+06guild_08	mapflag	noteleport
+06guild_08	mapflag	nowarp
+06guild_08	mapflag	nowarpto
+//----
+pvp_y_7-1	mapflag	nomemo
+pvp_y_7-1	mapflag	pvp	off
+pvp_y_7-1	mapflag	nosave	SavePoint
+pvp_y_7-1	mapflag	noteleport
+pvp_y_7-1	mapflag	nowarp
+pvp_y_7-1	mapflag	nowarpto
+//----
+pvp_y_7-2	mapflag	nomemo
+pvp_y_7-2	mapflag	pvp	off
+pvp_y_7-2	mapflag	nosave	SavePoint
+pvp_y_7-2	mapflag	noteleport
+pvp_y_7-2	mapflag	nowarp
+pvp_y_7-2	mapflag	nowarpto
+//----
+pvp_y_7-3	mapflag	nomemo
+pvp_y_7-3	mapflag	pvp	off
+pvp_y_7-3	mapflag	nosave	SavePoint
+pvp_y_7-3	mapflag	noteleport
+pvp_y_7-3	mapflag	nowarp
+pvp_y_7-3	mapflag	nowarpto
+//----
+pvp_y_7-4	mapflag	nomemo
+pvp_y_7-4	mapflag	pvp	off
+pvp_y_7-4	mapflag	nosave	SavePoint
+pvp_y_7-4	mapflag	noteleport
+pvp_y_7-4	mapflag	nowarp
+pvp_y_7-4	mapflag	nowarpto
+//----
+pvp_y_8-5	mapflag	nomemo
+pvp_y_8-5	mapflag	pvp	off
+pvp_y_8-5	mapflag	nosave	SavePoint
+pvp_y_8-5	mapflag	noteleport
+pvp_y_8-5	mapflag	nowarp
+pvp_y_8-5	mapflag	nowarpto

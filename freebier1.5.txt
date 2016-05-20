@@ -1,0 +1,187 @@
+//Version 1.5 rAthena Only
+prontera.gat,149,180,5	script	Freebie NPC	753,{
+//Configurable Char Variables
+set @c, 1; // This is a variable for first letter Case-change. ( 1=on/0=off )
+set @npc$,	"[^0000FFFreebie NPC^000000]";
+setarray @cmds$,	"getitemname",	"getcharid",	"strcharinfo";
+//End
+
+//Character Vars
+set .@blvl,	BaseLevel;
+set .@getitm$, ".itm"+#itmget+"$";
+set .@getitm_len, getarraysize(getd(.@getitm$));
+set .@nxtrblvl,	atoi(getd(".itm"+(#itmget+1)+"$[2]"));
+set .@rblvl,	atoi(getd(.@getitm$+"[2]"));
+set .@itmid,	atoi(getd(.@getitm$));
+set .@itmam,	atoi(getd(.@getitm$+"[1]"));
+//End
+
+//NPC Dialogue
+if(.@blvl>=.@rblvl) {
+	for(set .@s,0;.@s<(.@getitm_len-3);set .@s,.@s+1){
+		set .@op$, callfunc("dispmes_func",getd(.@getitm$+"["+(.@s+3)+"]"));
+		if(compare(.@op$,"next;")) { set .@op$, ""; next; }
+		if(compare(.@op$,"menu;")) { if(select("Yes:No")&2) close; set .@op$, ""; }
+		if(compare(.@op$,"close;")) { set .@op$, ""; close; }
+		if(compare(.@op$,"item;")) { set .@op$, ""; getitem .@itmid,.@itmam; set #itmget,#itmget+1; }
+		if(compare(.@op$,"npc;")) { set .@op$, @npc$; }
+		if(.@op$!="") mes .@op$;
+	}
+}
+
+mes @npc$;
+set .@message$, (.@blvl<=.@rblvl )?
+		"You have already received this item, please come back when you are level "+.@rblvl+" for a special item."
+	:
+		((.@rblvl<.@blvl )?
+				"Sorry, I don't have anymore items to give you!"
+			:
+				"");
+mes .@message$;
+close;
+//End
+
+
+end;
+OnInit:
+	waitingroom "Free items!",0;
+
+//Configure NPC Items & Dialogue HERE!
+	//					ItemID	Amount	Required-BaseLevel
+	setarray .itm0$,	"501",	"10",	"1",
+		"Npc;",
+		"Hello, strcharinfo(0), do you want this free item?",
+		"next;",	"menu;",
+		"Alright!",	"item;",
+		"Goodbye.",	"close;";
+
+	setarray .itm1$,	"502",	"20",	"70",
+		"Npc;",
+		"Wow, strcharinfo(0), you're really strong!",
+		"I won't keep you waiting.",
+		"Here is your item- You've earned it!",
+		"item;", "Until we meet again.", "close;";
+
+	setarray .itm2$,	"1599",	"1",	"180",
+		"Npc;",
+		"You, sir, are a true god!",
+		"Hh-h-here is your getitemname(1599).",
+		"item;", "close;";
+//End
+
+/*Explanation:
+	The first three values in each row are the only constant numbers.
+	First is the item_id then the amount you want to give then the level you give it at.
+	Every line after that is lucid. You can type what the npc is going to say.
+	You can also use optional commands that I will list below to display information.
+	Add new conditions by following my example just remember to change .itm<#>$ to the next value.
+	I hope everyone can understand this x.x Keep in mind this is just the first version.
+	It's still a little slow. You can change upper-case to ignore for speedup.
+	
+Commands Explained:
+	Commands that takeup one line:
+		"Npc;", -> This will display the npcs name.
+		"Item;", -> Will give the player item and increase quest value.
+		"Menu;", -> This will display a Yes and No menu.
+		"Close;", -> This will close the script.
+		"Next;", -> This will refresh chat window and display Next button.
+	
+	Commands that can be used in chat:
+		getitemname(<itemid>) -> Shows item name in chat.
+		getcharid(<type>) -> Will return character id number.
+		strcharinfo(<type>) -> displays information from charinfo. EX: strcharinfo(0) = Characters Name
+
+Skorm
+*/
+
+}
+
+
+function	script	dispmes_func	{
+	set .@len,callfunc("str_explode2","@explosion$",getarg(0), 3, " ", "(", ")");
+	for(set .@a,0;.@a<.@len;set .@a,.@a+1) {
+		for(set .@b,0;.@b<getarraysize(@cmds$);set .@b,.@b+1){
+			if (compare(@explosion$[.@a],@cmds$[.@b])){
+				set .@output$, callfunc("commands_func",.@b,@explosion$[(.@a+1)]);
+				set @explosion$[.@a], .@output$;
+				set @explosion$[(.@a+1)], "";
+			}
+		}
+		if(!.@a&&@c) {
+			set .@tmp$, charat(@explosion$[.@a],0);
+			set .@tmp$, strtoupper(.@tmp$);
+			set @explosion$[.@a], setchar(@explosion$[.@a], .@tmp$, 0);
+		}
+		set .@message$, .@message$+ ((@explosion$[.@a]!=""&&.@a<(.@len-1))?
+				@explosion$[.@a]+" "
+			:
+				@explosion$[.@a]+"");
+	}
+	return .@message$;
+}
+
+
+
+function	script	commands_func	{
+	switch(getarg(0)){
+		case 0:
+			return getitemname(atoi(getarg(1)));
+		case 1:
+			return getcharid(atoi(getarg(1)));
+		case 2:
+			return strcharinfo(atoi(getarg(1)));
+	}
+}
+
+
+
+/// callfunc "str_explode2" , "<array output>", "<string>"{, <Amount of Delemiter>{, "<Delemiter>"{, "<Delemiter>"}}}; 
+function	script	str_explode2	{
+	if ( !getarg(2) )
+		return callfunc("str_toarray", getarg(1), getarg(0) );
+	sleep2 1;
+	setarray .@char$[0],
+		" ", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+		"e", "i", "a", "s", "r", "n", "t", "o", "u", "l", "c",
+		"p", "m", "d", "v", "h", "g", "f", "b", "y", "q", "k",
+		"z", "x", "j", "w", "_", "-", "(", ")", ";", ",", ":",
+		".", "*", "!", "?", "'";
+	set .@charsize,	getarraysize(.@char$);
+	set .@tmp$,	"|~key~|";
+	set .@str$,	.@tmp$ + getarg(1) ;
+	set .@len,	getstrlen(getarg(1));
+	set .@delem_len,	getarg(2);
+	for( set .@g,0;.@g<.@delem_len;set .@g,.@g+1 ){
+		setd(".@parse_len"+.@g, getstrlen(getarg(3+.@g)));
+	}
+	while( .@len > .@s ) {
+		set .@i, 0 ; 
+		while( .@i < .@charsize  ) {
+			if ( ! ( set(.@l,.@l+1) % 600) )
+				sleep2 1;
+			if ( compare( .@str$ , .@tmp$ + .@char$[.@i] ) ) {
+				set .@tmp$, .@tmp$ + .@char$[.@i];
+				set .@g, 0; 
+				while( .@g < .@delem_len ) {
+					if ( ! ( set(.@l,.@l+1) % 600) )
+						sleep2 1;
+					if ( .@char$[.@i] == getarg((3+.@g)) ) {
+						set .@p, .@p + 1;
+						set .@s, .@s + (getd(".@parse_len"+.@g)-1) ;
+						break;
+					}
+					set .@g,.@g+1;
+				}
+				if ( .@delem_len == .@g )
+					set .@arr$[.@p], .@arr$[.@p] + .@char$[.@i];
+				break;
+			}
+			set .@i, .@i+1 ;
+		}
+		if ( .@i == .@charsize ) return 0;
+		else set .@s, .@s+1 ;
+	}
+	deletearray getd(getarg(0));
+	copyarray getd(getarg(0)), .@arr$, .@p+1;
+	return .@p+1;
+}

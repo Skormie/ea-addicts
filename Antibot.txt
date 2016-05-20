@@ -1,0 +1,130 @@
+//By Skorm
+s_atelier,0,0,5	script	AntiBot	-1,{
+OnNPCKillEvent:
+if(rand(1,100)==1){
+OnPCLoginEvent:
+//Saving info
+set $@p,$@p+1;
+setd "$@info"+$@p,getcharid(3);
+getmapxy($@map$[$@p],$@x[$@p],$@y[$@p],0);
+//
+if(getmapusers("s_atelier")){ warp "geffen_in",182,194; dispbottom "Welcome to the waiting room! You'll be warped in a minute."; while(getmapusers("s_atelier")){ sleep2 1;}}
+set .@monster,1002;
+setarray $@names1$[0],"I","m"," ","n","o","t"," ","a"," ","b","o","t";
+setarray $@names2$[0],"N","o"," ","b","o","t"," ","h","e","r","e";
+setarray $@fakenames1$[0],"I","","a","m"," ","a"," ","b","o","t";
+setarray $@fakenames2$[0],"b","o","t"," ","h","e","r","e";
+set .@a,rand(1,2);
+
+//Changing case
+for(set .@b,0;.@b<getarraysize(getd("$@names"+.@a+"$"));set .@b,.@b+1){
+	set .@variable$,callfunc("str_changecase",getd("$@names"+.@a+"$["+.@b+"]"),rand(0,1));
+	set .@variable2$,callfunc("str_changecase",getd("$@fakenames"+.@a+"$["+.@b+"]"),rand(0,1));
+	setarray .@temparray$[.@b],.@variable$;
+	setarray .@temparray2$[.@b],.@variable2$;
+}
+killmonsterall "s_atelier";
+sleep2 1000;
+warp "s_atelier",21,120;
+sleep2 3000;
+attachnpctimer;
+initnpctimer;
+atcommand "@cleanmap";
+atcommand "@mute 100 "+strcharinfo(0);
+//Imploding Arrays
+set .@str$, "";	set .@str2$, "";
+set .@size, getarraysize(.@temparray$);	set .@size2, getarraysize(.@temparray$);
+set .@i, 0;	set .@i2, 0;
+while( .@i<.@size ) {
+	set .@str$ , .@str$ + .@temparray$[.@i];
+	set .@i, .@i+1;
+}
+while( .@i2<.@size2 ) {
+	set .@str2$ , .@str2$ + .@temparray2$[.@i2];
+	set .@i2, .@i2+1;
+}
+//
+mapannounce "s_atelier","You have 60 seconds to kill the '"+.@str$+"' Poring to warp out.",bc_map;
+monster "s_atelier",21,120,.@str$,.@monster,1,"AntiBot::OnImNot";
+monster "s_atelier",21,120,.@str2$,.@monster,5,"AntiBot::OnIam";
+end;
+}
+end;
+
+
+OnImNot:
+stopnpctimer;
+if(!getmapusers("s_atelier")) end;
+for(set .@a,0; getd("$@info"+.@a)!=getcharid(3); set .@a,.@a+1){}
+set $@a,.@a;
+detachrid;
+atcommand "@unmute "+rid2name(getd("$@info"+$@a));
+attachrid(getd("$@info"+$@a));
+set .@a,$@a;
+dispbottom "Congratulations!";
+warp $@map$[$@p],$@x[$@p],$@y[$@p];
+sleep2 1000;
+if(strcharinfo(3)=="s_atelier") warp prontera,100,100;
+deletearray $@map$[$@p],1;	deletearray getd("$@info"+.@a+"["+.@a+"]"),1;
+deletearray $@x[$@p],1;	deletearray $@y[$@p],1;
+end;
+
+
+OnIam:
+stopnpctimer;
+if(!getmapusers("s_atelier")) end;
+for(set .@a,0; getd("$@info"+.@a)!=getcharid(3); set .@a,.@a+1){}
+set $@a,.@a;
+detachrid;
+atcommand "@unmute "+rid2name(getd("$@info"+$@a));
+attachrid(getd("$@info"+$@a));
+atcommand "@kick "+strcharinfo(0);
+end;
+
+
+OnTimer60000:
+if(!getmapusers("s_atelier")) end;
+for(set .@a,0; getd("$@info"+.@a)!=getcharid(3); set .@a,.@a+1){}
+set $@a,.@a;
+detachrid;
+atcommand "@unmute "+rid2name(getd("$@info"+$@a));
+attachrid(getd("$@info"+$@a));
+atcommand "@kick "+strcharinfo(0);
+end;
+}
+
+function	script	str_changecase	{
+	sleep2 1;
+	if ( getarg(1) ) {
+		setarray .@char$[ 0 ],
+			" ", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+			"E", "I", "A", "S", "R", "N", "T", "O", "U", "L", "C",
+			"P", "M", "D", "V", "H", "G", "F", "B", "Y", "Q", "K",
+			"Z", "X", "J", "W", "_", "-";
+	}
+	else {
+		setarray .@char$[ 0 ],
+			" ", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+			"e", "i", "a", "s", "r", "n", "t", "o", "u", "l", "c",
+			"p", "m", "d", "v", "h", "g", "f", "b", "y", "q", "k",
+			"z", "x", "j", "w", "_", "-";
+	}
+	set .@charsize, getarraysize(.@char$);
+	set .@str$, "|~key~|" + getarg(0) ;
+	set .@len, getstrlen(getarg(0));
+	while( .@len>.@s ) {
+		set .@i,0;
+		while( .@i<.@charsize ) {
+			if ( ! ( set(.@l,.@l+1) % 650) )
+				sleep2 1;
+			if ( compare( .@str$ , "|~key~|" + .@tmp$ + .@char$[.@i] ) ) {
+				set .@tmp$, .@tmp$ + .@char$[.@i];
+				break;
+			}
+			set .@i, .@i+1;
+		}
+		if ( .@i == .@charsize ) return "";
+		else set .@s, .@s+1;
+	}
+	return .@tmp$;
+}

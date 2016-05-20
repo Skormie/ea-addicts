@@ -1,0 +1,27 @@
+aethra,194,54,3	script	1CastleDisable	112,{
+//OnPCLoadMapEvent:
+//while(strcharinfo(3) == "prtg_cas01"){
+cleararray @inventorylist_card1[0],0,128;
+cleararray @inventorylist_card2[0],0,128;
+cleararray @inventorylist_card3[0],0,128;
+cleararray @inventorylist_card4[0],0,128;
+cleararray @inventorylist_id[0],0,128;
+getinventorylist;
+for(set .@i,0; .@i < getarraysize(@inventorylist_card1); set .@i, .@i + 1){
+	sleep2 1;
+	if(getequipid(3)==@inventorylist_id[.@i]){
+		if(@inventorylist_card1[.@i]||@inventorylist_card2[.@i]||@inventorylist_card3[.@i]||@inventorylist_card4[.@i]){
+			getitem @inventorylist_card1[.@i],1;
+			getitem @inventorylist_card2[.@i],1;
+			getitem @inventorylist_card3[.@i],1;
+			getitem @inventorylist_card4[.@i],1;
+			delitem @inventorylist_id[.@i],1;
+			getitem @inventorylist_id[.@i],1;
+			break;
+		}
+	}
+}
+//}
+end;
+}
+//prtg_cas01	mapflag	loadevent

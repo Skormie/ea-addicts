@@ -1,0 +1,10 @@
+aethra,125,74,4	script	Identify & Repairer	123,{
+getinventorylist;
+for (set .@j, 0; .@j < @inventorylist_count; set .@j, .@j + 1) {
+    if (!@inventorylist_identify[.@j]) {
+        delitem2 @inventorylist_id[.@j],1,0,0,0,0,0,0,0;
+        getitem @inventorylist_id[.@j],1;
+    }
+}
+atcommand "@repairall " + strcharinfo(0);
+}

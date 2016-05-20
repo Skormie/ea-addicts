@@ -1,0 +1,7 @@
+new_1-2,95,71,4	script	+10 Refiner	100,{
+	for ( .@i = 1; .@i <= 10; .@i++ ) {
+		 if ( getequipisequiped(.@i) )
+			while( getequiprefinerycnt(.@i) < 10 ) successrefitem .@i;
+	}
+	end;
+}

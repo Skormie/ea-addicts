@@ -1,0 +1,183 @@
+prontera,96,96,2	script	MVP Spawner	66,{
+if(getgmlevel()<.gmlevel) end;
+set .@MVPID,-3;
+L_Menu:
+	mes .NPC$;
+	mes "Select an option from the menu below and click [^0000FFSummon!^000000] when you're done.";
+	next;
+	if(.@MVPID==-3){ set .@tmp$,"Random MVP"; } else { set .@tmp$,getmonsterinfo(.@MVPID,0); }
+	Switch(select("MonsterID(^0000FF"+.@tmp$+"^000000):MapName(^0000FF"+.@MAPNAME$+"^000000):Amount(^0000FF"+.@AMOUNT+"^000000):AddItems(^0000FF"+.@tmp2$+"^000000):[^0000FFSummon!^000000]")){
+		case 1:
+			mes .NPC$;
+			mes "Input the id of the monster you'd like to spawn.";
+			next;
+			input(.@MVPID);
+			while(!query_sql("(SELECT `ID` from `mob_db` where `ID` = "+.@MVPID+") UNION ALL (SELECT `ID` from `mob_db2` where `ID` = "+.@MVPID+" LIMIT 1);",.@a)){
+				input(.@MVPID);
+			} goto L_Menu;
+		case 2:
+			mes .NPC$;
+			mes "Input the name of the map you'd like to spawn the monster on.";
+			next;
+			input(.@MAPNAME$);
+			while(mobcount(.@MAPNAME$,"all")==-1){
+				input(.@MAPNAME$);
+				if(mobcount(.@MAPNAME$,"all")!=-1){
+					mes .NPC$;
+					mes "Would you like to spawn "+(.@MVPID==-3?"Random MVPs":getmonsterinfo(.@MVPID,0))+" on the map "+.@MAPNAME$+"?";
+					next;
+					if(select("Yes:No")-1) { set .@MAPNAME$,""; continue; } else { break; }
+				}
+			} goto L_Menu;
+		case 3:
+			mes .NPC$;
+			mes "Input the amount you'd like to spawn.";
+			mes "(Maximum "+.Lamount+")";
+			next;
+			input(.@AMOUNT);
+			while(.@AMOUNT<=0||.@AMOUNT>.Lamount){
+				input(.@AMOUNT);
+				if(.@AMOUNT>0&&.@AMOUNT<=.Lamount){
+					mes .NPC$;
+					mes "Would you like to spawn "+.@AMOUNT+" monsters?";
+					next;
+					if(select("Yes:No")-1) { set .@AMOUNT,0; continue; } else { break; }
+				}
+			} goto L_Menu;
+		case 4: L_Main:
+			set .@menu$,"";
+			for(set .@b,1; .@b <= 5; set .@b,.@b + 1) {
+				set .@menu$, .@menu$ + "( " + .@b + ") " + getd("slistn"+.@b+"$") + ":";
+			} set .@menu$,.@menu$+":Back";
+			select .@menu$;
+			if(@menu>5) goto L_Menu;
+			if(getd("slistn"+@menu+"$")==""){ mes "What would you like to call this list?"; input(@name$); setd "slistn"+@menu+"$",@name$; }
+			set .@m,@menu;
+			for(set .@b,1; .@b <= 10; set .@b,.@b + 1) {
+				setarray .@foobar[.@b],getd(.@m+"sitemid"+.@b);
+				setarray .@foobarq[.@b],getd(.@m+"sitemq"+.@b);
+				setarray .@foobarr[.@b],getd(.@m+"sitemr"+.@b);
+			}
+			L_list:
+			set .@menu$,"";
+			mes "Select to edit the list.";
+			for(set .@b,1; .@b <= 10; set .@b,.@b + 1) {
+				set .@menu$, .@menu$ + "( " + .@b + ") " + ((getitemname(.@foobar[.@b])!="null")? getitemname(.@foobar[.@b])+ " x" + .@foobarq[.@b]+"-"+.@foobarr[.@b]+"%":"Empty!") + ":";
+			}
+			set .@menu$, .@menu$ + "Save:Rename:Pick:Delete:Back";
+			select(.@menu$);
+			if(@menu<=10){
+				mes "Item ID"; input(@itemid); mes "Item Quantity"; input(@itemq); mes "Item Rate"; mes "(1=1% | 100=100%)"; set @itemr,0; while(@itemr<1||@itemr>100){input(@itemr);}
+				setarray .@foobar[@menu],@itemid;
+				setarray .@foobarq[@menu],@itemq;
+				setarray .@foobarr[@menu],@itemr;
+				next;
+				goto L_list;
+			}
+			if(@menu==11){
+				for(set .@b,1; .@b <= 10; set .@b,.@b + 1) {
+					if(.@foobar[.@b]) setd .@m + "sitemid" + .@b, .@foobar[.@b];
+					if(.@foobarq[.@b]) setd .@m + "sitemq" + .@b, .@foobarq[.@b];
+					if(.@foobarr[.@b]) setd .@m + "sitemr" + .@b, .@foobarr[.@b];
+				}
+				next;
+				goto L_list;
+			}
+			if(@menu==12){
+				mes "Please input a new name.";
+				input(@newn$);
+				setd "slistn"+.@m+"$",@newn$;
+				next;
+				goto L_Main;
+			}
+			if(@menu==13){
+				if(.@MAPNAME$==""){ set .@MAPNAME$,.defaultm$; }
+				if(getd("."+.@MAPNAME$+"dl[1]")){
+					deletearray getd("."+.@MAPNAME$+"dl[1]"),128;
+					deletearray getd("."+.@MAPNAME$+"dq[1]"),128;
+					deletearray getd("."+.@MAPNAME$+"dr[1]"),128;
+				}
+				for(set .@b,1; .@b <= 10; set .@b,.@b + 1) {
+					if(.@foobar[.@b]) setd "."+.@MAPNAME$+"dl["+.@b+"]", .@foobar[.@b];
+					if(.@foobarq[.@b]) setd "."+.@MAPNAME$+"dq["+.@b+"]", .@foobarq[.@b];
+					if(.@foobarr[.@b]) setd "."+.@MAPNAME$+"dr["+.@b+"]", .@foobarr[.@b];
+				}
+				set .@tmp2$,getd("slistn"+.@m+"$");
+				mes "Set as drop list.";
+				next;
+				goto L_Menu;
+			}
+			if(@menu==14){
+				setd "slistn"+.@m+"$","";
+				for(set .@b,1; .@b <= 10; set .@b,.@b + 1) {
+					if(.@foobar[.@b]) setd .@m + "sitemid" + .@b, 0;
+					if(.@foobarq[.@b]) setd .@m + "sitemq" + .@b, 0;
+					if(.@foobarr[.@b]) setd .@m + "sitemr" + .@b, 0;
+				}
+				mes "List deleted!.";
+				next;
+				goto L_Menu;
+			}
+			if(@menu>=15){
+				next;
+				goto L_Main;
+			}
+		case 5:
+			if(mobcount(.@MAPNAME$,"all")==-1||.@AMOUNT<=0){
+				if(!.fiesta){
+					mes .NPC$;
+					mes "I'm sorry you need to fillout all the fields before summoning a monster!";
+					next;
+					goto L_Menu;
+				} else {
+					if(mobcount(.@MAPNAME$,"all")==-1) set .@MAPNAME$,"this";
+					if(.@AMOUNT<=0) set .@AMOUNT,.fiesta;
+				}
+			}
+			if(.@tmp2$==""&&getd("."+.@MAPNAME$+"dl[1]")){
+				deletearray("."+.@MAPNAME$+"dr[1]",128);
+				deletearray("."+.@MAPNAME$+"dl[1]",128);
+				deletearray("."+.@MAPNAME$+"dq[1]",128);
+			}
+			if(.Mamount){
+				if(mobcount(.@MAPNAME$,"MVP Spawner::OnMVPDeath")+.@AMOUNT>.Mamount&&.Mamount>0){
+					mes .NPC$;
+					mes "I'm sorry but there can only be "+.Mamount+" MVPs in one map.";
+					set .@tmp,.Mamount-mobcount(.@MAPNAME$,"MVP Spawner::OnMVPDeath");
+					if(.@tmp>0){
+						mes "Would you like to spawn "+.@tmp+" instead?";
+						if(select("Yes:No")-1) { mes "Ok!"; close; }
+						announce "GM-"+strcharinfo(0)+" summoned "+.@AMOUNT+" "+.@tmp$+"(s) in "+(.@MAPNAME$=="this"?strcharinfo(3):.@MAPNAME$)+".",bc_all,"0x"+.fontcolor$;
+						monster .@MAPNAME$,0,0,"--ja--",.@MVPID,.@tmp,"MVP Spawner::OnMVPDeath";
+						close;
+					}
+					next;
+					goto L_Menu;
+				}
+			}
+			announce "GM-"+strcharinfo(0)+" summoned "+.@AMOUNT+" "+.@tmp$+"(s) in "+(.@MAPNAME$=="this"?strcharinfo(3):.@MAPNAME$)+".",bc_all,"0x"+.fontcolor$;
+			monster .@MAPNAME$,0,0,"--ja--",.@MVPID,.@AMOUNT,"MVP Spawner::OnMVPDeath";
+			close;
+	}
+end;
+OnMVPDeath:
+	if(!playerattached()) { end; }
+	if(getarraysize(getd("."+strcharinfo(3)+"dl"))){
+		for(set .@b,1; .@b < getarraysize(getd("."+strcharinfo(3)+"dl")); set .@b,.@b + 1) {
+			if(getd("."+strcharinfo(3)+"dl["+.@b+"]")){
+				if(!(rand(1,(100/getd("."+strcharinfo(3)+"dr["+.@b+"]")))-1)) { getitem getd("."+strcharinfo(3)+"dl["+.@b+"]"),getd("."+strcharinfo(3)+"dq["+.@b+"]"); }
+			}
+		}
+	}
+end;
+OnInit:
+//=-=-=-=-=-=Configuration=-=-=-=-=-=
+set .NPC$,"[^0000FFFrankie^000000]"; // Npc Name
+set .gmlevel,50; //Minimum Gm level allowed to spawn MVPS.
+set .fiesta,5; // If enabled will spawn that many random MVPs on the players map if no other information is provided! (Off=0) Will bypass Maximum amount!
+set .fontcolor$,"FFCE00"; // Hexi color text is announced in.
+set .Lamount,5; // Maximum amount of mvps that can be spawned at once.
+set .Mamount,5; // Maximum amount of mvps on one map at a time. (Off=0)
+set .defaultm$,"prontera"; // If map name is not given first and items are picked it will default to this map!
+//=-=-=-=-=-=-=-=Skorm=-=-=-=-=-=-=-=
+}

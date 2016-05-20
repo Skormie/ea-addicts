@@ -1,0 +1,22 @@
+prontera,155,180,4	script	PvpEvent	414,{
+    set @menu,0;
+    while(@menu<=1){ if(select("Choose!:-Join:-Cancel")==3) close; }
+    if(!getmapusers("payon")) set $game,0;
+    warp "payon",0,0;
+	dispbottom getmapxy(.@map$,.@x,.@y,0)+.@map$+.@x+.@y+strcharinfo(3);
+    while(.@a<100){ set .@a,.@a+1; dispbottom getmapxy(.@map$,.@x,.@y,0)+.@map$+.@x+.@y+strcharinfo(3); }
+    announce "["+strcharinfo(0)+"] joined the event!",bc_all;
+    goto L_OE;
+    
+L_OE:
+    if (getmapusers("payon") > 1&&!$game){
+        mapannounce "payon","Event has started!",bc_map,0xFFCE00;
+        sleep2 3000;
+        pvpon "payon";
+        set $game,1;
+        end;
+    } else if (getmapusers("payon") == 1){
+    announce "Need 1 More Player To Start the event!.",bc_all;
+    end;
+    }
+}

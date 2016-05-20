@@ -1,0 +1,24 @@
+// KoE Exit
+prontera,151,151,5	script	Exit#KoE	51,{
+	mes "[Exit]";
+	mes "See ya.";
+	/*if(!getmapguildusers(strcharinfo(3),getcharid(2))-1){
+		getitem 12103,10;
+		warp "Save",0,0;
+		end;
+	}*/
+	npctalk ""+getmapguildusers(strcharinfo(3),getcharid(2));
+	query_sql( "SELECT `account_id` FROM `guild_member` WHERE `guild_id` = "+getcharid(2)+"", .account_id );
+//	for(set .@i,0; .@i<getarraysize(.account_id);set .@i,.@i+1){
+//		npctalk rid2name(.account_id[.@i]);
+//	}
+//	close;
+	for(set .@i,0; .@i<getarraysize(.account_id);set .@i,.@i+1){
+		if(isloggedin(.account_id[.@i])){
+			getmapxy(.@map$,.@x,.@y,0,rid2name(.account_id[.@i]));
+			if(.@map$==strcharinfo(3)) charcommand "#item "+rid2name(.account_id[.@i])+" 12103 10";
+		}
+	}
+	maprespawnguildid strcharinfo(3),getcharid(2),3;
+	end;
+}

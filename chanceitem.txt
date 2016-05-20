@@ -1,0 +1,16 @@
+splendide,210,199,5	script	Sample	757,{
+	setarray .@items[0],20,5738,20,5443,25,2294,33,5509,50,5150,100,5426; set .@id,20078;
+	mes "Do you want to use your "+getitemname( .@id )+" to try and get something awesome?"; next;
+	if( select("Yes:No")-1 ) close;
+	if( !countitem( .@id ) ){
+		mes "You don't have any "+getitemname( .@id )+".";
+	} else {
+		delitem .@id,1;
+		for(set .@a,0; .@a < getarraysize(.@items); set .@a,.@a+2){
+			if(rand(.@items[.@a])==1){ getitem (.@items[.@a+1]),1; emotion e_grat; mes "Done, congratz."; close; }
+		}
+		specialeffect2 611;
+		mes "It failed, sorry.";
+	}
+	close;
+}

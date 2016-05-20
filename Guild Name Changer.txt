@@ -1,0 +1,29 @@
+prontera.gat,161,190,5	script	Guild Name Changer	100,{
+mes "Hello, can I change your guildname for you at the cost of 1 Emperium?";
+if( countitem(714)&&!(select("Yes:No")-1)&&BaseLevel>=23 ) {
+goto L_start;
+}
+mes "Either you don't have Emperium your baselevel isn't 23 or higher or you just don't want to make a guild.";
+close;
+L_start:
+if(!getcharid(2)) {
+mes "I'm sorry but you don't have a guild.";
+} else {
+mes "Tell me what to call your guild.";
+set @guildname$,"";
+while(@guildname$==""){input(@guildname$);}
+query_sql("SELECT `guild_id`,`master`  FROM `guild` WHERE `guild_id` = '"+ getcharid(2) +"';",.@a,.@b$);
+if(.@b$!=strcharinfo(0)){ mes "I'm sorry but you're not the leader of "+strcharinfo(2)+"."; close; }
+set .@a,"";
+query_sql("SELECT `name` FROM `guild` WHERE `name` = '"+ @guildname$ +"';",.@a$);
+npctalk .@a$;
+if(.@a$!=""){ mes "I'm sorry but you can't take others' guildnames, please try again."; next; goto L_start; }
+query_sql("UPDATE `guild` SET `name`='"+escape_sql(@guildname$)+"' WHERE `guild_id`='"+getcharid(2)+"'");
+delitem 714, 1;
+mes @guildname$+" successfully created!";
+mes "Changes will take effect after server restart!";
+next;
+}
+mes "Done!";
+close;
+}

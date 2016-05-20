@@ -1,0 +1,63 @@
+//By Skorm
+-	shop	custom_seller1	-1,501:50
+morocc,159,97,5	script	Inventory NPC [ TCG ]	60,{
+mes "Welcome to my shop!";
+for(set .@i,0; getd(".shop_list"+.day+"["+.@i+"]"); set .@i,.@i+1){ mes getitemname(getd(".shop_list"+.day+"["+.@i+"]"))+" ("+(getd(".amount_list"+.day+"["+.@i+"]")?"^007700In-Stock":"^CD0000Out-of-Stock")+"^000000) ["+getd(".amount_list"+.day+"["+.@i+"]")+"]"; }
+callshop "custom_seller1",1;
+npcshopattach "custom_seller1";
+end;
+OnBuyItem:
+for(set @i,0; getd(".shop_list"+.day+"["+@i+"]"); set @i,@i+1) {
+	for(set @d,0; @d<getarraysize(@bought_nameid); set @d,@d+1){
+		if(@bought_nameid[@d]==getd(".shop_list"+.day+"["+@i+"]")){
+			if(countitem(.itemid) >= (getd(".price_list"+.day+"["+@i+"]")*@bought_quantity[@d])) {
+				if(checkweight(getd(".shop_list"+.day+"["+@i+"]"),((@bought_quantity[@d]>getd(".amount_list"+.day+"["+@i+"]"))?getd(".amount_list"+.day+"["+@i+"]"):@bought_quantity[@d]))){
+					if(getd(".amount_list"+.day+"["+@i+"]")>0){
+						delitem .itemid,getd(".price_list"+.day+"["+@i+"]")*((@bought_quantity[@d]>getd(".amount_list"+.day+"["+@i+"]"))?getd(".amount_list"+.day+"["+@i+"]"):@bought_quantity[@d]);
+						getitem @bought_nameid[@d],((@bought_quantity[@d]>getd(".amount_list"+.day+"["+@i+"]"))?getd(".amount_list"+.day+"["+@i+"]"):@bought_quantity[@d]);
+						setd ".amount_list"+.day+"["+@i+"]",getd(".amount_list"+.day+"["+@i+"]")-((@bought_quantity[@d]>getd(".amount_list"+.day+"["+@i+"]"))?getd(".amount_list"+.day+"["+@i+"]"):@bought_quantity[@d]);
+					} else { dispbottom "I'm sorry but we're currently out of "+getitemname(getd(".shop_list"+.day+"["+@i+"]"))+"s."; }
+				} else { dispbottom "I'm sorry but you can't hold that many "+getitemname(getd(".shop_list"+.day+"["+@i+"]"))+"s."; }
+			} else { dispbottom "I'm sorry you don't have enough money for "+getitemname(getd(".shop_list"+.day+"["+@i+"]"))+"s."; }
+		}
+	}
+}
+deletearray @bought_quantity, getarraysize(@bought_quantity);
+deletearray @bought_nameid, getarraysize(@bought_nameid);
+close;
+OnHour0000:
+OnInit:
+//=================Configuration================
+set .itemid,7227;
+set .day,gettime(4);
+//Itemlist
+setarray .shop_list0,12114,12115,12280,12117,12116; //Sunday
+setarray .shop_list1,12117,12114,12115,12116,12280; //Monday
+setarray .shop_list2,12280,12117,12114,12115,12279; //Tuesday
+setarray .shop_list3,12279,12280,12117,12114,12115; //Wednesday
+setarray .shop_list4,12280,12279,12116,12117,12114; //Thursday
+setarray .shop_list5,12279,12116,12280,12115,12114; //Friday
+setarray .shop_list6,12116,12279,12114,12117,12115; //Saturday
+//Pricelist
+setarray .price_list0,10,10,10,10,10; //Sunday
+setarray .price_list1,10,10,10,10,10; //Monday
+setarray .price_list2,10,10,10,10,10; //Tuesday
+setarray .price_list3,10,10,10,10,10; //Wednesday
+setarray .price_list4,10,10,10,10,10; //Thursday
+setarray .price_list5,10,10,10,10,10; //Friday
+setarray .price_list6,10,10,10,10,10; //Saturday
+//Stock
+setarray .amount_list0,100,100,100,100,100; //Sunday
+setarray .amount_list1,100,100,100,100,100; //Monday
+setarray .amount_list2,100,100,100,100,100; //Tuesday
+setarray .amount_list3,100,100,100,100,100; //Wednesday
+setarray .amount_list4,100,100,100,100,100; //Thursday
+setarray .amount_list5,100,100,100,100,100; //Friday
+setarray .amount_list5,100,100,100,100,100; //Saturday
+//======================Skorm======================
+OnTimer10000:
+npcshopitem "custom_seller1",0,0; // Don't touch any coding beyond here
+for(set .i,0; getd(".shop_list"+.day+"["+.i+"]"); set .i,.i+1){ if(getd(".amount_list"+.day+"["+.i+"]")){ npcshopadditem "custom_seller1",getd(".shop_list"+.day+"["+.i+"]"),getd(".price_list"+.day+"["+.i+"]"); } }
+initnpctimer;
+end;
+}

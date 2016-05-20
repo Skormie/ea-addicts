@@ -1,0 +1,77 @@
+//By Skorm
+prontera.gat,144,178,5	script	 Cloner Twins	812,{
+
+set .npc$, "[Cloner Twins]";
+set @price,10;
+getmapxy(.@map$,.@x,.@y,0);
+if(Gclone!=0) {
+	goto HaveC;
+} else
+mes .npc$;
+mes "Hello would you like a mindless slave to help you in your journeys?";
+next;
+mes .npc$;
+mes "But theres a Zeny cost for the time you want the clone.";
+
+	switch(select("Sure.","Nah.")) {
+
+	
+	case 1:
+		next;
+		mes .npc$;
+		mes "Input duration of the clone in seconds.";
+		mes "^0000FF [1]^000000second costs ^0000FF[10]^000000zeny";
+		mes "^0000FF [60]^000000seconds equals ^0000FF[1]^000000minute";
+		mes "^FF0000 -If you Lose your clone due to death,glitch,Disconnection or logout it will not be returned This is so we can make a profit you see.";
+		input .@duration;
+			if(.@duration!=0) goto Buy; {
+			mes "^FF0000 [0] is Not an option.";
+			close;
+		}
+	case 2:
+		close;
+	}
+
+	Buy:
+	set @price,@price*.@duration;
+	if(Zeny < @price) goto NOtEnuff;
+	next;
+	mes .npc$;
+	mes "Ok Here is your total: ^FF0000" + @price;
+	mes "Do you still accept?";
+	switch(select("yup","No")) {
+	case 1:
+		atcommand "@effect 200";
+		set Zeny,Zeny-@price;
+		clone "" + .@map$ + "",.@x,.@y,"",getcharid(0),getcharid(0),assists,1,.@duration;
+		set .@duration,.@duration*1000;
+		set Gclone,.@duration;
+		close2;
+		callfunc "Count-b";
+	case 2:
+		mes "Ok come again.";
+		close;
+	}
+ 
+	NOtEnuff:
+	mes "Sorry Come Back When You have More Zeny.";
+	close;
+
+	HaveC:
+	set .@Tclone,Gclone/1000;
+	mes "Time is still remaining on your ^0000FF[" + .@Tclone + "]^000000seconds purchase. Come back when this time is up or Re-login.";
+	close;
+}
+
+-	script	 OnPCLoginEvent	-1,{
+OnPCLoginEvent:
+if(Gclone!=0) {
+	set Gclone,0;
+} else
+	end;
+}
+
+function	script	Count-b	{
+sleep2 Gclone;
+set Gclone,0;
+}

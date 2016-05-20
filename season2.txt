@@ -1,0 +1,225 @@
+-	script	Season	-1,{
+OnClock0000:
+if(gettime(6) == 12&&gettime(5) == 25) { announce "Merry Xmas!",8; }
+if(gettime(6) == 1) { announce "Happy New Year!",8; }
+end;
+OnClock1900:
+OnClock0600:
+OnInit:
+set $@minutesfrommidnight, gettime(3)*60+gettime(2);
+set $@night_start, 1140; // 19:00pm
+set $@night_end, 360; // 06:00am
+if ($@minutesfrommidnight>=$@night_start && $@minutesfrommidnight<$@night_end) goto StartNight;
+goto StartDay;
+StartNight:	
+night;
+end;
+StartDay:
+day;
+end;
+OnPCLoadMapEvent:
+	if(isday()&&gettime(6) >= 4 && gettime(6) <= 7){
+		callfunc "SakuraFlag";
+	} else if(isnight()&&gettime(6)==1){
+		callfunc "SnowFlag";
+		//gettime(6) >= 11 && gettime(6) <= 12
+	}
+    end;
+}
+
+function	script	SakuraFlag	{
+setmapflag strcharinfo(3),mf_sakura;
+end;
+}
+
+function	script	SnowFlag	{
+setmapflag strcharinfo(3),mf_snow;
+end;
+}
+
+alb2trea	mapflag	loadevent
+alberta	mapflag	loadevent
+aldebaran	mapflag	loadevent
+gef_fild00	mapflag	loadevent
+gef_fild01	mapflag	loadevent
+gef_fild02	mapflag	loadevent
+gef_fild03	mapflag	loadevent
+gef_fild04	mapflag	loadevent
+gef_fild05	mapflag	loadevent
+gef_fild06	mapflag	loadevent
+gef_fild07	mapflag	loadevent
+gef_fild08	mapflag	loadevent
+gef_fild09	mapflag	loadevent
+gef_fild10	mapflag	loadevent
+gef_fild11	mapflag	loadevent
+geffen	mapflag	loadevent
+gl_church	mapflag	loadevent
+gl_chyard	mapflag	loadevent
+gl_knt01	mapflag	loadevent
+gl_knt02	mapflag	loadevent
+gl_step	mapflag	loadevent
+glast_01	mapflag	loadevent
+//hunter_1-1	mapflag	loadevent
+//hunter_2-1	mapflag	loadevent
+//hunter_3-1	mapflag	loadevent
+izlude	mapflag	loadevent
+job_thief1	mapflag	loadevent
+//knight_1-1	mapflag	loadevent
+//knight_2-1	mapflag	loadevent
+//knight_3-1	mapflag	loadevent
+mjolnir_01	mapflag	loadevent
+mjolnir_02	mapflag	loadevent
+mjolnir_03	mapflag	loadevent
+mjolnir_04	mapflag	loadevent
+mjolnir_05	mapflag	loadevent
+mjolnir_06	mapflag	loadevent
+mjolnir_07	mapflag	loadevent
+mjolnir_08	mapflag	loadevent
+mjolnir_09	mapflag	loadevent
+mjolnir_10	mapflag	loadevent
+mjolnir_11	mapflag	loadevent
+mjolnir_12	mapflag	loadevent
+moc_fild01	mapflag	loadevent
+moc_fild02	mapflag	loadevent
+moc_fild03	mapflag	loadevent
+moc_fild04	mapflag	loadevent
+moc_fild05	mapflag	loadevent
+moc_fild06	mapflag	loadevent
+moc_fild07	mapflag	loadevent
+moc_fild08	mapflag	loadevent
+moc_fild09	mapflag	loadevent
+moc_fild10	mapflag	loadevent
+moc_fild11	mapflag	loadevent
+moc_fild12	mapflag	loadevent
+moc_fild13	mapflag	loadevent
+moc_fild14	mapflag	loadevent
+moc_fild15	mapflag	loadevent
+moc_fild16	mapflag	loadevent
+moc_fild17	mapflag	loadevent
+moc_fild18	mapflag	loadevent
+moc_fild19	mapflag	loadevent
+moc_pryd01	mapflag	loadevent
+moc_pryd02	mapflag	loadevent
+moc_pryd03	mapflag	loadevent
+moc_pryd04	mapflag	loadevent
+moc_pryd05	mapflag	loadevent
+moc_pryd06	mapflag	loadevent
+moc_prydb1	mapflag	loadevent
+moc_ruins	mapflag	loadevent
+morocc	mapflag	loadevent
+//new_1-1	mapflag	loadevent
+//new_1-2	mapflag	loadevent
+//new_1-3	mapflag	loadevent
+//new_1-4	mapflag	loadevent
+pay_arche	mapflag	loadevent
+pay_fild01	mapflag	loadevent
+pay_fild02	mapflag	loadevent
+pay_fild03	mapflag	loadevent
+pay_fild04	mapflag	loadevent
+pay_fild05	mapflag	loadevent
+pay_fild06	mapflag	loadevent
+pay_fild07	mapflag	loadevent
+pay_fild08	mapflag	loadevent
+pay_fild09	mapflag	loadevent
+pay_fild10	mapflag	loadevent
+pay_fild11	mapflag	loadevent
+//priest_1-1	mapflag	loadevent
+//priest_2-1	mapflag	loadevent
+//priest_3-1	mapflag	loadevent
+prontera	mapflag	loadevent
+prt_are01	mapflag	loadevent
+prt_fild00	mapflag	loadevent
+prt_fild01	mapflag	loadevent
+prt_fild02	mapflag	loadevent
+prt_fild03	mapflag	loadevent
+prt_fild04	mapflag	loadevent
+prt_fild05	mapflag	loadevent
+prt_fild06	mapflag	loadevent
+prt_fild07	mapflag	loadevent
+prt_fild08	mapflag	loadevent
+prt_fild09	mapflag	loadevent
+prt_fild10	mapflag	loadevent
+prt_fild11	mapflag	loadevent
+prt_maze01	mapflag	loadevent
+prt_maze02	mapflag	loadevent
+prt_maze03	mapflag	loadevent
+prt_monk	mapflag	loadevent
+cmd_fild01	mapflag	loadevent
+cmd_fild02	mapflag	loadevent
+cmd_fild03	mapflag	loadevent
+cmd_fild04	mapflag	loadevent
+cmd_fild05	mapflag	loadevent
+cmd_fild06	mapflag	loadevent
+cmd_fild07	mapflag	loadevent
+cmd_fild08	mapflag	loadevent
+cmd_fild09	mapflag	loadevent
+cmd_in01	mapflag	loadevent
+cmd_in02	mapflag	loadevent
+gef_fild12	mapflag	loadevent
+gef_fild13	mapflag	loadevent
+gef_fild14	mapflag	loadevent
+alde_gld	mapflag	loadevent
+pay_gld	mapflag	loadevent
+prt_gld	mapflag	loadevent
+alde_alche	mapflag	loadevent
+yuno	mapflag	loadevent
+yuno_fild01	mapflag	loadevent
+yuno_fild02	mapflag	loadevent
+yuno_fild03	mapflag	loadevent
+yuno_fild04	mapflag	loadevent
+ama_fild01	mapflag	loadevent
+ama_test	mapflag	loadevent
+amatsu	mapflag	loadevent
+gon_fild01	mapflag	loadevent
+gon_test	mapflag	loadevent
+gonryun	mapflag	loadevent
+umbala	mapflag	loadevent
+um_fild01	mapflag	loadevent
+um_fild02	mapflag	loadevent
+um_fild03	mapflag	loadevent
+um_fild04	mapflag	loadevent
+niflheim	mapflag	loadevent
+nif_fild01	mapflag	loadevent
+nif_fild02	mapflag	loadevent
+nif_in	mapflag	loadevent
+yggdrasil01	mapflag	loadevent
+valkyrie	mapflag	loadevent
+lou_fild01	mapflag	loadevent
+louyang	mapflag	loadevent
+nguild_gef	mapflag	loadevent
+nguild_prt	mapflag	loadevent
+nguild_pay	mapflag	loadevent
+nguild_alde	mapflag	loadevent
+jawaii	mapflag	loadevent
+jawaii_in	mapflag	loadevent
+gefenia01	mapflag	loadevent
+gefenia02	mapflag	loadevent
+gefenia03	mapflag	loadevent
+gefenia04	mapflag	loadevent
+payon	mapflag	loadevent
+ayothaya	mapflag	loadevent
+ayo_in01	mapflag	loadevent
+ayo_in02	mapflag	loadevent
+ayo_fild01	mapflag	loadevent
+ayo_fild02	mapflag	loadevent
+que_god01	mapflag	loadevent
+que_god02	mapflag	loadevent
+yuno_fild05	mapflag	loadevent
+yuno_fild07	mapflag	loadevent
+yuno_fild08	mapflag	loadevent
+yuno_fild09	mapflag	loadevent
+yuno_fild11	mapflag	loadevent
+yuno_fild12	mapflag	loadevent
+alde_tt02	mapflag	loadevent
+einbech	mapflag	loadevent
+einbroch	mapflag	loadevent
+ein_fild06	mapflag	loadevent
+ein_fild07	mapflag	loadevent
+ein_fild08	mapflag	loadevent
+ein_fild09	mapflag	loadevent
+ein_fild10	mapflag	loadevent
+que_sign01	mapflag	loadevent
+ein_fild03	mapflag	loadevent
+ein_fild04	mapflag	loadevent
+lhz_fild02	mapflag	loadevent
+lhz_fild03	mapflag	loadevent

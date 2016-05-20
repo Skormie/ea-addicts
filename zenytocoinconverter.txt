@@ -1,0 +1,26 @@
+prontera,95,100,5	script	Converter	100,{
+setarray .coins[0],671,1;
+if(!(select("NPC credits to Coins.:Coins to NPC credits.") - 1)) {
+	mes "Would you like me to convert your annoying NPC credits into coins?";
+	if(select("Yes.:No.") - 1) close;
+	for(set .@a,0; .@a < getarraysize(.coins); set .@a,.@a + 2){
+		if(#CASHPOINTS > .coins[.@a+1]) {
+			set .@amt,#CASHPOINTS / .coins[.@a+1];
+			set #CASHPOINTS,#CASHPOINTS % .coins[.@a+1];
+			getitem .coins[.@a],.@amt;
+		}
+	}
+	mes "Your NPC credits has been converted. You currently have [^0000FF" + (countitem(674)) + "^000000] coins.";
+	close;
+}
+mes "Would you like me to convert your annoying coins into NPC credits?";
+if(select("Yes.:No.") - 1) close;
+for(set .@a,0; .@a < getarraysize(.coins); set .@a,.@a + 2) {
+	if((#CASHPOINTS + (countitem(.coins[.@a]) * .coins[.@a+1])) > 1000000000) set .@mult,(1000000000 - #CASHPOINTS) / .coins[.@a+1];
+	else set .@mult,countitem(.coins[.@a]);
+	set #CASHPOINTS,#CASHPOINTS + (.@mult * .coins[.@a+1]);
+	delitem .coins[.@a],.@mult;
+}
+mes "Your coins have been converted, you currently have [^0000FF" + #CASHPOINTS + "^000000] NPC credits.";
+close;
+}

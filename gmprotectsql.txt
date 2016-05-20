@@ -1,0 +1,145 @@
+//Skorm
+//Gm Protection v2
+//SQL
+
+/* Run this Query before installing this script!
+CREATE TABLE IF NOT EXISTS `gmprotect` (
+  `account_id` int(11) unsigned NOT NULL default '0',
+  `password` varchar(24) NOT NULL default '',
+  `gm_level` int(11) unsigned NOT NULL default '0',
+  `switch` BOOLEAN NOT NULL default '0',
+  PRIMARY KEY  (`account_id`)
+) ENGINE=MyISAM;
+*/
+
+-	script	GMPROTECT	-1,{
+	OnPCLoginEvent:
+		set .@p, query_sql("SELECT `password`,`switch` FROM `gmprotect` WHERE `account_id` = "+getcharid(3)+";",.@pass$,.@a);
+		if( getgmlevel() <= .bypass && .@a ) {
+			if( !.norm && !getgmlevel() ) end;
+			if(!.@p) {
+				mes "I see it's your first time logging in!";
+				mes "Would you like to set a login password?";
+				next;
+				if(select("Yes:No")&2) {
+					query_sql "INSERT INTO `gmprotect` (`account_id`,`gm_level`) VALUES ('"+getcharid(3)+"',"+getgmlevel()+");";
+					mes "Alright, maybe next time.";
+					close;
+				}
+				pass:
+				mes "Please input your password.";
+				input(.@pass$);
+				while(.@pass$!=.@pass2$) {
+					mes "Again.";	input(.@pass2$);	set .@z,.@z+1;
+					if(.@z>1){
+						mes "I'm sorry, but your passwords didn't match, try again?";
+						next;
+						if(select("Yes:No")&2) {
+							mes "Alright, maybe next time.";
+							query_sql "INSERT INTO `gmprotect` (`account_id`,`gm_level`) VALUES ('"+getcharid(3)+"',"+getgmlevel()+");";
+							close;
+						}
+						set .@z,0;
+						goto pass;
+					}
+				}
+				query_sql "INSERT INTO `gmprotect` (`account_id`,`password`,`gm_level`,`switch`) VALUES ('"+getcharid(3)+"','"+escape_sql(((.md5)?md5(.@pass$):.@pass$))+"',"+getgmlevel()+",1);";
+				mes "Don't forget your password has been set to ["+.@pass$+"].";
+				close;
+			}
+			setnpctimer 0; attachnpctimer(strcharinfo(0)); startnpctimer;
+			atcommand "@mute 100 "+strcharinfo(0);
+			mes "Please input your password, before 60 seconds are up.";
+			next;
+			input(.@input$);
+			if(((.md5)?md5(.@input$):.@input$) == .@pass$) {
+				mes "Welcome back!";
+				close2;
+				stopnpctimer;
+				if(playerattached()){
+					set .@g,1; callfunc "unlocker",strcharinfo(0),getcharid(3),.@g;
+				}
+			} else {
+				mes "Incorrect!";
+				close2;
+				if(playerattached()){
+					callfunc "unlocker",strcharinfo(0),getcharid(3),.@g;
+				}
+			}
+			
+		}
+	end;
+	OnTimer10000:
+		if(playerattached()){
+			callfunc "unlocker",strcharinfo(0),getcharid(3),.@g;
+		}
+	end;
+	OnInit:
+		set .bypass, 100; //GMs this level or greater don't need passwords.
+		set .md5, 0; //MD5 Passwords this is for added security (1=on:0=off) rAthena Only!
+		set .norm, 0; //Enable Passwords for normal players (1=on:0=off)
+		end;
+}
+
+//Example Changing Password NPC
+prontera,162,191,3	script	Pass Setting	100,{
+begin:
+	query_sql("SELECT `password`,`switch` FROM `gmprotect` WHERE `account_id` = "+getcharid(3)+";",.@pass$,.@a);
+	mes "Would you like to change or set a login password?";
+	next;
+	select("Change Password:Online Pass["+((.@a)?"On":"Off")+"]:Cancel");
+	if(@menu==3) {
+		mes "Alright, maybe next time.";
+		close;
+	}
+	if(@menu==1){
+		mes "Please input your old password.";
+		next;
+		input(.@pass1$);
+		if(((.md5)?md5(.@pass1$):.@pass1$)==.@pass$){
+			pass:
+				mes "Please input your new password.";
+				next;
+				input(.@pass$);
+				while(.@pass$!=.@pass2$) {
+					mes "Again.";	input(.@pass2$);	set .@z,.@z+1;
+					if(.@z>1){
+						mes "I'm sorry, but your passwords didn't match, try again?";
+						next;
+						if(select("Yes:No")&2) {
+							mes "Alright, maybe next time.";
+							close;
+						}
+						set .@z,0;
+						goto pass;
+					}
+				}
+				query_sql "UPDATE `gmprotect` SET `password`='"+((.md5)?md5(.@pass$):.@pass$)+"', `switch`=1 WHERE `account_id`="+getcharid(3)+";";
+				mes "Don't forget your password has been set to ["+.@pass$+"].";
+				close;
+		} else {
+			mes "Sorry that's not your old password!";
+			close;
+		}
+	} else {
+		query_sql "UPDATE `gmprotect` SET `switch`="+((.@a)?0:1)+" WHERE `account_id`="+getcharid(3)+";";
+		goto begin;
+	}
+	end;
+	
+	OnInit:
+		set .md5, 0; //MD5 Passwords this is for added security (1=on:0=off) rAthena Only!
+		end;
+}
+
+function	script	unlocker	{
+	detachrid;
+	if(getarg(2)){
+		atcommand "@unmute "+getarg(0);
+		end;
+	}
+	atcommand "@unmute "+getarg(0);
+	attachrid(getarg(1));
+	atcommand "@kick "+getarg(0);
+	end;
+}

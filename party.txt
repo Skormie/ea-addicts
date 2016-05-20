@@ -1,0 +1,24 @@
+-	script	party	-1,{
+OnWhisperGlobal:
+set @recallcooldown, 60; //in seconds 
+
+if (gettimetick(2) < partyrecall){
+dispbottom "Please wait "+((partyrecall - gettimetick(2)))+" more seconds to recall party again.";
+end;
+}
+if(!getcharid(1))
+{
+	dispbottom "You are not in a party";
+	end;
+}
+getmapxy @map$, @x, @y, 0;
+set @leaderid, getpartyleader(getcharid(1),2);
+if(@leaderid != getcharid(0)){
+dispbottom "Only the party leader can use this function";
+end;
+}
+warpparty @mapname$, @x, @y, getcharid(1);
+set partyrecall,gettimetick(2)+@recallcooldown;
+end;
+}
+

@@ -1,0 +1,28 @@
+prontera,98,100,5	script	Warper#a1	100,{
+if(BaseLevel<255){mes "I'm sorry you don't have the required Level 255."; close;}
+if(getpartyleader(getcharid(1),2)!=getcharid(0)){mes "I'm sorry your not the party leader."; close;}
+getpartymember(getcharid(1));
+if((getarraysize($@partymembername$)-1)<5){mes "I'm sorry you need at least 5 party members."; close;}
+setarray $@maps$[1], "pay_dun00", "pay_dun01";
+for(set .@b,1; .@b < getarraysize($@maps$); set .@b,.@b + 1) {
+	set .@menu$, .@menu$  + "Room["+(.@b-1)+"]- "+((getmapusers(""+$@maps$[.@b]+""))?"^CD0000Closed^000000("+getmapusers($@maps$[.@b])+")":"^007700Open^000000("+getmapusers($@maps$[.@b])+")")+":";
+}
+if(select(.@menu$)) { callfunc "Wfunction",$@maps$[@menu],@menu; }
+}
+
+function	script	Wfunction	{
+if(getmapusers(getarg(0))){ mes "This room is currently occupied."; close; }
+mes "You and your party have 2 hours to complete this doungeon.";
+mes "Warping...";
+sleep2 3000;
+set @id,getcharid(1);
+warpparty getarg(0),152,174,@id;
+sleep2 7200000;
+set .@a$,strcharinfo(3);
+if(.@a$=="pay_dun00"||.@a$=="pay_dun01"||.@a$=="pay_dun02"||.@a$=="pay_dun03"||.@a$=="pay_dun04"){
+mes "Your time is up: Warping...";
+warpparty "prontera",100,100,@id;
+close;
+}
+end;
+}

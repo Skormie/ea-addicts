@@ -1,0 +1,23 @@
+//By Skorm
+prontera.gat,154,196,5	script	Guild Maker	100,{
+mes "Hello, I can create a guild for you at the cost of 1 Emperium.";
+if( countitem(714)&&select("Yes:No")==1 ) {
+goto L_start;
+}
+mes "You might not have any Emperium.";
+close;
+
+L_start:
+mes "Tell me how do you what to call your guild.";
+input @guildname$;
+delitem 714, 1;
+atcommand "@guild "+@guildname$;
+next;
+if(!getcharid(2)) {
+mes "Guild name already exist.";
+getitem 714, 1;
+goto L_start;
+}
+mes "Done sir!";
+close;
+}

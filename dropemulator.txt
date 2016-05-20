@@ -1,0 +1,54 @@
+-	script	Drop Emulator	-1,{
+OnNPCKillEvent:
+	set .@mid, killedrid;
+	set .@ar$, ".mob"+.@mid;
+	set .@len, getarraysize(getd(.@ar$));
+	if(.@len){
+		for(set .@p,1; .@p<.@len;set .@p,.@p+2 ) {
+			set .@itm, getd(.@ar$+"["+(.@p-1)+"]");
+			set .@itmtyp, getiteminfo(.@itm,2);
+			set .@btflg, callfunc("Monster_DB",.@mid,.@itmtyp);
+			set .@itmrt, getd(.@ar$+"["+.@p+"]");
+			query_sql("SELECT ROUND("+.@itmrt+"*("+.@btflg+"/100));",.@rte);
+			if(((.@rte<=10000)?((rand(1,10000/.@rte)==1)?1:0):1)) {
+				getitem .@itm,1;
+			}
+		}
+	}
+	end;
+	
+OnInit: //By Skorm
+	//Example Poring Apple, 10%, Apple, 1.5%....etc
+	setarray .mob1002, 512, 1000, 512, 150, 619, 20, 713, 1500, 909, 7000, 938, 400, 1202, 100, 4001, 1; // Mob List 10000=100% can support up to 128 values
+}
+
+function	script	Monster_DB	{
+	switch(getarg(0)){
+		case 1002:
+			switch(getarg(1)){
+				// Keep in mind these are precents overall so 20% is actually lower while 140% is actually 40% higher.
+				// Where 200% is double... It's like saying 2*400=800.
+				case 0: // Heal Item Rate (Healing Items)
+					return 20; // 20% for  healing items.
+				
+				case 2: case 7: case 11: case 18: // Uasable Item Rate (Anything Usable that doesn't heal)
+					return 100; // 100% for healing items.
+					
+				case 3: // Common Item Rate (ETC)
+					return 200; //200% more for Common Items.
+				
+				case 4: case 5: case 8: case 10: // Equip Item Rate (Ammo, Pet Equip, Weapon, Armor)
+					return 140; // 140% more for equip items.
+				
+				case 6: // Card Item Rate (Card)
+					return 200; // 110% more for cards.
+			}
+		case 1003:
+		case 1004:
+		case 1005:
+		//...to add new monsters simply do as I've done.
+	}
+}
+
+//getmonsterinfo(.@mid,22)
+//set .btflg, (getbattleflag(.gbfid$[.@a]+((getmonsterinfo(.@mid,22))?"_boss":""))/100000);

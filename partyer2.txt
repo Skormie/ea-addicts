@@ -1,0 +1,18 @@
+//By Skorm
+-	script	Party-Summoner2	-1,{
+OnWhisperGlobal:
+if(getpartyleader(getcharid(1),1)!=getcharid(3)){ mes "Sorry, this function is only for the party leader"; close; }
+mes "Would you like me to summon your party memebers who're level 180 or above?";
+if(select("Yes:No")-1) close;
+deletearray $@partymemberaid[0],128;
+getpartymember getcharid(1),2;
+getmapxy(.map$,.x,.y,0);
+for(set .a,0;.a<$@partymembercount;set .a,.a+1){
+	detachrid;
+	attachrid($@partymemberaid[.a]);
+	if((playerattached())&&BaseLevel>=180&&getpartyleader(getcharid(1),1)!=getcharid(3)){
+		warp .map$,.x,.y;
+	}
+}
+close;
+}

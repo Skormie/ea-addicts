@@ -1,0 +1,189 @@
+//By Skorm
+//spoilbox v2.5
+-	script	Royal_Chest	-1,{
+end;
+
+OnMVPKilled:
+getmapxy .map$, .x, .y, 0; set .a,0; set .b,0;
+	set .id,atoi(strnpcinfo(2));
+	if(getmobdrops(.mvpid[.id])) {
+		set .count, $@MobDrop_count;
+		copyarray .item[0],$@MobDrop_item[0],.count;
+		copyarray .rate[0],$@MobDrop_rate[0],.count;
+		for(set .@i,0;.@i<.count;set .@i,.@i+1) {
+			set .@a,getiteminfo(.item[.@i],2);
+			if(!getmonsterinfo(.mvpid[.id],22)) {
+				if(rand(((getbattleflag(.gbfid[.@a])*.rate[.@i])/100),10000)) {
+					set .drops[.@b],.item[.@i];
+					set .droprs[.@b],((.rate[.@i]*getbattleflag(gbfid[.@a]))/100);
+					set .@b,.@b+1;
+				}
+			} else {
+				if(rand(((getbattleflag(.gbfid[.@a]+"_boss")*.rate[.@i])/100),10000)) {
+					set .drops[.@b],.item[.@i];
+					set .droprs[.@b],((.rate[.@i]*getbattleflag(gbfid[.@a]+"_boss"))/100);
+					set .@b,.@b+1;
+				}
+			}
+		}
+	} else { end; }
+	if(strcharinfo(1)==""){ goto Alone; }
+	deletearray $@partymemberaid[0],128;
+	getpartymember getcharid(1),1;						getpartymember getcharid(1),2;
+	set .@count, $@partymembercount;					set .count,0;
+	copyarray .@party[0],$@partymemberaid[0],.@count;	copyarray .@cparty[0],$@partymembercid[0],.@count;
+	for( set .@i,0; .@i < .@count; set .@i,.@i +1 ) {
+		getmapxy(.@map$,.@x,.@y,0,rid2name(.@party[.@i]));
+		if(.@map$==strcharinfo(3)) set .@p,.@p+1;
+	}
+	if(.@p<2){ goto Alone; }
+	for ( set .@i, 0; .@i < .@count; set .@i, .@i +1 ){
+		if(isloggedin(.@party[.@i],.@cparty[.@i])){
+			set .party[.count],.@party[.@i];
+			set .count, .count +1 ;
+		}
+	}
+	if(.count<2) { goto Alone; }
+	movenpc strnpcinfo(0), .x, .y;
+	restart:
+	setnpctimer 0; attachnpctimer(strcharinfo(0)); startnpctimer;
+	set .loop, .tlimit;
+	while ( .loop ) {
+		delwaitingroom strnpcinfo(0);
+		waitingroom callfunc("timeleft__", .loop ), 0;
+		set .loop, .loop -1;
+		sleep2 1000;
+	}
+	if(.a<.count){
+		set .a,.a+1;
+		npctalk strcharinfo(0)+" has taken to long!";
+		for (set .@i,0; .@i < getarraysize(.party); set .@i,.@i+1){
+			detachrid; attachrid(.party[.@i]);
+			getmapxy .@map$, .@x, .@y, 0;
+			warp .@map$,.@x,.@y;
+		}
+		while(.b<getarraysize(.drops)){
+			setd ".partyroll"+.b+"["+.a+"]",0;
+			set .b,.b+1;
+		}
+		goto restart;
+	}
+	end;
+	
+	OnTimer1000:
+		while(.a<.count){
+			detachrid; attachrid(.party[.a]);
+			set .b,0;
+			mes "[^0000FFRoyal Chest^000000]"; mes "Select from the menu below to distribute the item.";
+			while(.b<getarraysize(.drops)){
+				if((playerattached())&&strcharinfo(3)==.map$) {
+					L_lo: if(.droprs[.b]>.ratelimit&&.ratelimit>0) { setd ".partyroll"+.b+"["+.a+"]",0; }
+					else { select("============(^0000FF"+getitemname(.drops[.b])+"^000000)===============:-Roll:-Pass"); if(!((@menu)-1)||@menu>3) goto L_lo; 
+					if(@menu==2){ setd ".partyroll"+.b+"["+.a+"]",rand(100); npctalk strcharinfo(0)+" rolled a ["+getd(".partyroll"+.b+"["+.a+"]")+"] on "+getitemname(.drops[.b])+"."; dispbottom "You rolled a ["+getd(".partyroll"+.b+"["+.a+"]")+"] on "+getitemname(.drops[.b])+"."; } else { setd ".partyroll"+.b+"["+.a+"]",0; npctalk strcharinfo(0)+" passed a on "+getitemname(.drops[.b])+"."; dispbottom "You passed a on "+getitemname(.drops[.b])+"."; } }
+					set .loop, 60;
+				}
+				set .b,.b+1;
+				if(.b>=getarraysize(.drops)) close2;
+			}
+			set .a,.a+1;
+		}
+	
+	//Find Highest Bawler.
+	for (set .@i,0; .@i < getarraysize(.party); set .@i,.@i+1){
+		for(set .@s,0; .@s < getarraysize(.drops); set .@s,.@s+1){
+			if(getd(".partyroll"+.@s+"["+.@i+"]")>getd(".wpartyroll"+.@s)) { setd ".wpartyroll"+.@s,getd(".partyroll"+.@s+"["+.@i+"]"); setd ".wrid"+.@s,.party[.@i];  }
+		}
+	}
+	
+	//Distribute Prize.
+	for(set .@s,0; .@s < getarraysize(.drops); set .@s,.@s+1){
+		detachrid; attachrid(getd(".wrid"+.@s));
+		if(getd(".wpartyroll"+.@s)){
+			npctalk strcharinfo(0)+" won ["+getitemname(.drops[.@s])+"].";
+			getitem .drops[.@s],1;
+		} else { makeitem .drops[.@s],1,.map$,.x,.y; }
+	}
+	
+	//Warp everyone so they aren't stuck anymore.
+	/*for (set .@i,0; .@i < getarraysize(.party); set .@i,.@i+1){
+		detachrid; attachrid(.party[.@i]);
+		getmapxy .@map$, .@x, .@y, 0;
+		warp .@map$,.@x,.@y;
+	}*/
+	stopnpctimer;
+	delwaitingroom strnpcinfo(0);
+	movenpc strnpcinfo(0), 0,0;
+	end;
+	
+Alone:
+	for(set .@s,0; .@s < getarraysize(.drops); set .@s,.@s+1){
+		getitem .drops[.@s],1;
+	}
+	delwaitingroom strnpcinfo(0);
+	movenpc strnpcinfo(0), 0,0;
+	end;
+	
+OnInit:
+
+	//=-=-=-=-=-=Configuration=-=-=-=-=-=-=
+	setarray .mvpid[1], 1871,1872,1719,1492,1147,1688,1583,2068,2156,2087,2165,1623,1389,1046,1272,1115,1046,1147,1272,1418,1157,2202,1685,1734,1658,1630,1038,1511,1885,1751,1150,1039,1086,1768,1832,1112,1312,1251,2131,1087,1190,1252,1059,1159,1917,1115,1785,1785,1785,1785,1613; // MVP ids make sure each id corresponds to the duplicated npcs and maps.
+	set .tlimit,60; // In seconds
+	set .ratelimit,0; // Ignores items dropped with rates higher then this value. 0 = off 10000 = 100%
+	//=-=-=-=-=-=-=Skorm=-=-=-=-=-=-=-=-=-=
+	setmapflag strnpcinfo(4),mf_nomvploot;
+	end;
+}
+ 
+prt_fild08,50,50,1,1	monster	Metaling	1613,1,360000,360000,"Royal Chest#51_mvp::OnMVPKilled"
+ 	
+prt_fild08,0,0,0	duplicate(Royal_Chest)	Royal Chest#51_mvp	801
+abbey02,0,0,0	duplicate(Royal_Chest)	Royal Chest#1_mvp	801
+abbey03,0,0,0	duplicate(Royal_Chest)	Royal Chest#2_mvp	801
+abyss_03,0,0,0	duplicate(Royal_Chest)	Royal Chest#3_mvp	801
+ama_dun03,0,0,0	duplicate(Royal_Chest)	Royal Chest#4_mvp	801
+anthell02,0,0,0	duplicate(Royal_Chest)	Royal Chest#5_mvp	801
+ayo_dun02,0,0,0	duplicate(Royal_Chest)	Royal Chest#6_mvp	801
+beach_dun,0,0,0	duplicate(Royal_Chest)	Royal Chest#7_mvp	801
+bra_dun02,0,0,0	duplicate(Royal_Chest)	Royal Chest#8_mvp	801
+dew_dun01,0,0,0	duplicate(Royal_Chest)	Royal Chest#9_mvp	801
+dic_dun02,0,0,0	duplicate(Royal_Chest)	Royal Chest#10_mvp	801
+dic_dun03,0,0,0	duplicate(Royal_Chest)	Royal Chest#11_mvp	801
+ein_dun02,0,0,0	duplicate(Royal_Chest)	Royal Chest#12_mvp	801
+gef_dun01,0,0,0	duplicate(Royal_Chest)	Royal Chest#13_mvp	801
+gef_dun02,0,0,0	duplicate(Royal_Chest)	Royal Chest#14_mvp	801
+gl_chyard,0,0,0	duplicate(Royal_Chest)	Royal Chest#15_mvp	801
+gld_dun01,0,0,0	duplicate(Royal_Chest)	Royal Chest#16_mvp	801
+gld_dun02,0,0,0	duplicate(Royal_Chest)	Royal Chest#17_mvp	801
+gld_dun03,0,0,0	duplicate(Royal_Chest)	Royal Chest#18_mvp	801
+gld_dun04,0,0,0	duplicate(Royal_Chest)	Royal Chest#19_mvp	801
+gon_dun03,0,0,0	duplicate(Royal_Chest)	Royal Chest#20_mvp	801
+in_sphinx5,0,0,0	duplicate(Royal_Chest)	Royal Chest#21_mvp	801
+iz_dun05,0,0,0	duplicate(Royal_Chest)	Royal Chest#22_mvp	801
+jupe_core,0,0,0	duplicate(Royal_Chest)	Royal Chest#23_mvp	801
+kh_dun02,0,0,0	duplicate(Royal_Chest)	Royal Chest#24_mvp	801
+lhz_dun02,0,0,0	duplicate(Royal_Chest)	Royal Chest#25_mvp	801
+lou_dun03,0,0,0	duplicate(Royal_Chest)	Royal Chest#26_mvp	801
+moc_pryd04,0,0,0	duplicate(Royal_Chest)	Royal Chest#27_mvp	801
+moc_pryd06,0,0,0	duplicate(Royal_Chest)	Royal Chest#28_mvp	801
+mosk_dun03,0,0,0	duplicate(Royal_Chest)	Royal Chest#29_mvp	801
+odin_tem03,0,0,0	duplicate(Royal_Chest)	Royal Chest#30_mvp	801
+pay_dun04,0,0,0	duplicate(Royal_Chest)	Royal Chest#31_mvp	801
+prt_maze03,0,0,0	duplicate(Royal_Chest)	Royal Chest#32_mvp	801
+prt_sewb4,0,0,0	duplicate(Royal_Chest)	Royal Chest#33_mvp	801
+ra_san05,0,0,0	duplicate(Royal_Chest)	Royal Chest#34_mvp	801
+thor_v03,0,0,0	duplicate(Royal_Chest)	Royal Chest#35_mvp	801
+treasure02,0,0,0	duplicate(Royal_Chest)	Royal Chest#36_mvp	801
+tur_dun04,0,0,0	duplicate(Royal_Chest)	Royal Chest#37_mvp	801
+xmas_dun02,0,0,0	duplicate(Royal_Chest)	Royal Chest#38_mvp	801
+1@mist,0,0,0	duplicate(Royal_Chest)	Royal Chest#39_mvp	801
+gef_fild10,0,0,0	duplicate(Royal_Chest)	Royal Chest#40_mvp	801
+gef_fild14,0,0,0	duplicate(Royal_Chest)	Royal Chest#41_mvp	801
+xmas_fild01,0,0,0	duplicate(Royal_Chest)	Royal Chest#42_mvp	801
+mjolnir_04,0,0,0	duplicate(Royal_Chest)	Royal Chest#43_mvp	801
+moc_fild17,0,0,0	duplicate(Royal_Chest)	Royal Chest#44_mvp	801
+moc_fild22,0,0,0	duplicate(Royal_Chest)	Royal Chest#45_mvp	801
+pay_fild11,0,0,0	duplicate(Royal_Chest)	Royal Chest#46_mvp	801
+ra_fild03,0,0,0	duplicate(Royal_Chest)	Royal Chest#47_mvp	801
+ra_fild04,0,0,0	duplicate(Royal_Chest)	Royal Chest#48_mvp	801
+ve_fild01,0,0,0	duplicate(Royal_Chest)	Royal Chest#49_mvp	801
+ve_fild02,0,0,0	duplicate(Royal_Chest)	Royal Chest#50_mvp	801

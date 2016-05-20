@@ -1,0 +1,21 @@
+new_1-2,95,71,4	script	Bling	100,{
+set .@price,1000000;
+if(!countitem(2202)){mes "Sorry come back when you get a pair of "+getitemname(2202)+"."; close;}
+mes "I can endow your glasses with mystical powers, but It'll cost ya z"+.@price+".";
+if(select("Yes:No")-1){mes "Alright, thanks anyways!"; close;}
+	if(getequipid(9)==2202){
+		if(Zeny<.@price){mes "I'm sorry you don't have enough Zeny to for me to endow your specticals, please come back later."; close;}
+		set Zeny,Zeny-.@price;
+		.@id = getequipid(9);
+		.@ref = getequiprefinerycnt(9);
+		.@card1 = getequipcardid( 9, 0 );
+		.@card2 = getequipcardid( 9, 1 );
+		.@card3 = getequipcardid( 9, 2 );
+		.@card4 = getequipcardid( 9, 3 );
+		delitem2 .@id, 1, 1, .@ref, 0, .@card1, .@card2, .@card3, .@card4;
+		getitem2 .@id, 1, 1, .@ref, 0, .@card1, .@card2, .@card3, 4848;
+		equip .@id;
+		mes "All done!";
+	}
+close;
+}

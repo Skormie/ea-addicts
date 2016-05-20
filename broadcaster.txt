@@ -1,0 +1,253 @@
+//
+//=======================================================================================
+//=======================================================================================
+//=======================================================================================
+//Annoucer/broadcaster   (in color)
+//=======================================================================================
+//=======================================================================================
+//=======================================================================================
+gonryun,156,122,5	script	Broadcaster	901,{
+
+	mes "[ ^FE021BMerme^000000 ]";
+	mes "Hello, ^F509DE"+strcharinfo(0)+"^000000";
+	mes "Do you want to broadcast something? Payment is^FAEB60 1 Gold Coins^000000.";
+	menu "Yes please.",-,"No",no;
+	if((countitem(.payitem)<.payamt)) goto exit2;
+	next;
+	mes "[ ^FE021BMerme^000000 ]";
+	mes "We Have Color Please choose!";
+	for(set .@i,0; .@i<getarraysize(.colormenu$);set .@i,.@i+1){
+		set .@menu$,.@menu$+.colormenu$[.@i]+":";
+	} set .@menu$,.@menu$+"Cancel";
+	if(select(.@menu$)>getarraysize(.colormenu$)) goto no;
+	next; mes "[ ^FE021BMerme^000000 ]";
+	mes "Type your message and it will be heard miles away!";
+	input .@message$; setarray .@a$,callfunc("str_explode","@explosion$[0]",.@message$," ");
+	for(set .@a,0;.@a<getarraysize(@explosion$);set .@a,.@a+1){
+		for(set .@i,0;.@i<getarraysize(.bad_words$);set .@i,.@i+1){
+			if(compare(@explosion$[.@a],.bad_words$[.@i])) {
+				while(getstrlen(@explosion$[.@a])>getstrlen(.@tmp$)){
+					set .@tmp$,.@tmp$+.filter$;
+				} set @explosion$[.@a],.@tmp$; 
+			}
+		}
+		if(!.@a){ 
+			callfunc "str_toarray", @explosion$[.@a], "@tmp$[0]";
+			set @tmp$[0],callfunc("str_changecase", @tmp$[0], 1);
+			set @explosion$[.@a],""; set .@i,0;
+			while(getstrlen(@explosion$[.@a])<getarraysize(@tmp$)){
+				set @explosion$[.@a],@explosion$[.@a]+@tmp$[.@i];
+				set .@i,.@i+1;
+			}
+		}
+/*		set .@str$,callfunc("str_charat",.@message$,(.@p+getstrlen(@explosion$[.@a])));
+		set .@str2$,callfunc("str_charat",@explosion$[.@a+1],0);
+		npctalk .@str$+" = "+.@str2$;
+		npctalk .@message$;
+		npctalk ""+(getstrlen(@explosion$[.@a]));
+		npctalk "p is "+.@p;
+		set .@u,0;
+		set .@message2$,.@message2$+@explosion$[.@a];
+		npctalk "somethingo"+(getstrlen(.@message2$)+getstrlen(@explosion$[.@a]));
+		if(.@str2$!=""){
+		while(callfunc("str_charat",.@message$,(.@p+getstrlen(@explosion$[.@a])))!=((callfunc("str_charat",.@message$,(.@p+getstrlen(@explosion$[.@a])))!="")?.@str2$:"")){
+			set .@str$,callfunc("str_charat",.@message$,(.@p+getstrlen(@explosion$[.@a])));
+			if(.@str$!=" ") break;
+			npctalk "something"+(getstrlen(.@message2$)+getstrlen(@explosion$[.@a]));
+			npctalk "Hello";
+			npctalk .@str$+" = "+.@str2$;
+			set .@g,getstrlen(.@message2$);
+			set .@message2$,.@message2$+callfunc("str_charat",.@message$,((.@u>0)?((.@p-getstrlen(@explosion$[.@a]))+.@u):(.@p+getstrlen(@explosion$[.@a]))));
+			set .@u,.@u+1;
+			//set .@p,.@p+getstrlen(@explosion$[.@a]);
+		}
+		}*/
+		set .@message2$,.@message2$+" "+@explosion$[.@a];
+	}
+	delitem .payitem,.payamt;
+	announce ""+strcharinfo(0)+":"+.@message2$+" ",bc,"0x"+.hexcolors$[(@menu-1)];
+	close;
+
+no:
+	next;
+	mes "[ ^FE021BMerme^000000 ]";
+	mes "Oh that's a bummmer.";
+	mes "Come back when you need me. ^_^";
+	close;
+
+exit2:
+	next;
+	mes "[ ^FE021BMerme^000000 ]";
+	mes "Sorry you don't have enough coins to make the broadcast.";
+	mes "Please come again.";
+	close;
+
+OnInit:
+	//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-Configuration-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	setarray .colormenu$[0],"Red","Black","Blue","Green","Purple","Pink","Gray","Orange";
+	setarray .hexcolors$[0],"FF0000","000000","0000FF","00FF00","9900FF","FF33FF","888888","FF6600";
+	setarray .bad_words$[0],"tang ina mo", "gago", "tanga", "bobo", "mother fucker", "fuck you", "noob", "asshole", "putang ina mo", "puta", "bitch", "fuck", "fucker";
+	set .payitem,671;
+	set .payamt,1;
+	set .filter$,"*"; //Will be repeated to match the length of given string.
+	//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-Skorm-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+}
+
+function	script	str_explode	{
+
+	if ( getarg(2,"") == "" )
+		return callfunc("str_toarray", getarg(1), getarg(0) );
+
+	sleep2 1;
+
+	setarray .@char$, getarg(2),
+		" ", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+		"e", "i", "a", "s", "r", "n", "t", "o", "u", "l", "c",
+		"p", "m", "d", "v", "h", "g", "f", "b", "y", "q", "k",
+		"z", "x", "j", "w", "_", "-", ".", ",", ";", "*";
+
+	set .@charsize, getarraysize(.@char$);
+	set .@tmp$, "|~key~|";
+	set .@str$, .@tmp$ + getarg(1) ;
+	set .@len, getstrlen(getarg(1));
+	set .@parse_len, getstrlen(getarg(2));
+
+	while( .@len > .@s ) {
+		set .@i, 0 ; 
+		while( .@i < .@charsize  ) {
+			if ( ! ( set(.@l,.@l+1) % 600) )
+				sleep2 1;
+			if ( compare( .@str$ , .@tmp$ + .@char$[.@i] ) ) {
+				set .@tmp$, .@tmp$ + .@char$[.@i];
+				if ( .@i ) 
+					set .@arr$[.@p], .@arr$[.@p] + .@char$[.@i];
+				else {
+					set .@p, .@p + 1;
+					set .@s, .@s + .@parse_len-1 ;
+				}
+				break;
+			}
+			set .@i, .@i+1 ;
+		}
+		if ( .@i == .@charsize ) return 0;
+		else set .@s, .@s+1 ;
+	}
+	deletearray getd(getarg(0)), 128;
+	copyarray getd(getarg(0)), .@arr$, .@p+1;
+	return .@p+1;
+}
+
+function	script	str_charat	{
+
+	sleep2 1;
+
+	setarray .@char$[ 0 ],
+		" ", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+		"e", "i", "a", "s", "r", "n", "t", "o", "u", "l", "c",
+		"p", "m", "d", "v", "h", "g", "f", "b", "y", "q", "k",
+		"z", "x", "j", "w", "_", "-", ".", ",", ";", "*";
+
+	set .@charsize, getarraysize(.@char$);
+	set .@tmp$, "|~key~|";
+	set .@str$, .@tmp$ + getarg(0) ;
+	set .@len, getstrlen(getarg(0));
+	set .@pos, getarg(1);
+
+	if ( .@pos >= .@len ) return "";
+
+	while( .@len>.@s ) {
+		set .@i,0;
+		while( .@i<.@charsize ) {
+			if ( ! ( set(.@l,.@l+1) % 650) )
+				sleep2 1;
+			if ( compare( .@str$ , .@tmp$ + .@char$[.@i] ) ) {
+				set .@tmp$, .@tmp$ + .@char$[.@i];
+				if ( .@s == .@pos ) return .@char$[.@i] ;
+				else break;
+			}
+			set .@i, .@i+1;
+		}
+		if ( .@i == .@charsize ) return 0;
+		else set .@s, .@s+1;
+	}
+	deletearray getd(getarg(1));
+	copyarray getd(getarg(1)), .@arr$, .@len;
+	return "";
+}
+
+function	script	str_changecase	{
+
+	sleep2 1;
+
+	if ( getarg(1) ) {
+		setarray .@char$[ 0 ],
+			" ", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+			"E", "I", "A", "S", "R", "N", "T", "O", "U", "L", "C",
+			"P", "M", "D", "V", "H", "G", "F", "B", "Y", "Q", "K",
+			"Z", "X", "J", "W", "_", "-", ".", ",", ";", "*";
+	}
+	else {
+		setarray .@char$[ 0 ],
+			" ", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+			"e", "i", "a", "s", "r", "n", "t", "o", "u", "l", "c",
+			"p", "m", "d", "v", "h", "g", "f", "b", "y", "q", "k",
+			"z", "x", "j", "w", "_", "-", ".", ",", ";", "*";
+	}
+
+	set .@charsize, getarraysize(.@char$);
+	set .@str$, "|~key~|" + getarg(0) ;
+	set .@len, getstrlen(getarg(0));
+
+	while( .@len>.@s ) {
+		set .@i,0;
+		while( .@i<.@charsize ) {
+			if ( ! ( set(.@l,.@l+1) % 650) )
+				sleep2 1;
+			if ( compare( .@str$ , "|~key~|" + .@tmp$ + .@char$[.@i] ) ) {
+				set .@tmp$, .@tmp$ + .@char$[.@i];
+				break;
+			}
+			set .@i, .@i+1;
+		}
+		if ( .@i == .@charsize ) return "";
+		else set .@s, .@s+1;
+	}
+	return .@tmp$;
+}
+
+function	script	str_toarray	{
+
+	sleep2 1;
+
+	if ( getstrlen( getarg(0) ) > 128 ) return 0;
+
+	setarray .@char$[ 0 ],
+		" ", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+		"e", "i", "a", "s", "r", "n", "t", "o", "u", "l", "c",
+		"p", "m", "d", "v", "h", "g", "f", "b", "y", "q", "k",
+		"z", "x", "j", "w", "_", "-", "*";
+
+	set .@charsize, getarraysize(.@char$);
+	set .@tmp$, "|~key~|";
+	set .@str$, .@tmp$ + getarg(0) ;
+	set .@len, getstrlen(getarg(0));
+
+	while( .@len>.@s ) {
+		set .@i,0;
+		while( .@i<.@charsize ) {
+			if ( ! ( set(.@l,.@l+1) % 650) )
+				sleep2 1;
+			if ( compare( .@str$ , .@tmp$ + .@char$[.@i] ) ) {
+				set .@tmp$, .@tmp$ + .@char$[.@i];
+				set .@arr$[.@s], .@char$[.@i];
+				break;
+			}
+			set .@i, .@i+1;
+		}
+		if ( .@i == .@charsize ) return 0;
+		else set .@s, .@s+1;
+	}
+	deletearray getd(getarg(1));
+	copyarray getd(getarg(1)), .@arr$, .@len;
+	return .@len;
+}

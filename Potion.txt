@@ -1,0 +1,16 @@
+function	script	Elixir	{
+getpartymember(getcharid(1));
+if ($@partymemberaid[0] == getpartyleader(getcharid(1),2)) {
+	for (set @i,0; @i <= @partymembercount; set @i,@i+1) {
+		getmapxy(.@mapl$, .@xl, .@yl, 0, $@partymemberaid[0]);
+		getmapxy(.@mapm$, .@xm, .@ym, 0, $@partymemberaid[.@i]);
+		if (.@mapl$ == .@mapm$) {
+			attachrid ($@partymemberaid[.@i]);
+			percentheal 15,15;
+		}
+	}
+} else {
+dispbottom "Only the party leader of your party may use this item. You are not authorized to use it.";
+}
+
+}

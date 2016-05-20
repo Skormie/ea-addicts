@@ -1,0 +1,25 @@
+-    script    afk    -1,{
+OnPCLoginEvent:
+    while(Class==18||Class==4019||Class==4041) {
+        if(gethominfo(2)!=""){
+            getmapxy(.@map$,.@x,.@y,0)
+            if (.@x==.@_x&&.@y==.@_y) {
+                if(.@afk_count<300){
+                    set .@afk_count,.@afk_count+1;
+                    if(.@afk_count==290){ set .@a,rand(1,100); attachnpctimer; initnpctimer; mes "Input "+.@a+" before 30 seconds."; input(.@b); if(.@b!=.@a){ dispbottom "You've been jailed for abusing your homonculus."; atcommand "@jailfor 30mn "+strcharinfo(0); end; } }
+                }
+            } else {
+                set .@_x,.@x;
+                set .@_y,.@y;
+                set .@afk_count,0;
+            }
+            sleep2 1000;
+        }
+    }
+    end;
+    OnTimer30000:
+        attachrid($@info);
+        dispbottom "You've been jailed for abusing your homonculus.";
+        atcommand "@jailfor 30mn "+strcharinfo(0);
+        end;
+}

@@ -1,0 +1,50 @@
+hugel,114,152,5	script	Heal#h1-1::Heal	110,{
+
+	if((@h_last) && (getnpctimer(1))) end;
+	
+	set @h_last,1;
+	percentheal 100,100;
+	specialeffect 312;
+	skilleffect 28,32767;
+	sc_end SC_STONE;
+	sc_end SC_FREEZE;
+	sc_end SC_STUN;
+	sc_end SC_SLEEP;
+	sc_end SC_POISON;
+	sc_end SC_CURSE;
+	sc_end SC_SILENCE;
+	sc_end SC_CONFUSION;
+	sc_end SC_BLIND;
+	sc_end SC_BLEEDING;
+	sc_end SC_DPOISON;
+	dispbottom "HP/SP fully restored.";
+	if(!getnpctimer(1)){setnpctimer 0; attachnpctimer(strcharinfo(0)); startnpctimer;}
+	end;
+
+OnTimer2000:
+	set @h_last,0;
+	stopnpctimer;
+	end;
+}
+
+// --------- NPC Clones ---------
+morocc,159,96,5	duplicate(Heal)	Heal#h1-2	742
+ayothaya,155,111,5	duplicate(Heal)	Heal#h1-3	742
+geffen,121,61,5	duplicate(Heal)	Heal#h1-4	742
+umbala,94,162,5	duplicate(Heal)	Heal#h1-5	742
+payon,180,105,5	duplicate(Heal)	Heal#h1-6	742
+alberta,185,144,5	duplicate(Heal)	Heal#h1-7	742
+aldebaran,134,123,5	duplicate(Heal)	Heal#h1-8	742
+izlude,125,118,5	duplicate(Heal)	Heal#h1-9	742
+xmas,149,136,5	duplicate(Heal)	Heal#h1-10	742
+comodo,188,162,5	duplicate(Heal)	Heal#h1-11	742
+amatsu,200,80,5	duplicate(Heal)	Heal#h1-12	742
+gonryun,164,130,5	duplicate(Heal)	Heal#h1-13	742
+yuno,152,186,5	duplicate(Heal)	Heal#h1-14	742
+niflheim,188,180,5	duplicate(Heal)	Heal#h1-15	742
+louyang,225,103,5	duplicate(Heal)	Heal#h1-16	742
+prontera,151,185,5	duplicate(Heal)	Heal#h1-16	742
+manuk,263,203,5	duplicate(Heal)	Heal#h1-16	742
+splendide,194,181,5	duplicate(Heal)	Healer#h1-17	435
+dicastes01,193,189,5	duplicate(Heal)	Healer#h1-18	485
+aethra,132,65,5	duplicate(Heal)	Healer#h1-19	485

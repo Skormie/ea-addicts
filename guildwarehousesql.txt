@@ -1,0 +1,175 @@
+/// make sure you run this query.
+///CREATE TABLE IF NOT EXISTS `guild_password` (
+///  `guild_id` int(11) unsigned NOT NULL default '0',
+///  `operator` varchar(30) NOT NULL default '>=',
+///  `position_condition` int(11) unsigned NOT NULL default '0',
+///  `storage_password` varchar(30) NOT NULL default '',
+///  PRIMARY KEY  (`guild_id`)
+///) ENGINE=MyISAM;
+
+//SQL Version 2
+prontera,166,188,4	script	Guild Warehouse#v2	112,{
+//NPC file here!
+	cutin "kafra_06",2;
+	set .@a,getcharid(0);	set .@b,getcharid(2);	set .@z,getguildmasterid(.@b);
+	query_sql( "SELECT `storage_password` FROM `guild_password` WHERE `guild_id`='"+.@b+"' LIMIT 1",.@storage_pass$);
+
+	mes "[Guild Warehouse Coupler]";
+	mes "This is the guild warehouse coupler service."; 
+	next;
+	menu "Access Guild Warehouse", GS_OPEN, "Set Guild Warehouse Password", GS_PASS, "Exit", GS_EXIT3;
+
+GS_OPEN:
+	if(query_sql( "SELECT `operator`,`position_condition` FROM `guild_password` WHERE `guild_id`="+.@b+" LIMIT 1;",.@opr$,.@pos_cnd)){
+		query_sql("SELECT `char_id` FROM `guild_member` WHERE `position` "+.@opr$+" "+escape_sql(.@pos_cnd)+" AND `guild_id` = "+.@b+" AND `char_id` = "+.@a+";",.@h);
+		if(.@a!=.@h) {
+			mes "Guild storage is restricted by guild position.";
+			mes "Contact your guild master for information regarding the guild positions.";
+			goto GS_EXIT4;
+		}
+	}
+	if(.@storage_pass$!=""){
+		mes "Please input your guilds password."; input(.@gspass$);
+		if(.@gspass$==.@storage_pass$)
+			mes "Welcome!";
+		else {
+			mes "I'm sorry but that's incorrect, please try again later.";
+			goto GS_EXIT4;
+		}
+	}
+	set @flag,guildopenstorage;
+	if(@flag == 1) goto GS_EXIT1;
+	if(@flag == 2) goto GS_EXIT2;
+	goto GS_EXIT4;
+
+GS_PASS:
+	if(!.@b) { mes "I'm sorry but you don't have a guild."; goto GS_EXIT4; }
+	if(.@z!=.@a){ mes "I'm sorry but you're not the leader of "+strcharinfo(2)+"."; goto GS_EXIT4; }
+	if(.@storage_pass$!=""){ mes "Did you forget, your guild password is "+.@storage_pass$+". Do you still want to change it?"; if(select("Yes:No")-1) goto GS_EXIT4; }
+	mes "Please Input your new guild password.";
+	input(.@pass$);
+	while(.@pass$!=.@gspass2$){
+		mes "Again.";	input(.@gspass2$);	set .@p,.@p+1;
+		if(.@p>1){
+			mes "I'm sorry, but your passwords didn't match, please try again."; goto GS_PASS;
+		}
+	}
+	if(query_sql("SELECT `guild_id` FROM `guild_password` WHERE `guild_id`="+.@b+";",.@gid))
+		query_sql("UPDATE `guild_password` SET `storage_password`='"+.@pass$+"' WHERE `guild_id`="+.@b+";");
+	else
+		query_sql("INSERT INTO `guild_password` (`guild_id`,`storage_password`) VALUES ("+.@b+",'"+.@pass$+"');");
+	mes .@pass$+", has been set as your password.";
+	goto GS_EXIT4;
+	
+GS_EXIT1:
+	mes "[Guild Warehouse]";
+	mes "The guild warehouse is being used right now.";
+	mes "Please wait a while, then come back.";
+	goto GS_EXIT4;
+
+GS_EXIT2:
+	mes "[Guild Warehouse]";
+	mes "You can't use this service if you're not in a guild!";
+	goto GS_EXIT4;
+
+GS_EXIT3:
+	mes "[Guild Warehouser]";
+	mes "Come back whenever you want.";
+
+GS_EXIT4:
+	cutin "kafra_06",255;
+	close;
+
+//Add to other guildstorage npcs.
+//donpcevent "Guild Warehouse::GS_OPEN";
+
+//@command part starts here!
+//SQL Version 2
+OnInit:
+	bindatcmd "gspw",strnpcinfo(3)+"::OnPassword";
+	bindatcmd "gscurb",strnpcinfo(3)+"::OnRestriction";
+	bindatcmd "guildstorage",strnpcinfo(3)+"::OnStorage";
+	end;
+
+OnPassword:
+	set .@a,getcharid(0);	set .@b,getcharid(2);
+	set .@pass$,(.@atcmd_parameters$[0]!="")?
+		"'"+escape_sql(.@atcmd_parameters$[0])+"'":"DEFAULT";
+
+	if(getguildmasterid(.@b)!=.@a) dispbottom "Only a guild leader may use this command.";
+	else {
+		if(query_sql("SELECT `guild_id` FROM `guild_password` WHERE `guild_id`="+.@b+";",.@gid))
+			.@message$=!query_sql("UPDATE `guild_password` SET `storage_password`="+.@pass$+" WHERE `guild_id`="+.@b+" LIMIT 1;")?
+				"Updated Guild Storage Password: "+.@atcmd_parameters$[0]+"!":"";
+		else
+			.@message$=!query_sql("INSERT INTO `guild_password` (`guild_id`,`storage_password`) VALUES ("+.@b+","+.@pass$+");")?
+				"Guild Storage Password Created: "+.@atcmd_parameters$[0]+"!":"";
+		.@message$=(.@atcmd_parameters$[0]=="")?
+			"Guild password has been reset!":.@message$;
+		dispbottom(.@message$);
+	}
+	end;
+
+OnRestriction:
+	set .@a,getcharid(0);	set .@b,getcharid(2);
+	setarray .@p$[0],">","=","<",">=","<=","";
+	setarray .@g$[0],"greater than","equal to",
+		"less than","greater than or equal to",
+		"less than or equal to","";
+	set .@d$,(.@atcmd_parameters$[0]!="")?
+		"'"+.@atcmd_parameters$[0]+"'":"DEFAULT";
+	set .@q$,.@atcmd_parameters$[1]?
+		.@atcmd_parameters$[1]:"DEFAULT";
+
+	if(getguildmasterid(.@b)!=.@a) dispbottom "Only a guild leader may use this command.";
+	else {
+		query_sql("SELECT `name` FROM `guild_position` WHERE `position` = '"+ .@atcmd_parameters$[1] +"' AND `guild_id` = '"+ .@b +"';",.@b$);
+		while(.@atcmd_parameters$[0]!=.@p$[.@i]) {
+			if(.@i==getarraysize(.@p$)){
+				dispbottom .@atcmd_parameters$[0]+" isn't a valid parameter, try: >, =, <, >=, <=";
+				dispbottom "Try: @gscurb <operator> <position#>";
+				end;
+			}
+			set .@i,.@i+1;
+		}
+		query_sql("SELECT `guild_id` FROM `guild_password` WHERE `guild_id`='"+.@b+"' LIMIT 1;",.@gid);
+		if(.@gid){
+			query_sql("UPDATE `guild_password` SET `operator`="+.@d$+",`position_condition`="+escape_sql(.@q$)+" WHERE `guild_id`='"+.@b+"' LIMIT 1;");
+			.@message$=(.@atcmd_parameters$[1]!=""&&.@atcmd_parameters$[0]!="")?
+				"Members "+.@g$[.@i]+" ["+.@b$+"] have access to guild storage.":"Guild storage restriction has been lifted! Try: @gscurb <operator> <position#>";
+			dispbottom(.@message$);
+		} else {
+			query_sql("INSERT INTO `guild_password` (`operator`,`position_condition`) VALUES ('"+escape_sql(.@atcmd_parameters$[0])+"',"+escape_sql(.@atcmd_parameters$[1])+");");
+			dispbottom("Members "+.@g$[.@i]+" ["+.@b$+"] have access to guild storage.");
+		}
+	}
+	end;
+
+OnStorage:
+	set .@a,getcharid(0);	set .@b,getcharid(2);
+
+	if(!.@b) { dispbottom "You need a guild to use this command."; end; }
+	if(query_sql( "SELECT `operator`,`position_condition` FROM `guild_password` WHERE `guild_id`="+.@b+" LIMIT 1;",.@opr$,.@pos_cnd)){
+		query_sql("SELECT `char_id` FROM `guild_member` WHERE `position` "+.@opr$+" "+escape_sql(.@pos_cnd)+" AND `guild_id` = "+.@b+" AND `char_id` = "+.@a+";",.@h);
+		if(.@a!=.@h) {
+			dispbottom "Guild storage is restricted by guild position. Contact your guild master for information regarding guild positions.";
+			end;
+		}
+	}
+	query_sql( "SELECT `storage_password` FROM `guild_password` WHERE `guild_id`="+.@b+";",.@storage_pass$);
+	if(.@storage_pass$!=""){
+		if(.@atcmd_parameters$[0]==.@storage_pass$ ) {
+			set .@z, guildopenstorage();
+		} else {
+			dispbottom "Wrong password contact your guild master for information!";
+		}
+	} else {
+		set .@z, guildopenstorage();
+	}
+	if(.@z) {
+		set .@message$, (.@z&2)?
+			"The guild warehouse is in use right now!":"You can't use this service if you're not in a guild!";
+		dispbottom(.@message$);
+	}
+	end;
+}

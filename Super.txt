@@ -1,0 +1,1181 @@
+-	script	Warp Agent#01	859,{
+
+	getmapxy(.@map$,.@x,.@y,0);
+	set @totalabyss, getmapusers("abyss_01") + getmapusers("abyss_02") + getmapusers("abyss_03");
+	set @totalamatsu, getmapusers("ama_dun01") + getmapusers("ama_dun02") + getmapusers("ama_dun03");
+	set @totalanthell, getmapusers("anthell01") + getmapusers("anthell02");
+	set @totalayo, getmapusers("ayo_dun01") + getmapusers("ayo_dun02");
+	set @totalbiblian, getmapusers("iz_dun00") + getmapusers("iz_dun01") + getmapusers("iz_dun02") + getmapusers("iz_dun03") + getmapusers("iz_dun04");
+	set @totalcoal, getmapusers("mjo_dun01") + getmapusers("mjo_dun02") + getmapusers("mjo_dun03");
+	set @totalclocktower, getmapusers("c_tower1") + getmapusers("c_tower2") + getmapusers("c_tower3") + getmapusers("c_tower4") + getmapusers("alde_dun01") + getmapusers("alde_dun02") + getmapusers("alde_dun03") + getmapusers("alde_dun04");
+	set @totalculvert, getmapusers("prt_sewb1") + getmapusers("prt_sewb2") + getmapusers("prt_sewb3") + getmapusers("prt_sewb4");
+	set @totaleinbech, getmapusers("ein_dun01") + getmapusers("ein_dun02");
+	set @totalgeffenia, getmapusers("gefenia01") + getmapusers("gefenia02") + getmapusers("gefenia03") + getmapusers("gefenia04");
+	set @totalgeffengungeon, getmapusers("gef_dun00") + getmapusers("gef_dun01") + getmapusers("gef_dun02") + getmapusers("gef_dun03");
+	set @totalglast, getmapusers("glast_01") + getmapusers("gl_church") + getmapusers("gl_chyard") + getmapusers("gl_cas01") + getmapusers("gl_cas02") + getmapusers("gl_prison") + getmapusers("gl_prison1") + getmapusers("gl_knt01") + getmapusers("gl_knt02") + getmapusers("gl_in01") + getmapusers("gl_step") + getmapusers("gl_sew01") + getmapusers("gl_sew02") + getmapusers("gl_sew03") + getmapusers("gl_sew04") + getmapusers("gl_dun01") + getmapusers("gl_dun02");
+	set @totalgonryn, getmapusers("gon_dun01") + getmapusers("gon_dun02") + getmapusers("gon_dun03");
+	set @totalmaze, getmapusers("prt_maze01") + getmapusers("prt_maze02") + getmapusers("prt_maze03");
+	set @totalice, getmapusers("ice_dun01") + getmapusers("ice_dun02") + getmapusers("ice_dun03");
+	set @totaljuperos, getmapusers("juperos_01") + getmapusers("juperos_02") + getmapusers("jupe_core");
+	set @totallouyang, getmapusers("lou_dun01") + getmapusers("lou_dun02") + getmapusers("lou_dun03");
+	set @totalmagma, getmapusers("mag_dun01") + getmapusers("mag_dun02");
+	set @totalmoscdun, getmapusers("mosk_dun01") + getmapusers("mosk_dun02") + getmapusers("mosk_dun03");
+	set @totalabbey, getmapusers("abbey01") + getmapusers("abbey02") + getmapusers("abbey03");
+	set @totalodin, getmapusers("odin_tem01") + getmapusers("odin_tem02") + getmapusers("odin_tem03");
+	set @totalork, getmapusers("orcsdun01") + getmapusers("orcsdun02");
+	set @totalpayd, getmapusers("pay_dun00") + getmapusers("pay_dun01") + getmapusers("pay_dun02") + getmapusers("pay_dun03") + getmapusers("pay_dun04") + getmapusers("pay_dun00");
+	set @totalpyramid, getmapusers("moc_pryd01") + getmapusers("moc_pryd02") + getmapusers("moc_pryd03") + getmapusers("moc_pryd04") + getmapusers("moc_pryd05") + getmapusers("moc_pryd06");
+	set @totalrachel, getmapusers("ra_san01") + getmapusers("ra_san02") + getmapusers("ra_san03") + getmapusers("ra_san04") + getmapusers("ra_san05");
+	set @totalsphnix, getmapusers("in_sphinx1") + getmapusers("in_sphinx2") + getmapusers("in_sphinx3") + getmapusers("in_sphinx4") + getmapusers("in_sphinx5");
+	set @totalsunken, getmapusers("alb2trea") + getmapusers("treasure01") + getmapusers("treasure02");
+	set @totalthana, getmapusers("tha_t01") + getmapusers("tha_t02") + getmapusers("tha_t03") + getmapusers("tha_t04") + getmapusers("tha_t05") + getmapusers("tha_t06") + getmapusers("tha_t07") + getmapusers("tha_t08") + getmapusers("tha_t09") + getmapusers("tha_t10") + getmapusers("tha_t11") + getmapusers("tha_t12") + getmapusers("thana_boss");
+	set @totalthor, getmapusers("thor_v01") + getmapusers("thor_v02") + getmapusers("thor_v03");
+	set @totalxmas, getmapusers("xmas_dun01") + getmapusers("xmas_dun02");
+	set @totalturtle, getmapusers("tur_dun01") + getmapusers("tur_dun02") + getmapusers("tur_dun03") + getmapusers("tur_dun04");
+	set @totalumbala, getmapusers("um_dun01") + getmapusers("um_dun02");
+	set @totalsplendide, getmapusers("spl_fild01") + getmapusers("spl_fild02") + getmapusers("spl_fild03")+1;
+	set @totalmanuk, getmapusers("man_fild01") + getmapusers("man_fild03");
+	set @totalPkm, getmapusers("lhz_dun01") + getmapusers("lhz_dun02") + getmapusers("lhz_dun03") + getmapusers("lhz_dun04") + getmapusers("lhz_dun05");
+	set @totalpkmd, getmapusers("route_01");
+	//fields
+	set @drunfild1, getmapusers("ra_fild01.gat")+getmapusers("ra_fild02.gat")+getmapusers("ra_fild03.gat")+getmapusers("ra_fild04.gat")+getmapusers("ra_fild05.gat")+getmapusers("ra_fild06.gat")+getmapusers("ra_fild07.gat")+getmapusers("ra_fild08.gat")+getmapusers("ra_fild09.gat")+getmapusers("ra_fild10.gat")+getmapusers("ra_fild11.gat")+getmapusers("ra_fild12.gat")+getmapusers("ra_fild13.gat");
+	set @dgeffild00, getmapusers("gef_fild00.gat")+getmapusers("gef_fild01.gat")+getmapusers("gef_fild02.gat")+getmapusers("gef_fild03.gat")+getmapusers("gef_fild04.gat")+getmapusers("gef_fild05.gat")+getmapusers("gef_fild06.gat")+getmapusers("gef_fild07.gat")+getmapusers("gef_fild08.gat")+getmapusers("gef_fild09.gat")+getmapusers("gef_fild10.gat")+getmapusers("gef_fild11.gat")+getmapusers("gef_fild12.gat")+getmapusers("gef_fild13.gat")+getmapusers("gef_fild14.gat");
+	set @dmjolnir1, getmapusers("mjolnir_01.gat")+getmapusers("mjolnir_02.gat")+getmapusers("mjolnir_03.gat")+getmapusers("mjolnir_04.gat")+getmapusers("mjolnir_05.gat")+getmapusers("mjolnir_06.gat")+getmapusers("mjolnir_07.gat")+getmapusers("mjolnir_08.gat")+getmapusers("mjolnir_09.gat")+getmapusers("mjolnir_10.gat")+getmapusers("mjolnir_11.gat")+getmapusers("mjolnir_12.gat");
+	set @dmosc1, getmapusers("mosk_fild01.gat")+getmapusers("mosk_fild02.gat");
+	set @dmocfild1, getmapusers("tha_scene01")+getmapusers("moc_fild01.gat")+getmapusers("moc_fild02.gat")+getmapusers("moc_fild03.gat")+getmapusers("moc_fild04.gat")+getmapusers("moc_fild05.gat")+getmapusers("moc_fild06.gat")+getmapusers("moc_fild07.gat")+getmapusers("moc_fild08.gat")+getmapusers("moc_fild09.gat")+getmapusers("moc_fild10.gat")+getmapusers("moc_fild11.gat")+getmapusers("moc_fild12.gat")+getmapusers("moc_fild13.gat")+getmapusers("moc_fild14.gat")+getmapusers("moc_fild15.gat")+getmapusers("moc_fild16.gat")+getmapusers("moc_fild17.gat")+getmapusers("moc_fild18.gat")+getmapusers("moc_fild19.gat")+8;
+	set @dpayfild1, getmapusers("pay_fild01.gat")+getmapusers("pay_fild02.gat")+getmapusers("pay_fild03.gat")+getmapusers("pay_fild04.gat")+getmapusers("pay_fild05.gat")+getmapusers("pay_fild06.gat")+getmapusers("pay_fild07.gat")+getmapusers("pay_fild08.gat")+getmapusers("pay_fild09.gat")+getmapusers("pay_fild10.gat")+getmapusers("pay_fild11.gat");
+	set @dprtfild0, getmapusers("prt_fild00.gat")+getmapusers("prt_fild01.gat")+getmapusers("prt_fild02.gat")+getmapusers("prt_fild03.gat")+getmapusers("prt_fild04.gat")+getmapusers("prt_fild05.gat")+getmapusers("prt_fild06.gat")+getmapusers("prt_fild07.gat")+getmapusers("prt_fild08.gat")+getmapusers("prt_fild09.gat")+getmapusers("prt_fild10.gat")+getmapusers("prt_fild11.gat");
+	set @dxmasfild1, getmapusers("xmas_fild01.gat");
+	set @dcmdfild1, getmapusers("cmd_fild01.gat")+getmapusers("cmd_fild02.gat")+getmapusers("cmd_fild03.gat")+getmapusers("cmd_fild04.gat")+getmapusers("cmd_fild05.gat")+getmapusers("cmd_fild06.gat")+getmapusers("cmd_fild07.gat")+getmapusers("cmd_fild08.gat")+getmapusers("cmd_fild09.gat");
+	set @dyunofild1, getmapusers("yuno_fild01.gat")+getmapusers("yuno_fild02.gat")+getmapusers("yuno_fild03.gat")+getmapusers("yuno_fild04.gat")+getmapusers("yuno_fild05.gat")+getmapusers("yuno_fild06.gat")+getmapusers("yuno_fild07.gat")+getmapusers("yuno_fild08.gat")+getmapusers("yuno_fild09.gat")+getmapusers("yuno_fild10.gat")+getmapusers("yuno_fild11.gat")+getmapusers("yuno_fild12.gat");
+	set @damafild1, getmapusers("ama_fild01.gat");
+	set @dgonfild1, getmapusers("gon_fild01.gat");
+	set @dumfild1, getmapusers("um_fild01.gat")+getmapusers("um_fild02.gat")+getmapusers("um_fild03.gat")+getmapusers("um_fild04.gat");
+	set @dniffild1, getmapusers("nif_fild01.gat")+getmapusers("nif_fild02.gat");
+	set @dyggdrasil1, getmapusers("yggdrasil01.gat");
+	set @dloufild1, getmapusers("lou_fild01.gat");
+	set @dayofild1, getmapusers("ayo_fild01.gat")+getmapusers("ayo_fild02.gat");
+	set @deinfild1, getmapusers("ein_fild01.gat")+getmapusers("ein_fild02.gat")+getmapusers("ein_fild03.gat")+getmapusers("ein_fild04.gat")+getmapusers("ein_fild05.gat")+getmapusers("ein_fild06.gat")+getmapusers("ein_fild07.gat")+getmapusers("ein_fild08.gat")+getmapusers("ein_fild09.gat")+getmapusers("ein_fild10.gat");
+	set @dlhzfild1, getmapusers("lhz_fild01.gat")+getmapusers("lhz_fild02.gat")+getmapusers("lhz_fild03.gat");
+	set @dhufild1, getmapusers("hu_fild01.gat")+getmapusers("hu_fild02.gat")+getmapusers("hu_fild03.gat")+getmapusers("hu_fild04.gat")+getmapusers("hu_fild05.gat")+getmapusers("hu_fild06.gat")+getmapusers("hu_fild07.gat");
+	set @wodtemp1, getmapusers("odin_tem01.gat")+getmapusers("odin_tem02.gat")+getmapusers("odin_tem03.gat");
+	set @dvfild1, getmapusers("ve_fild01.gat")+getmapusers("ve_fild02.gat")+getmapusers("ve_fild03.gat")+getmapusers("ve_fild04.gat")+getmapusers("ve_fild05.gat")+getmapusers("ve_fild06.gat")+getmapusers("ve_fild07.gat");
+
+	set @totaldungeon, @totalclocktower + @totalabyss + @totalamatsu + @totalanthell + @totalayo + @totalbiblian + @totalbios + @totalcoal + @totalculvert + @totaleinbech + @totalgeffenia + @totalglast + @totalgonryn + @totalmaze + @totalice + @totaljuperos + @totalkiel + @totallouyang + @totalmagma + @totalmoscdun + @totalabbey + @totalodin + @totalork + @totalpayd + @totalpyramid + @totalrachel + @totalsphinx + @totalsunken + @totalthana + @totalthor + @totalxmas + @totalturtle + @totalumbala + @totalsplendide + @totalmanuk + @totalPkm + @totalpkmd;
+	set @totaltown, getmapusers("alberta") + getmapusers("aldebaran") + getmapusers("amatsu") + getmapusers("ayothaya") + getmapusers("comodo") + getmapusers("einbroch") + getmapusers("einbech") + getmapusers("geffen") + getmapusers("gonryun") + getmapusers("hugel") + getmapusers("izlude") + getmapusers("lighthalzen") + getmapusers("louyang") + getmapusers("xmas") + getmapusers("morocc") + getmapusers("moscovia") + getmapusers("niflheim") + getmapusers("prontera") + getmapusers("payon") + getmapusers("veins") + getmapusers("umbala") + getmapusers("yuno");
+	set @totalfield, @dvfild1 + @wodtemp1 + @dhufild1 + @dlhzfild1 + @deinfild1 + @dloufild1 + @dyggdrasil1 + @dniffild1 + @dumfild1 + @dgonfild1 + @drunfild1 + @dgeffild00 + @dmjolnir1 + @dmosc1 + @dmocfild1 + @dpayfild1 + @dprtfild0 + @dxmasfild1 + @dcmdfild1 + @dyunofild1 + @damafild1;
+
+	set @floor1,0;
+	set @floor2,2000;
+	set @floor3,6000;
+	set @floor4,10000;
+	set @floor5,14000;
+	set @floor6,18000;
+	set @floor7,22000;
+	set @floor8,29000;
+	set @floor9,30000;
+	set @floor10,34000;
+	set @floor11,38000;
+
+	set @cost,100;
+
+	callfunc "F_ClearGarbage"; //Clear outdated, unused variables
+
+
+
+	mes "[^FF33FFAdvanced Warpra^000000]";
+	mes "We have had a total of [^FF33FF"+@townwarp+"^000000] warps to towns";
+	mes "A total of [^FF33FF"+@dungeonwarp+"^000000] warps to dungeons";
+	mes "A total of [^FF33FF"+@fieldwarp+"^000000] warps to fields";
+	mes "And a total of [^FF33FF"+@storageopen+"^000000] storage accesses";
+	mes "";
+	mes "How may I help you?";
+	next;
+	menu "Warp",L_Warp,"Storage",L_Storage,"Deposit Zeny",Ldeposit,"Withdraw Zeny",Lwithdrawl,"Not Interested",L_Done;
+
+
+Ldeposit:
+	mes "[Banker]";
+	mes "Very well... How much would you like to deposit? The maximum you can deposit at once is 999,999 Zeny.";
+	next;
+	if (@cost > 0) goto Ldepocost;
+	goto Ldepocont;
+
+	Ldepocost:
+		mes "[Banker]";
+		mes "Oh and don't forget there is a " + @cost + " Zeny charge on all transactions.";
+		next;
+		goto Ldepocont;
+
+Ldepocont:
+	input @deposit;
+	if (@deposit < 1) goto Lrealamount;
+	if (@deposit > Zeny) goto Lneedzeny;
+	if (@deposit > (Zeny - @cost)) goto Lneedzeny2;
+	set Zeny,Zeny - @deposit;
+	set Zeny,Zeny - @cost;
+	set #bankstorage,#bankstorage + @deposit;
+	mes "[Banker]";
+	mes "Thank you very much... Your zeny is in good hands.";
+	close;
+Lwithdrawl:
+	mes "[Banker]";
+	mes "Very well... How much would you like to withdraw?";
+	mes "You currently have " + #bankstorage + " Zeny in your account.";
+	next;
+	if (@cost > 0) goto Lwithcost;
+	goto Lwithcont;
+
+	Lwithcost:
+		mes "[Banker]";
+		mes "Oh and don't forget there is a " + @cost + " Zeny charge on all transactions.";
+		next;
+		goto Lwithcont;
+
+Lwithcont:
+	input @withdrawl;
+	if (@withdrawl < 1) goto Lrealamount;
+	if (@withdrawl > #bankstorage) goto Lneedzeny3;
+	if ((@cost > Zeny) && ((Zeny + @withdrawl) > @cost)) goto Lcostask; 
+	if (@cost > Zeny) goto Lneedzeny2;
+	goto Lwithcont2;
+
+	Lcostask:
+		mes "[Banker]";
+		mes "You don't have the Zeny for the transaction fee right now. Would you like me to take the fee directly from your withdrawl?";
+		next;
+		menu "Yes please.",Lwithtake,"No thank you.",Lcancel;
+
+	Lwithtake:
+		mes "[Banker]";
+		mes "Ok then.";
+		set @withdrawl,@withdrawl - @cost;
+		set #bankstorage,#bankstorage - @cost;
+		set @cost,0;
+		next;
+		goto Lwithcont2;
+
+Lwithcont2:
+	set Zeny,Zeny - @cost;
+	set Zeny,Zeny + @withdrawl;
+	set #bankstorage,#bankstorage - @withdrawl;
+	mes "[Banker]";
+	mes "There's your Zeny. Have a good day.";
+	close;
+Lrealamount:
+	mes "[Banker]";
+	mes "Don't play jokes with me please. Next time ask for a real amount.";
+	close;
+
+Lneedzeny:
+	mes "[Banker]";
+	mes "You don't have enough Zeny to make that deposit.";
+	close;
+
+Lneedzeny2:
+	mes "[Banker]";
+	mes "You don't have enough Zeny to cover the transaction fee.";
+	close;
+
+Lneedzeny3:
+	mes "[Banker]";
+	mes "You don't have enough Zeny in your account.";
+	close;
+
+L_Done:
+
+close;
+
+L_storage:
+	close2;
+	openstorage;
+	set @storageopen, @storageopen + 1;
+	end;
+
+L_Sorry:
+	mes "I'm Sorry But You do not have correct funds to support this warp came back when you do.";
+	close;
+
+L_Warp:
+
+
+	//All town warps are free of charge, for now.
+	mes "[^FF33FFAdvanced Warpra^000000]";
+	mes "Ok, so you want warping somewhere, yes? No problem. Would you like to go to a town or a dungeon?";
+	next;
+	if(@dungeonwarp != 0||@fieldwarp != 0) {
+	goto Lastmap;
+	} else
+	menu "Towns [^0000ff"+@totaltown+"^000000]",M_Town,"Dungeons [^0000ff"+@totaldungeon+"^000000]",M_Dungeon,"Fields [^0000ff"+@totalfield+"^000000]",M_Field;
+
+		M_Town:
+			
+			mes "[^FF33FFAdvanced Warpra^000000]";
+			mes "Please choose a destination";
+			next;
+			menu "Alberta [^0000ff"+getmapusers("alberta")+"^000000]",walberta,
+			"Aldebaran [^0000ff"+getmapusers("aldebaran")+"^000000]",waldebaran,
+			"Amatsu [^0000ff"+getmapusers("amatsu")+"^000000]",wamatsu,
+			"Ayothaya [^0000ff"+getmapusers("ayothaya")+"^000000]",wayothaya,
+			"Comodo [^0000ff"+getmapusers("comodo")+"^000000]",wcomodo,
+			"Einbroch [^0000ff"+getmapusers("einbroch")+"^000000]",weinbroch,
+			"Einbech [^0000ff"+getmapusers("einbech")+"^000000]",weinbech,
+			"Geffen [^0000ff"+getmapusers("geffen")+"^000000]",wgeffen,
+			"Gonryun [^0000ff"+getmapusers("gonryun")+"^000000]",wgonryun,
+			"Hugel [^0000ff"+getmapusers("hugel")+"^000000]",whugel,
+			"Izlude [^0000ff"+getmapusers("izlude")+"^000000]",wizlude,
+			"Lighthalzen [^0000ff"+getmapusers("lighthalzen")+"^000000]",wlighthalzen,
+			"Louyang [^0000ff"+getmapusers("louyang")+"^000000]",wlouyang,
+			"Lutie [^0000ff"+getmapusers("xmas")+"^000000]",wlutie,
+			"Morroc [^0000ff"+getmapusers("morocc")+"^000000]",wmorroc,
+			"Moscovia [^0000ff"+getmapusers("moscovia")+"^000000]",wmoscovia,
+			"Niflheim [^0000ff"+getmapusers("niflheim")+"^000000]",wniflheim,
+			"Prontera [^0000ff"+getmapusers("prontera")+"^000000]",wprontera,
+			"Payon [^0000ff"+getmapusers("payon")+"^000000]",wpayon,
+			"Veins [^0000ff"+getmapusers("veins")+"^000000]",wveins,
+			"Umbala [^0000ff"+getmapusers("umbala")+"^000000]",wumbala,
+			"Yuno [^0000ff"+getmapusers("yuno")+"^000000]",wyuno;
+			
+			
+		M_Dungeon:
+			
+			mes @name$;
+			mes "Please choose a destination";
+			menu "Abyss Lake [^0000ff"+@totalabyss+"^000000]",dabyss,
+			"Amatsu Dungeon [^0000ff"+@totalamatsu+"^000000]",damatsu,
+			"Anthell [^0000ff"+@totalanthell+"^000000]",danthell,
+			"Ayothaya Dungeon [^0000ff"+@totalayo+"^000000]",dayothaya,
+			"Beach Dungeon [^0000ff"+@totalbeach+"^000000]",dbeach,
+			"Biblian Dungeon [^0000ff"+@totalbiblian+"^000000]",dbiblian,
+			"Clocktower [^0000ff"+@totalclocktower+"^000000]",dclocktower,
+			"Coal Min(Mjolnir Dead Pit) [^0000ff"+@totalcoal+"^000000]",dcoal,
+			"Culvert(Prt Sewers) [^0000ff"+@totalculvert+"^000000]",dculvert,
+			"Einbech Dungeon [^0000ff"+@totaleinbech+"^000000]",deinbech,
+			"Geffen Dungeon [^0000ff"+@totalgeffengungeon+"^000000]",dgeffendungeon,
+			"Geffenia [^0000ff"+@totalgeffenia+"^000000]",dgeffenia,
+			"Glast Heim [^0000ff"+@totalglast+"^000000]",dglast,
+			"Gonryun Dungeon [^0000ff"+@totalgonryun+"^000000]",dgonryun,
+			"Hidden Temple [^0000ff"+@totalmaze+"^000000]",dmaze,
+			"Ice Dungeon [^0000ff"+@totalice+"^000000]",d_ice,
+			"Juperos [^0000ff"+@totaljuperos+"^000000]",djuperos,
+			"Louyang Dungeon [^0000ff"+@totallouyang+"^000000]",dlouyang,
+			"Magma Dungeon [^0000ff"+@totalmagma+"^000000]",dmagma,
+			"Manuk field [^0000ff"+@totalmanuk+"^000000]",dmanuk,
+			"Moscovia Dungeon [^0000ff"+@totalmoscdun+"^000000]",dmosk,
+			"Nameless Abbey [^0000ff"+@totalabbey+"^000000]",dabbey,
+			"Odin Temple [^0000ff"+@totalodin+"^000000]",dodin,
+			"Orc Dungeon [^0000ff"+@totalork+"^000000]",dorc,
+			"Bio Lab(Lighthalzen Dungeon) [^0000ff"+@totalPkm+"^000000]",dIsland,
+			"Payon Dungeon [^0000ff"+@totalpayd+"^000000]",dpayon,
+			"Pokemon Dungeon [^0000ff"+@totalpkmd+"^000000]",dpkmd,
+			"Pyramid Dungeon [^0000ff"+@totalpyramid+"^000000]",dpyramid,
+			"Rachel Sanctuary [^0000ff"+@totalrachel+"^000000]",drachel,
+			"Sphinx Dungeon [^0000ff"+@totalsphinx+"^000000]",dsphinx,
+			"Splendide field [^0000ff"+@totalsplendide+"^000000]",dsplendide,
+			"Sunken Ship [^0000ff"+@totalsunken+"^000000]",dsunken,
+			"Thanatos Tower [^0000ff"+@totalthana+"^000000]",dthana,
+			"Thor's Volcano [^0000ff"+@totalthor+"^000000]",dthor,
+			"Toy Factory [^0000ff"+@totalxmas+"^000000]",dtoy,
+			"Turtle Dungeon [^0000ff"+@totalturtle+"^000000]",dturtle,
+			"Umbala Dungeon [^0000ff"+@totalumbala+"^000000]",dumbala;
+			
+		M_field:
+			mes @name$;
+			mes "Please choose a destination";
+			menu "Rachel Fields [^0000ff"+@drunfild1+"^000000]",drunfild1,
+			"Geffen Fields [^0000ff"+@dgeffild00+"^000000]",dgeffild00,
+			"Mjolnir Fields [^0000ff"+@dmjolnir1+"^000000]",dmjolnir1,
+			"Moscovia Fields [^0000ff"+@dmosc1+"^000000]",dmosc1,
+			"Sograt Deserts(Morocc Fields) [^0000ff"+@dmocfild1+"^000000]",dmocfild1,
+			"Payon Forests [^0000ff"+@dpayfild1+"^000000]",dpayfild1,
+			"Prontera Fields [^0000ff"+@dprtfild0+"^000000]",dprtfild0,
+			"Lutie Fields [^0000ff"+@dxmasfild1+"^000000]",dxmasfild1,
+			"Comodo Fields [^0000ff"+@dcmdfild1+"^000000]",dcmdfild1,
+			"Yuno Fields [^0000ff"+@dyunofild1+"^000000]",dyunofild1,
+			"Amatsu Fields [^0000ff"+@damafild1+"^000000]",damafild1,
+			"Gonryun Fields [^0000ff"+@dgonfild1+"^000000]",dgonfild1,
+			"Umbala Fields [^0000ff"+@dumfild1+"^000000]",dumfild1,
+			"Niflheim Fields [^0000ff"+@dniffild1+"^000000]",dniffild1,
+			"Odin Temples [^0000ff"+@wodtemp1+"^000000]",wodtemp1,
+			"Louyang Fields [^0000ff"+@dloufild1+"^000000]",dloufild1,
+			"Ayothaya Field [^0000ff"+@dayofild1+"^000000]",dayofild1,
+			"Einbroch Fields [^0000ff"+@deinfild1+"^000000]",deinfild1,
+			"Lighthalzen Fields [^0000ff"+@dlhzfild1+"^000000]",dlhzfild1,
+			"Hugel Fields [^0000ff"+@dhufild1+"^000000]",dhufild1,
+			"Veins Fields [^0000ff"+@dvfild1+"^000000]",dvfild1;
+
+
+Lastmap:
+	menu "Towns [^0000ff"+@totaltown+"^000000]",L_Town,"Dungeons [^0000ff"+@totaldungeon+"^000000]",L_Dungeon,"Fields [^0000ff"+@totalfield+"^000000]",L_Field,"Last Map (^00FF00"+ @map$ +"^000000)",L_Map;
+
+		L_Town:
+			
+			mes "[^FF33FFAdvanced Warpra^000000]";
+			mes "Please choose a destination";
+			next;
+			menu "Alberta [^0000ff"+getmapusers("alberta")+"^000000]",walberta,
+			"Aldebaran [^0000ff"+getmapusers("aldebaran")+"^000000]",waldebaran,
+			"Amatsu [^0000ff"+getmapusers("amatsu")+"^000000]",wamatsu,
+			"Ayothaya [^0000ff"+getmapusers("ayothaya")+"^000000]",wayothaya,
+			"Comodo [^0000ff"+getmapusers("comodo")+"^000000]",wcomodo,
+			"Einbroch [^0000ff"+getmapusers("einbroch")+"^000000]",weinbroch,
+			"Einbech [^0000ff"+getmapusers("einbech")+"^000000]",weinbech,
+			"Geffen [^0000ff"+getmapusers("geffen")+"^000000]",wgeffen,
+			"Gonryun [^0000ff"+getmapusers("gonryun")+"^000000]",wgonryun,
+			"Hugel [^0000ff"+getmapusers("hugel")+"^000000]",whugel,
+			"Izlude [^0000ff"+getmapusers("izlude")+"^000000]",wizlude,
+			"Lighthalzen [^0000ff"+getmapusers("lighthalzen")+"^000000]",wlighthalzen,
+			"Louyang [^0000ff"+getmapusers("louyang")+"^000000]",wlouyang,
+			"Lutie [^0000ff"+getmapusers("xmas")+"^000000]",wlutie,
+			"Morroc [^0000ff"+getmapusers("morocc")+"^000000]",wmorroc,
+			"Moscovia [^0000ff"+getmapusers("moscovia")+"^000000]",wmoscovia,
+			"Niflheim [^0000ff"+getmapusers("niflheim")+"^000000]",wniflheim,
+			"Prontera [^0000ff"+getmapusers("prontera")+"^000000]",wprontera,
+			"Payon [^0000ff"+getmapusers("payon")+"^000000]",wpayon,
+			"Veins [^0000ff"+getmapusers("veins")+"^000000]",wveins,
+			"Umbala [^0000ff"+getmapusers("umbala")+"^000000]",wumbala,
+			"Yuno [^0000ff"+getmapusers("yuno")+"^000000]",wyuno;
+			
+			
+		L_Dungeon:
+			
+			mes @name$;
+			mes "Please choose a destination";
+			menu "Abyss Lake [^0000ff"+@totalabyss+"^000000]",dabyss,
+			"Amatsu Dungeon [^0000ff"+@totalamatsu+"^000000]",damatsu,
+			"Anthell [^0000ff"+@totalanthell+"^000000]",danthell,
+			"Ayothaya Dungeon [^0000ff"+@totalayo+"^000000]",dayothaya,
+			"Beach Dungeon [^0000ff"+@totalbeach+"^000000]",dbeach,
+			"Biblian Dungeon [^0000ff"+@totalbiblian+"^000000]",dbiblian,
+			"Clocktower [^0000ff"+@totalclocktower+"^000000]",dclocktower,
+			"Coal Mine(Mjolnir Dead Pit) [^0000ff"+@totalcoal+"^000000]",dcoal,
+			"Culvert(Prt Sewers) [^0000ff"+@totalculvert+"^000000]",dculvert,
+			"Einbech Dungeon [^0000ff"+@totaleinbech+"^000000]",deinbech,
+			"Geffen Dungeon [^0000ff"+@totalgeffengungeon+"^000000]",dgeffendungeon,
+			"Geffenia [^0000ff"+@totalgeffenia+"^000000]",dgeffenia,
+			"Glast Heim [^0000ff"+@totalglast+"^000000]",dglast,
+			"Gonryun Dungeon [^0000ff"+@totalgonryun+"^000000]",dgonryun,
+			"Hidden Temple [^0000ff"+@totalmaze+"^000000]",dmaze,
+			"Ice Dungeon [^0000ff"+@totalice+"^000000]",d_ice,
+			"Juperos [^0000ff"+@totaljuperos+"^000000]",djuperos,
+			"Louyang Dungeon [^0000ff"+@totallouyang+"^000000]",dlouyang,
+			"Magma Dungeon [^0000ff"+@totalmagma+"^000000]",dmagma,
+			"Manuk field [^0000ff"+@totalmanuk+"^000000]",dmanuk,
+			"Moscovia Dungeon [^0000ff"+@totalmoscdun+"^000000]",dmosk,
+			"Nameless Abbey [^0000ff"+@totalabbey+"^000000]",dabbey,
+			"Odin Temple [^0000ff"+@totalodin+"^000000]",dodin,
+			"Orc Dungeon [^0000ff"+@totalork+"^000000]",dorc,
+			"Bio Lab(Lighthalzen Dungeon) [^0000ff"+@totalPkm+"^000000]",dIsland,
+			"Payon Dungeon [^0000ff"+@totalpayd+"^000000]",dpayon,
+			"Pokemon Dungeon [^0000ff"+@totalpkmd+"^000000]",dpkmd,
+			"Pyramid Dungeon [^0000ff"+@totalpyramid+"^000000]",dpyramid,
+			"Rachel Sanctuary [^0000ff"+@totalrachel+"^000000]",drachel,
+			"Sphinx Dungeon [^0000ff"+@totalsphinx+"^000000]",dsphinx,
+			"Splendide field [^0000ff"+@totalsplendide+"^000000]",dsplendide,
+			"Sunken Ship [^0000ff"+@totalsunken+"^000000]",dsunken,
+			"Thanatos Tower [^0000ff"+@totalthana+"^000000]",dthana,
+			"Thor's Volcano [^0000ff"+@totalthor+"^000000]",dthor,
+			"Toy Factory [^0000ff"+@totalxmas+"^000000]",dtoy,
+			"Turtle Dungeon [^0000ff"+@totalturtle+"^000000]",dturtle,
+			"Umbala Dungeon [^0000ff"+@totalumbala+"^000000]",dumbala;
+			
+		L_field:
+			mes @name$;
+			mes "Please choose a destination";
+			menu "Rachel Fields [^0000ff"+@drunfild1+"^000000]",drunfild1,
+			"Geffen Fields [^0000ff"+@dgeffild00+"^000000]",dgeffild00,
+			"Mjolnir Fields [^0000ff"+@dmjolnir1+"^000000]",dmjolnir1,
+			"Moscovia Fields [^0000ff"+@dmosc1+"^000000]",dmosc1,
+			"Sograt Deserts(Morocc Fields) [^0000ff"+@dmocfild1+"^000000]",dmocfild1,
+			"Payon Forests [^0000ff"+@dpayfild1+"^000000]",dpayfild1,
+			"Prontera Fields [^0000ff"+@dprtfild0+"^000000]",dprtfild0,
+			"Lutie Fields [^0000ff"+@dxmasfild1+"^000000]",dxmasfild1,
+			"Comodo Fields [^0000ff"+@dcmdfild1+"^000000]",dcmdfild1,
+			"Yuno Fields [^0000ff"+@dyunofild1+"^000000]",dyunofild1,
+			"Amatsu Fields [^0000ff"+@damafild1+"^000000]",damafild1,
+			"Gonryun Fields [^0000ff"+@dgonfild1+"^000000]",dgonfild1,
+			"Umbala Fields [^0000ff"+@dumfild1+"^000000]",dumfild1,
+			"Niflheim Fields [^0000ff"+@dniffild1+"^000000]",dniffild1,
+			"Odin Temples [^0000ff"+@wodtemp1+"^000000]",wodtemp1,
+			"Louyang Fields [^0000ff"+@dloufild1+"^000000]",dloufild1,
+			"Ayothaya Field [^0000ff"+@dayofild1+"^000000]",dayofild1,
+			"Einbroch Fields [^0000ff"+@deinfild1+"^000000]",deinfild1,
+			"Lighthalzen Fields [^0000ff"+@dlhzfild1+"^000000]",dlhzfild1,
+			"Hugel Fields [^0000ff"+@dhufild1+"^000000]",dhufild1,
+			"Veins Fields [^0000ff"+@dvfild1+"^000000]",dvfild1;
+
+		L_Map:
+
+			warp ""+ @map$ +"",x,y; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; end;
+			
+
+//Towns
+
+walberta:      warp "alberta", 27,     236;    set @townwarp, @townwarp + 1;end;
+waldebaran:     warp "aldebaran",       145,    120;    set @townwarp, @townwarp + 1; end;
+wamatsu:       warp "amatsu",  197,    86;     set @townwarp, @townwarp + 1; end;
+wayothaya:      warp "ayothaya",        149,    118; set @townwarp, @townwarp + 1;    end;
+wcomodo:        warp "comodo",  188,    161;   set @townwarp, @townwarp + 1; end;
+weinbroch:      warp "einbroch",        64,     200;   set @townwarp, @townwarp + 1; end;
+weinbech:      warp "einbech", 70,     95;    set @townwarp, @townwarp + 1; end;
+wgeffen:        warp "geffen",  119,    66;    set @townwarp, @townwarp + 1; end;
+wgonryun:       warp "gonryun", 150,    130;   set @townwarp, @townwarp + 1; end;
+whugel:         warp "hugel",   96,     145;   set @townwarp, @townwarp + 1; end;
+wizlude:        warp "izlude",  128,    111;   set @townwarp, @townwarp + 1; end;
+wlighthalzen:   warp "lighthalzen",     158,   92;set @townwarp, @townwarp + 1; end;
+wlouyang:       warp "louyang", 210,    108;   set @townwarp, @townwarp + 1; end;
+wmorroc:        warp "morocc",  159,    93;    set @townwarp, @townwarp + 1; end;
+wmoscovia:	warp "moscovia",	224,	192;	set @townwarp, @townwarp + 1;	end;
+wniflheim:	warp "niflheim",	21,	153;	set @townwarp, @townwarp + 1;	end;
+wprontera:      warp "prontera",        156,    187;   set @townwarp, @townwarp + 1; end;
+wpayon:         warp "payon",   152,    75;    set @townwarp, @townwarp + 1; end;
+wumbala:        warp "umbala",  130,    130;   set @townwarp, @townwarp + 1; end;
+wlutie:          warp "xmas",    148,    131;   set @townwarp, @townwarp + 1; end;
+wyuno:         warp "yuno",    160,    168;   set @townwarp, @townwarp + 1; end;
+wveins:		warp "veins",	216,	123;	set @townwarp, @townwarp + 1; end;
+
+//Dungeons
+
+dabyss:	
+	menu "Floor 1 [^0000ff"+getmapusers("abyss_01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("abyss_02")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("abyss_03")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "abyss_01",265,273; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "abyss_02",274,270; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "abyss_03",116,27; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+damatsu:
+	menu "Floor 1 [^0000ff"+getmapusers("ama_dun01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("ama_dun02")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("ama_dun03")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "ama_dun01",227,10; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "ama_dun02",32,43; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "ama_dun03",119,15; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+danthell:
+	menu "Floor 1 [^0000ff"+getmapusers("anthell01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("anthell02")+"^000000] [^66CC33"+@floor2+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "anthell01",255,70; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "anthell02",262,263; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dayothaya:
+	menu "Floor 1 [^0000ff"+getmapusers("ayo_dun01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("ayo_dun02")+"^000000] [^66CC33"+@floor2+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "ayo_dun01",275,17; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "ayo_dun02",150,13; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dbeach:
+	menu "Ruande, The northern cave [^0000ff"+getmapusers("beach_dun2")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Karu, The west cave [^0000ff"+getmapusers("beach_dun")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Mao, The east save [^0000ff"+getmapusers("beach_dun3")+"^000000] [^66CC33"+@floor2+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "beach_dun",273,68; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "beach_dun2",154,16; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor2) { goto L_Sorry; } warp "beach_dun3",23,260; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+
+dbiblian:
+	menu "Floor 1 [^0000ff"+getmapusers("iz_dun00")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("iz_dun01")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("iz_dun02")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Floor 4 [^0000ff"+getmapusers("iz_dun03")+"^000000] [^66CC33"+@floor4+"z^000000]",-,
+	"Floor 5 [^0000ff"+getmapusers("iz_dun04")+"^000000] [^66CC33"+@floor5+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "iz_dun00",168,168; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "iz_dun01",41,37; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "iz_dun02",236,204; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor4) { goto L_Sorry; } warp "iz_dun03",32,63; set Zeny, Zeny - @floor4; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 5) { if(Zeny < @floor5) { goto L_Sorry; } warp "iz_dun04",26,27; set Zeny, Zeny - @floor5; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+
+dcoal:
+	menu "Floor 1 [^0000ff"+getmapusers("mjo_dun01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("mjo_dun02")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("mjo_dun03")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "mjo_dun01",52,17; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "mjo_dun02",381,348; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "mjo_dun03",302,261; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dclocktower:
+	menu "Floor 1 [^0000ff"+getmapusers("c_tower1")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("c_tower2")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("c_tower3")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Floor 4 [^0000ff"+getmapusers("c_tower4")+"^000000] [^66CC33"+@floor4+"z^000000]",-,
+	"Basement 1 [^0000ff"+getmapusers("alde_dun01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Basement 2 [^0000ff"+getmapusers("alde_dun02")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Basement 3 [^0000ff"+getmapusers("alde_dun03")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Basement 4 [^0000ff"+getmapusers("alde_dun04")+"^000000] [^66CC33"+@floor4+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "c_tower1",200,163; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "c_tower2",268,26; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "c_tower3",64,148; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor4) { goto L_Sorry; } warp "c_tower4",32,63; set Zeny, Zeny - @floor4; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 5) { if(Zeny < @floor1) { goto L_Sorry; } warp "alde_dun01",197,25; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 6) { if(Zeny < @floor2) { goto L_Sorry; } warp "alde_dun02",262,41; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 7) { if(Zeny < @floor3) { goto L_Sorry; } warp "alde_dun03",276,53; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 8) { if(Zeny < @floor4) { goto L_Sorry; } warp "alde_dun04",122,125; set Zeny, Zeny - @floor4; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dculvert:
+	menu "Floor 1 [^0000ff"+getmapusers("prt_sewb1")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("prt_sewb2")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("prt_sewb3")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Floor 4 [^0000ff"+getmapusers("prt_sewb4")+"^000000] [^66CC33"+@floor4+"z^000000]",-;
+
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "prt_sewb1",132,248; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "prt_sewb2",19,19; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "prt_sewb3",180,169; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor4) { goto L_Sorry; } warp "prt_sewb4",100,92; set Zeny, Zeny - @floor4; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+deinbech:
+	menu "Floor 1 [^0000ff"+getmapusers("ein_dun01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("ein_dun02")+"^000000] [^66CC33"+@floor2+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "ein_dun01",22,17; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "ein_dun02",290,289; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dgeffenia:
+	menu "Floor 1 [^0000ff"+getmapusers("gefenia01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("gefenia02")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("gefenia03")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Floor 4 [^0000ff"+getmapusers("gefenia04")+"^000000] [^66CC33"+@floor4+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "gefenia01",42,103; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "gefenia02",201,35; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "gefenia03",264,236; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor4) { goto L_Sorry; } warp "gefenia04",33,270; set Zeny, Zeny - @floor4; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dgeffendungeon:
+	menu "Floor 1 [^0000ff"+getmapusers("gef_dun00")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("gef_dun01")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("gef_dun02")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Floor 4 [^0000ff"+getmapusers("gef_dun03")+"^000000] [^66CC33"+@floor4+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "gef_dun00",104,100; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "gef_dun01",115,236; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "gef_dun02",106,132; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor4) { goto L_Sorry; } warp "gef_dun03",203,200; set Zeny, Zeny - @floor4; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+
+dglast:
+	menu "Glast Heim Main [^0000ff"+getmapusers("glast_01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Glast Heim Church [^0000ff"+getmapusers("gl_church")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Churchyard [^0000ff"+getmapusers("gl_chyard")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Castle - F1 [^0000ff"+getmapusers("gl_cas01")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Castle - F2 [^0000ff"+getmapusers("gl_cas02")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Prison - F1 [^0000ff"+getmapusers("gl_prison")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Prison - F2 [^0000ff"+getmapusers("gl_prison1")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Chivalry - F1 [^0000ff"+getmapusers("gl_knt01")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Chivalry - F2 [^0000ff"+getmapusers("gl_knt02")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Inside Glast Heim [^0000ff"+getmapusers("gl_in01")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Staircase Dungeon [^0000ff"+getmapusers("gl_step")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Sewers - F1 [^0000ff"+getmapusers("gl_sew01")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Sewers - F2 [^0000ff"+getmapusers("gl_sew02")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Sewers - F3 [^0000ff"+getmapusers("gl_sew03")+"^000000] [^66CC33"+@floor4+"z^000000]",-,
+	"Sewers - F4 [^0000ff"+getmapusers("gl_sew04")+"^000000] [^66CC33"+@floor5+"z^000000]",-,
+	"Lower Dungeon - F1 [^0000ff"+getmapusers("gl_dun01")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Lower Dungeon - F2 [^0000ff"+getmapusers("gl_dun02")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "glast_01",370,300; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "gl_church",156,8; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor2) { goto L_Sorry; } warp "gl_chyard",147,15; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor2) { goto L_Sorry; } warp "gl_cas01",121,59; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 5) { if(Zeny < @floor3) { goto L_Sorry; } warp "gl_cas02",122,121; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 6) { if(Zeny < @floor2) { goto L_Sorry; } warp "gl_prison",104,25; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 7) { if(Zeny < @floor3) { goto L_Sorry; } warp "gl_prison1",150,10; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 8) { if(Zeny < @floor2) { goto L_Sorry; } warp "gl_knt01",157,287; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 9) { if(Zeny < @floor3) { goto L_Sorry; } warp "gl_knt02",184,45; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 10) { if(Zeny < @floor2) { goto L_Sorry; } warp "gl_in01",150,14; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 11) { if(Zeny < @floor2) { goto L_Sorry; } warp "gl_step",117,124; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 12) { if(Zeny < @floor2) { goto L_Sorry; } warp "gl_sew01",258,255; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 13) { if(Zeny < @floor3) { goto L_Sorry; } warp "gl_sew02",108,291; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 14) { if(Zeny < @floor4) { goto L_Sorry; } warp "gl_sew03",171,273; set Zeny, Zeny - @floor4; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 15) { if(Zeny < @floor5) { goto L_Sorry; } warp "gl_sew04",68,277; set Zeny, Zeny - @floor5; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 16) { if(Zeny < @floor2) { goto L_Sorry; } warp "gl_dun01",133,271; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 17) { if(Zeny < @floor3) { goto L_Sorry; } warp "gl_dun02",224,274; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dgonryun:
+	menu "Floor 1 [^0000ff"+getmapusers("gon_dun01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("gon_dun02")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("gon_dun03")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "gon_dun01",143,59; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "gon_dun02",17,114; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "gon_dun03",68,9; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dmaze:
+	menu "Floor 1 [^0000ff"+getmapusers("prt_maze01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("prt_maze02")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("prt_maze03")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "prt_maze01",176,6; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "prt_maze02",94,19; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "prt_maze03",23,8; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dIsland:
+	menu "Floor 1 [^0000ff"+getmapusers("lhz_dun01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("lhz_dun02")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("lhz_dun03")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Floor 4 [^0000ff"+getmapusers("lhz_dun04")+"^000000] [^66CC33"+@floor4+"z^000000]",-,
+	"Floor 5 [^0000ff"+getmapusers("lhz_dun05")+"^000000] [^66CC33"+@floor5+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "lhz_dun01",280,155; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "lhz_dun02",211,240; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "lhz_dun03",140,133; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor3) { goto L_Sorry; } warp "lhz_dun04",139,139; set Zeny, Zeny - @floor4; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 5) { if(Zeny < @floor3) { goto L_Sorry; } warp "lhz_dun05",131,264; set Zeny, Zeny - @floor5; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+d_ice:
+	menu "Floor 1 [^0000ff"+getmapusers("ice_dun01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("ice_dun02")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("ice_dun03")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "ice_dun01",157,15; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "ice_dun02",151,139; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "ice_dun03",149,24; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+djuperos:
+	menu "Floor 1 [^0000ff"+getmapusers("juperos_01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("juperos_02")+"^000000] [^66CC33"+@floor2+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "juperos_01",53,247; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "juperos_02",36,60; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	
+
+dlouyang:
+	menu "Floor 1 [^0000ff"+getmapusers("lou_dun01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("lou_dun02")+"^000000] [^66CC33"+@floor10+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("lou_dun03")+"^000000] [^66CC33"+@floor11+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "lou_dun01",217,195; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor10) { goto L_Sorry; } warp "lou_dun02",283,19; set Zeny, Zeny - @floor10; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor11) { goto L_Sorry; } warp "lou_dun03",166,39; set Zeny, Zeny - @floor11; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dmagma:
+	menu "Floor 1 [^0000ff"+getmapusers("mag_dun01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("mag_dun02")+"^000000] [^66CC33"+@floor2+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "mag_dun01",126,69; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "mag_dun02",47,32; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dmosk:
+	menu "Floor 1 [^0000ff"+getmapusers("mosk_dun01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("mosk_dun02")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("mosk_dun03")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "mosk_dun01",190,46; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "mosk_dun02",163,31; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "mosk_dun03",34,135; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dabbey:
+	menu "Floor 1 [^0000ff"+getmapusers("abbey01")+"^000000] [^66CC33"+@floor10+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("abbey02")+"^000000] [^66CC33"+@floor11+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("abbey03")+"^000000] [^66CC33"+@floor11+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor10) { goto L_Sorry; } warp "abbey01",51,12; set Zeny, Zeny - @floor10; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor11) { goto L_Sorry; } warp "abbey02",149,11; set Zeny, Zeny - @floor11; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor11) { goto L_Sorry; } warp "abbey03",119,8; set Zeny, Zeny - @floor11; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dodin:
+	menu "Floor 1 [^0000ff"+getmapusers("odin_tem01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("odin_tem02")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("odin_tem03")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "odin_tem01",96,145; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "odin_tem02",25,180; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "odin_tem03",247,38; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dorc:
+	menu "Floor 1 [^0000ff"+getmapusers("orcsdun01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("orcsdun02")+"^000000] [^66CC33"+@floor2+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "orcsdun01",133,82; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "orcsdun02",22,183; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+
+dpayon:
+	menu "Floor 1 [^0000ff"+getmapusers("pay_dun00")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("pay_dun01")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("pay_dun02")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Floor 4 [^0000ff"+getmapusers("pay_dun03")+"^000000] [^66CC33"+@floor4+"z^000000]",-,
+	"Floor 5 [^0000ff"+getmapusers("pay_dun04")+"^000000] [^66CC33"+@floor5+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "pay_dun00",22,180; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "pay_dun01",19,33; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "pay_dun02",19,63; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor4) { goto L_Sorry; } warp "pay_dun03",155,159; set Zeny, Zeny - @floor4; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 5) { if(Zeny < @floor5) { goto L_Sorry; } warp "pay_dun04",201,204; set Zeny, Zeny - @floor4; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dpkmd:
+	menu "Floor 1 [^0000ff"+getmapusers("route_01")+"^000000] [^66CC33"+@floor1+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "route_01",22,180; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dpyramid:
+	menu "Floor 1 [^0000ff"+getmapusers("moc_pryd01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("moc_pryd02")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("moc_pryd03")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Floor 4 [^0000ff"+getmapusers("moc_pryd04")+"^000000] [^66CC33"+@floor4+"z^000000]",-,
+	"Floor 5 [^0000ff"+getmapusers("moc_pryd05")+"^000000] [^66CC33"+@floor5+"z^000000]",-,
+	"Floor 6 [^0000ff"+getmapusers("moc_pryd06")+"^000000] [^66CC33"+@floor5+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "moc_pryd01",192,9; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "moc_pryd02",10,192; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "moc_pryd03",100,92; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor4) { goto L_Sorry; } warp "moc_pryd04",181,11; set Zeny, Zeny - @floor4; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 5) { if(Zeny < @floor5) { goto L_Sorry; } warp "moc_pryd05",94,96; set Zeny, Zeny - @floor5; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 6) { if(Zeny < @floor5) { goto L_Sorry; } warp "moc_pryd06",192,8; set Zeny, Zeny - @floor5; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+drachel:
+	menu "Floor 1 [^0000ff"+getmapusers("ra_san01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("ra_san02")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("ra_san03")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Floor 4 [^0000ff"+getmapusers("ra_san04")+"^000000] [^66CC33"+@floor4+"z^000000]",-,
+	"Floor 5 [^0000ff"+getmapusers("ra_san05")+"^000000] [^66CC33"+@floor5+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "ra_san01",140,19; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "ra_san02",33,21; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "ra_san03",119,283; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor4) { goto L_Sorry; } warp "ra_san04",119,108; set Zeny, Zeny - @floor4; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 5) { if(Zeny < @floor5) { goto L_Sorry; } warp "ra_san05",150,11; set Zeny, Zeny - @floor5; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dsphinx:
+	menu "Floor 1 [^0000ff"+getmapusers("in_sphinx1")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("in_sphinx2")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("in_sphinx3")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Floor 4 [^0000ff"+getmapusers("in_sphinx4")+"^000000] [^66CC33"+@floor4+"z^000000]",-,
+	"Floor 5 [^0000ff"+getmapusers("in_sphinx5")+"^000000] [^66CC33"+@floor5+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "in_sphinx1",192,9; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "in_sphinx2",149,81; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "in_sphinx3",210,54; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor4) { goto L_Sorry; } warp "in_sphinx4",10,222; set Zeny, Zeny - @floor4; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 5) { if(Zeny < @floor5) { goto L_Sorry; } warp "in_sphinx5",100,99; set Zeny, Zeny - @floor5; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dsunken:
+	menu "Floor 1 [^0000ff"+getmapusers("alb2trea")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("treasure01")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("treasure02")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "alb2trea",41,50; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "treasure01",69,24; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "treasure02",102,27; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dthana:
+	menu "Thana Entrance [^0000ff"+getmapusers("tha_scene01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 1 [^0000ff"+getmapusers("tha_t01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("tha_t02")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("tha_t03")+"^000000] [^66CC33"+@floor4+"z^000000]",-,
+	"Floor 4 [^0000ff"+getmapusers("tha_t04")+"^000000] [^66CC33"+@floor5+"z^000000]",-,
+	"Floor 5 [^0000ff"+getmapusers("tha_t05")+"^000000] [^66CC33"+@floor6+"z^000000]",-,
+	"Floor 6 [^0000ff"+getmapusers("tha_t06")+"^000000] [^66CC33"+@floor7+"z^000000]",-,
+	"Floor 7 [^0000ff"+getmapusers("tha_t07")+"^000000] [^66CC33"+@floor8+"z^000000]",-,
+	"Floor 8 [^0000ff"+getmapusers("tha_t08")+"^000000] [^66CC33"+@floor9+"z^000000]",-,
+	"Floor 9 [^0000ff"+getmapusers("tha_t09")+"^000000] [^66CC33"+@floor9+"z^000000]",-,
+	"Floor 10 [^0000ff"+getmapusers("tha_t10")+"^000000] [^66CC33"+@floor10+"z^000000]",-,
+	"Floor 11 [^0000ff"+getmapusers("tha_t11")+"^000000] [^66CC33"+@floor10+"z^000000]",-,
+	"Floor 12 [^0000ff"+getmapusers("tha_t12")+"^000000] [^66CC33"+@floor11+"z^000000]",-,
+	"Boss Level [^0000ff"+getmapusers("thana_boss")+"^000000] [^66CC33"+@floor11+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "tha_scene01",131,221; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor1) { goto L_Sorry; } warp "tha_t01",150,35; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor2) { goto L_Sorry; } warp "tha_t02",150,136; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor4) { goto L_Sorry; } warp "tha_t03",220,158; set Zeny, Zeny - @floor4; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 5) { if(Zeny < @floor5) { goto L_Sorry; } warp "tha_t04",59,143; set Zeny, Zeny - @floor5; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 6) { if(Zeny < @floor6) { goto L_Sorry; } warp "tha_t05",62,11; set Zeny, Zeny - @floor6; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 7) { if(Zeny < @floor7) { goto L_Sorry; } warp "tha_t06",206,8; set Zeny, Zeny - @floor7; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 8) { if(Zeny < @floor8) { goto L_Sorry; } warp "tha_t07",35,166; set Zeny, Zeny - @floor8; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 9) { if(Zeny < @floor9) { goto L_Sorry; } warp "tha_t08",105,44; set Zeny, Zeny - @floor9; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 10) { if(Zeny < @floor9) { goto L_Sorry; } warp "tha_t09",88,145; set Zeny, Zeny - @floor9; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 11) { if(Zeny < @floor10) { goto L_Sorry; } warp "tha_t10",168,138; set Zeny, Zeny - @floor10; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 12) { if(Zeny < @floor10) { goto L_Sorry; } warp "tha_t11",90,36; set Zeny, Zeny - @floor10; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 13) { if(Zeny < @floor11) { goto L_Sorry; } warp "tha_t12",129,83; set Zeny, Zeny - @floor11; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 14) { if(Zeny < @floor11) { goto L_Sorry; } warp "thana_boss",85,76; set Zeny, Zeny - @floor11; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dthor:
+	menu "Floor 1 [^0000ff"+getmapusers("thor_v01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("thor_v02")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("thor_v03")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "thor_v01",21,229; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "thor_v02",78,203; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "thor_v03",35,262; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dtoy:
+	menu "Floor 1 [^0000ff"+getmapusers("xmas_dun01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("xmas_dun02")+"^000000] [^66CC33"+@floor2+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "xmas_dun01",205,16; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "xmas_dun02",129,133; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dturtle:
+	menu "Floor 1 [^0000ff"+getmapusers("tur_dun01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("tur_dun02")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("tur_dun03")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Floor 4 [^0000ff"+getmapusers("tur_dun04")+"^000000] [^66CC33"+@floor4+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "tur_dun01",161,34; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "tur_dun02",148,256; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "tur_dun03",132,190; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor4) { goto L_Sorry; } warp "tur_dun04",100,192; set Zeny, Zeny - @floor4; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dumbala:
+	menu "Floor 1 [^0000ff"+getmapusers("um_dun01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("um_dun02")+"^000000] [^66CC33"+@floor2+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "um_dun01",205,26; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "um_dun02",48,30; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dsplendide:
+	menu "Floor 1 [^0000ff"+(getmapusers("spl_fld01")+1)+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("spl_fild02")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("spl_fild03")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "spl_fild01",24,339; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "spl_fild02",9,350; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "spl_fild03",93,370; set Zeny, Zeny - @floor3; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+dmanuk:
+	menu "Floor 1 [^0000ff"+getmapusers("man_fild01")+"^000000] [^66CC33"+@floor1+"z^000000]",-,
+	"Floor 2 [^0000ff"+getmapusers("man_fild02")+"^000000] [^66CC33"+@floor2+"z^000000]",-,
+	"Floor 3 [^0000ff"+getmapusers("man_fild03")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor1) { goto L_Sorry; } warp "man_fild01",36,240; set Zeny, Zeny - @floor1; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor2) { goto L_Sorry; } warp "man_fild02",36,262; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor2) { goto L_Sorry; } warp "man_fild03",81,364; set Zeny, Zeny - @floor2; set @dungeonwarp, @dungeonwarp + 1; getmapxy(@map$,x,y,0); end; }
+
+//Fields
+drunfild1:
+	menu "Field 1 [^0000ff"+getmapusers("ra_fild01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 2 [^0000ff"+getmapusers("ra_fild02.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 3 [^0000ff"+getmapusers("ra_fild03.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 4 [^0000ff"+getmapusers("ra_fild04.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 5 [^0000ff"+getmapusers("ra_fild05.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 6 [^0000ff"+getmapusers("ra_fild06.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 7 [^0000ff"+getmapusers("ra_fild07.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 8 [^0000ff"+getmapusers("ra_fild08.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 9 [^0000ff"+getmapusers("ra_fild09.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 10 [^0000ff"+getmapusers("ra_fild10.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 11 [^0000ff"+getmapusers("ra_fild11.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 12 [^0000ff"+getmapusers("ra_fild12.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 13 [^0000ff"+getmapusers("ra_fild13.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "ra_fild01.gat",192,162; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor3) { goto L_Sorry; } warp "ra_fild02.gat",235,166; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "ra_fild03.gat",202,206; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor3) { goto L_Sorry; } warp "ra_fild04.gat",202,208; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 5) { if(Zeny < @floor3) { goto L_Sorry; } warp "ra_fild05.gat",225,202; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 6) { if(Zeny < @floor3) { goto L_Sorry; } warp "ra_fild06.gat",202,214; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 7) { if(Zeny < @floor3) { goto L_Sorry; } warp "ra_fild07.gat",263,196; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 8) { if(Zeny < @floor3) { goto L_Sorry; } warp "ra_fild08.gat",217,201; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 9) { if(Zeny < @floor3) { goto L_Sorry; } warp "ra_fild09.gat",87,121; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 10) { if(Zeny < @floor3) { goto L_Sorry; } warp "ra_fild10.gat",277,181; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 11) { if(Zeny < @floor3) { goto L_Sorry; } warp "ra_fild11.gat",221,185; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 12) { if(Zeny < @floor3) { goto L_Sorry; } warp "ra_fild12.gat",175,200; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 13) { if(Zeny < @floor3) { goto L_Sorry; } warp "ra_fild13.gat",174,197; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+dgeffild00:
+	menu "Field 0 [^0000ff"+getmapusers("gef_fild00.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 1 [^0000ff"+getmapusers("gef_fild01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 2 [^0000ff"+getmapusers("gef_fild02.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 3 [^0000ff"+getmapusers("gef_fild03.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 4 [^0000ff"+getmapusers("gef_fild04.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 5 [^0000ff"+getmapusers("gef_fild05.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 6 [^0000ff"+getmapusers("gef_fild06.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 7 [^0000ff"+getmapusers("gef_fild07.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 8 [^0000ff"+getmapusers("gef_fild08.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 9 [^0000ff"+getmapusers("gef_fild09.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 10 [^0000ff"+getmapusers("gef_fild10.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 11 [^0000ff"+getmapusers("gef_fild11.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 12 [^0000ff"+getmapusers("gef_fild12.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 13 [^0000ff"+getmapusers("gef_fild13.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 12 [^0000ff"+getmapusers("gef_fild14.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "gef_fild00.gat",46,199; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor3) { goto L_Sorry; } warp "gef_fild01.gat",213,204; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "gef_fild02.gat",195,212; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor3) { goto L_Sorry; } warp "gef_fild03.gat",257,192; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end;  }
+	if(@menu == 5) { if(Zeny < @floor3) { goto L_Sorry; } warp "gef_fild04.gat",188,171; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 6) { if(Zeny < @floor3) { goto L_Sorry; } warp "gef_fild05.gat",166,263; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 7) { if(Zeny < @floor3) { goto L_Sorry; } warp "gef_fild06.gat",248,158; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 8) { if(Zeny < @floor3) { goto L_Sorry; } warp "gef_fild07.gat",195,191; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 9) { if(Zeny < @floor3) { goto L_Sorry; } warp "gef_fild08.gat",186,183; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 10) { if(Zeny < @floor3) { goto L_Sorry; } warp "gef_fild09.gat",221,117; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 11) { if(Zeny < @floor3) { goto L_Sorry; } warp "gef_fild10.gat",178,218; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 12) { if(Zeny < @floor3) { goto L_Sorry; } warp "gef_fild11.gat",136,328; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 13) { if(Zeny < @floor3) { goto L_Sorry; } warp "gef_fild12.gat",240,181; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 14) { if(Zeny < @floor3) { goto L_Sorry; } warp "gef_fild13.gat",235,235; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 15) { if(Zeny < @floor3) { goto L_Sorry; } warp "gef_fild14.gat",211,185; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+dmjolnir1:
+	menu "Field 1 [^0000ff"+getmapusers("mjolnir_01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 2 [^0000ff"+getmapusers("mjolnir_02.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 3 [^0000ff"+getmapusers("mjolnir_03.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 4 [^0000ff"+getmapusers("mjolnir_04.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 5 [^0000ff"+getmapusers("mjolnir_05.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 6 [^0000ff"+getmapusers("mjolnir_06.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 7 [^0000ff"+getmapusers("mjolnir_07.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 8 [^0000ff"+getmapusers("mjolnir_08.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 9 [^0000ff"+getmapusers("mjolnir_09.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 10 [^0000ff"+getmapusers("mjolnir_10.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 11 [^0000ff"+getmapusers("mjolnir_11.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 12 [^0000ff"+getmapusers("mjolnir_12.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "mjolnir_01.gat",204,120; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor3) { goto L_Sorry; } warp "mjolnir_02.gat",175,193; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "mjolnir_03.gat",208,213; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor3) { goto L_Sorry; } warp "mjolnir_04.gat",179,180; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 5) { if(Zeny < @floor3) { goto L_Sorry; } warp "mjolnir_05.gat",181,240; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 6) { if(Zeny < @floor3) { goto L_Sorry; } warp "mjolnir_06.gat",195,270; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 7) { if(Zeny < @floor3) { goto L_Sorry; } warp "mjolnir_07.gat",235,202; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 8) { if(Zeny < @floor3) { goto L_Sorry; } warp "mjolnir_08.gat",188,215; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 9) { if(Zeny < @floor3) { goto L_Sorry; } warp "mjolnir_09.gat",205,144; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 10) { if(Zeny < @floor3) { goto L_Sorry; } warp "mjolnir_10.gat",245,223; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 11) { if(Zeny < @floor3) { goto L_Sorry; } warp "mjolnir_11.gat",180,206; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 12) { if(Zeny < @floor3) { goto L_Sorry; } warp "mjolnir_12.gat",196,208; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+dmosc1:
+	menu "Field 1 [^0000ff"+getmapusers("mosk_fild01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 2 [^0000ff"+getmapusers("mosk_fild02.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "mosk_fild01.gat",99,105; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor3) { goto L_Sorry; } warp "mosk_fild02.gat",204,59; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+dmocfild1:
+	menu "Field 1 [^0000ff"+getmapusers("moc_fild01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 2 [^0000ff"+getmapusers("moc_fild02.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 3 [^0000ff"+getmapusers("moc_fild03.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 4 [^0000ff"+(getmapusers("moc_fild04.gat")+1)+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 5 [^0000ff"+(getmapusers("moc_fild05.gat")+1)+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 6 [^0000ff"+(getmapusers("moc_fild06.gat")+1)+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 7 [^0000ff"+getmapusers("moc_fild07.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 8 [^0000ff"+(getmapusers("moc_fild08.gat")+1)+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 9 [^0000ff"+(getmapusers("moc_fild09.gat")+1)+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 10 [^0000ff"+(getmapusers("moc_fild10.gat")+1)+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 11 [^0000ff"+getmapusers("moc_fild11.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 12 [^0000ff"+getmapusers("moc_fild12.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 13 [^0000ff"+getmapusers("moc_fild13.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 14 [^0000ff"+(getmapusers("moc_fild14.gat")+1)+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 15 [^0000ff"+(getmapusers("moc_fild15.gat")+1)+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 16 [^0000ff"+getmapusers("moc_fild16.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 17 [^0000ff"+getmapusers("moc_fild17.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 18 [^0000ff"+getmapusers("moc_fild18.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 19 [^0000ff"+getmapusers("moc_fild19.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "moc_fild01.gat",219,205; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor3) { goto L_Sorry; } warp "moc_fild02.gat",177,206; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "moc_fild03.gat",194,182; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor3) { goto L_Sorry; } warp "moc_fild04.gat",184,217; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 5) { if(Zeny < @floor3) { goto L_Sorry; } warp "moc_fild05.gat",203,213; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 6) { if(Zeny < @floor3) { goto L_Sorry; } warp "moc_fild06.gat",213,208; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 7) { if(Zeny < @floor3) { goto L_Sorry; } warp "moc_fild07.gat",224,170; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 8) { if(Zeny < @floor3) { goto L_Sorry; } warp "moc_fild08.gat",229,177; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 9) { if(Zeny < @floor3) { goto L_Sorry; } warp "moc_fild09.gat",195,198; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 10) { if(Zeny < @floor3) { goto L_Sorry; } warp "moc_fild10.gat",209,168; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 11) { if(Zeny < @floor3) { goto L_Sorry; } warp "moc_fild11.gat",198,216; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 12) { if(Zeny < @floor3) { goto L_Sorry; } warp "moc_fild12.gat",156,187; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 13) { if(Zeny < @floor3) { goto L_Sorry; } warp "moc_fild13.gat",185,263; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 14) { if(Zeny < @floor3) { goto L_Sorry; } warp "moc_fild14.gat",209,219; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 15) { if(Zeny < @floor3) { goto L_Sorry; } warp "moc_fild15.gat",223,188; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 16) { if(Zeny < @floor3) { goto L_Sorry; } warp "moc_fild16.gat",206,228; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 17) { if(Zeny < @floor3) { goto L_Sorry; } warp "moc_fild17.gat",208,238; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 18) { if(Zeny < @floor3) { goto L_Sorry; } warp "moc_fild18.gat",209,223; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 19) { if(Zeny < @floor3) { goto L_Sorry; } warp "moc_fild19.gat",85,97; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+dpayfild1:
+	menu "Field 1 [^0000ff"+getmapusers("pay_fild01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 2 [^0000ff"+getmapusers("pay_fild02.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 3 [^0000ff"+getmapusers("pay_fild03.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 4 [^0000ff"+getmapusers("pay_fild04.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 5 [^0000ff"+getmapusers("pay_fild05.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 6 [^0000ff"+getmapusers("pay_fild06.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 7 [^0000ff"+getmapusers("pay_fild07.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 8 [^0000ff"+getmapusers("pay_fild08.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 9 [^0000ff"+getmapusers("pay_fild09.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 10 [^0000ff"+getmapusers("pay_fild10.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 11 [^0000ff"+getmapusers("pay_fild11.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "pay_fild01.gat",158,206; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor3) { goto L_Sorry; } warp "pay_fild02.gat",151,219; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "pay_fild03.gat",205,148; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor3) { goto L_Sorry; } warp "pay_fild04.gat",186,247; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 5) { if(Zeny < @floor3) { goto L_Sorry; } warp "pay_fild05.gat",134,204; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 6) { if(Zeny < @floor3) { goto L_Sorry; } warp "pay_fild06.gat",193,235; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 7) { if(Zeny < @floor3) { goto L_Sorry; } warp "pay_fild07.gat",200,177; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 8) { if(Zeny < @floor3) { goto L_Sorry; } warp "pay_fild08.gat",137,189; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 9) { if(Zeny < @floor3) { goto L_Sorry; } warp "pay_fild09.gat",201,224; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 10) { if(Zeny < @floor3) { goto L_Sorry; } warp "pay_fild10.gat",160,205; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 11) { if(Zeny < @floor3) { goto L_Sorry; } warp "pay_fild11.gat",194,150; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+dprtfild0:
+	menu "Field 0 [^0000ff"+getmapusers("prt_fild00.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 1 [^0000ff"+getmapusers("prt_fild01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 2 [^0000ff"+getmapusers("prt_fild02.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 3 [^0000ff"+getmapusers("prt_fild03.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 4 [^0000ff"+getmapusers("prt_fild04.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 5 [^0000ff"+getmapusers("prt_fild05.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 6 [^0000ff"+getmapusers("prt_fild06.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 7 [^0000ff"+getmapusers("prt_fild07.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 8 [^0000ff"+getmapusers("prt_fild08.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 9 [^0000ff"+getmapusers("prt_fild09.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 10 [^0000ff"+getmapusers("prt_fild10.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 11 [^0000ff"+getmapusers("prt_fild11.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "prt_fild00.gat",184,235; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor3) { goto L_Sorry; } warp "prt_fild01.gat",190,206; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "prt_fild02.gat",240,206; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor3) { goto L_Sorry; } warp "prt_fild03.gat",190,143; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 5) { if(Zeny < @floor3) { goto L_Sorry; } warp "prt_fild04.gat",307,252; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 6) { if(Zeny < @floor3) { goto L_Sorry; } warp "prt_fild05.gat",239,213; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 7) { if(Zeny < @floor3) { goto L_Sorry; } warp "prt_fild06.gat",185,188; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 8) { if(Zeny < @floor3) { goto L_Sorry; } warp "prt_fild07.gat",193,194; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end;  }
+	if(@menu == 9) { if(Zeny < @floor3) { goto L_Sorry; } warp "prt_fild08.gat",187,218; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 10) { if(Zeny < @floor3) { goto L_Sorry; } warp "prt_fild09.gat",210,183; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 11) { if(Zeny < @floor3) { goto L_Sorry; } warp "prt_fild10.gat",195,149; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 12) { if(Zeny < @floor3) { goto L_Sorry; } warp "prt_fild11.gat",198,164; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+dxmasfild1:
+	menu "Field 1 [^0000ff"+getmapusers("xmas_fild01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "xmas_fild01.gat",115,145; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+dcmdfild1:
+	menu "Field 1 [^0000ff"+getmapusers("cmd_fild01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 2 [^0000ff"+getmapusers("cmd_fild02.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 3 [^0000ff"+getmapusers("cmd_fild03.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 4 [^0000ff"+getmapusers("cmd_fild04.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 5 [^0000ff"+getmapusers("cmd_fild05.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 6 [^0000ff"+getmapusers("cmd_fild06.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 7 [^0000ff"+getmapusers("cmd_fild07.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 8 [^0000ff"+getmapusers("cmd_fild08.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 9 [^0000ff"+getmapusers("cmd_fild09.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "cmd_fild01.gat",180,178; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor3) { goto L_Sorry; } warp "cmd_fild02.gat",231,160; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "cmd_fild03.gat",191,172; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor3) { goto L_Sorry; } warp "cmd_fild04.gat",228,194; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 5) { if(Zeny < @floor3) { goto L_Sorry; } warp "cmd_fild05.gat",224,203; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 6) { if(Zeny < @floor3) { goto L_Sorry; } warp "cmd_fild06.gat",190,223; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 7) { if(Zeny < @floor3) { goto L_Sorry; } warp "cmd_fild07.gat",234,177; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 8) { if(Zeny < @floor3) { goto L_Sorry; } warp "cmd_fild08.gat",194,175; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 9) { if(Zeny < @floor3) { goto L_Sorry; } warp "cmd_fild09.gat",172,172; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+dyunofild1:
+	menu "Field 1 [^0000ff"+getmapusers("yuno_fild01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 2 [^0000ff"+getmapusers("yuno_fild02.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 3 [^0000ff"+getmapusers("yuno_fild03.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 4 [^0000ff"+getmapusers("yuno_fild04.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 5 [^0000ff"+getmapusers("yuno_fild05.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 6 [^0000ff"+getmapusers("yuno_fild06.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 7 [^0000ff"+getmapusers("yuno_fild07.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 8 [^0000ff"+getmapusers("yuno_fild08.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 9 [^0000ff"+getmapusers("yuno_fild09.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 10 [^0000ff"+getmapusers("yuno_fild10.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 11 [^0000ff"+getmapusers("yuno_fild11.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 12 [^0000ff"+getmapusers("yuno_fild12.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "yuno_fild01.gat",189,224; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor3) { goto L_Sorry; } warp "yuno_fild02.gat",192,207; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "yuno_fild03.gat",221,157; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor3) { goto L_Sorry; } warp "yuno_fild04.gat",226,199; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 5) { if(Zeny < @floor3) { goto L_Sorry; } warp "yuno_fild05.gat",223,177; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 6) { if(Zeny < @floor3) { goto L_Sorry; } warp "yuno_fild06.gat",187,232; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 7) { if(Zeny < @floor3) { goto L_Sorry; } warp "yuno_fild07.gat",231,174; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 8) { if(Zeny < @floor3) { goto L_Sorry; } warp "yuno_fild08.gat",196,203; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 9) { if(Zeny < @floor3) { goto L_Sorry; } warp "yuno_fild09.gat",183,214; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end;  }
+	if(@menu == 10) { if(Zeny < @floor3) { goto L_Sorry; } warp "yuno_fild10.gat",200,124; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 11) { if(Zeny < @floor3) { goto L_Sorry; } warp "yuno_fild11.gat",195,226; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 12) { if(Zeny < @floor3) { goto L_Sorry; } warp "yuno_fild12.gat",210,304; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+damafild1:
+	menu "Field 1 [^0000ff"+getmapusers("ama_fild01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "ama_fild01.gat",190,197; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+dgonfild1:
+	menu "Field 1 [^0000ff"+getmapusers("gon_fild01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "gon_fild01.gat",220,227; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+dumfild1:
+	menu "Field 1 [^0000ff"+getmapusers("um_fild01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 2 [^0000ff"+getmapusers("um_fild02.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 3 [^0000ff"+getmapusers("um_fild03.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 4 [^0000ff"+getmapusers("um_fild04.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "um_fild01.gat",217,206; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor3) { goto L_Sorry; } warp "um_fild02.gat",223,221; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "um_fild03.gat",237,215; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor3) { goto L_Sorry; } warp "um_fild04.gat",202,197; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+dniffild1:
+	menu "Field 1 [^0000ff"+getmapusers("nif_fild01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 2 [^0000ff"+getmapusers("nif_fild02.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "nif_fild01.gat",215,229; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor3) { goto L_Sorry; } warp "nif_fild02.gat",167,234; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+dyggdrasil1:
+	menu "Field 1 [^0000ff"+getmapusers("yggdrasil01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "yggdrasil01.gat",204,78; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+dloufild1:
+	menu "Field 1 [^0000ff"+getmapusers("lou_fild01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "lou_fild01.gat",229,187; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+dayofild1:
+	menu "Field 1 [^0000ff"+getmapusers("ayo_fild01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 2 [^0000ff"+getmapusers("ayo_fild02.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "ayo_fild01.gat",173,134; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor3) { goto L_Sorry; } warp "ayo_fild02.gat",212,150; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+deinfild1:
+	menu "Field 1 [^0000ff"+getmapusers("ein_fild01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 2 [^0000ff"+getmapusers("ein_fild02.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 3 [^0000ff"+getmapusers("ein_fild03.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 4 [^0000ff"+getmapusers("ein_fild04.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 5 [^0000ff"+getmapusers("ein_fild05.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 6 [^0000ff"+getmapusers("ein_fild06.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 7 [^0000ff"+getmapusers("ein_fild07.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 8 [^0000ff"+getmapusers("ein_fild08.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 9 [^0000ff"+getmapusers("ein_fild09.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 10 [^0000ff"+getmapusers("ein_fild10.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "ein_fild01.gat",142,225; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor3) { goto L_Sorry; } warp "ein_fild02.gat",182,141; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "ein_fild03.gat",187,228; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 4) { if(Zeny < @floor3) { goto L_Sorry; } warp "ein_fild04.gat",185,173; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 5) { if(Zeny < @floor3) { goto L_Sorry; } warp "ein_fild05.gat",216,173; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 6) { if(Zeny < @floor3) { goto L_Sorry; } warp "ein_fild06.gat",195,148; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 7) { if(Zeny < @floor3) { goto L_Sorry; } warp "ein_fild07.gat",272,220; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 8) { if(Zeny < @floor3) { goto L_Sorry; } warp "ein_fild08.gat",173,214; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 9) { if(Zeny < @floor3) { goto L_Sorry; } warp "ein_fild09.gat",207,174; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 10) { if(Zeny < @floor3) { goto L_Sorry; } warp "ein_fild10.gat",196,200; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+dlhzfild1:
+	menu "Field 1 [^0000ff"+getmapusers("lhz_fild01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 2 [^0000ff"+getmapusers("lhz_fild02.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 3 [^0000ff"+getmapusers("lhz_fild03.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "lhz_fild01.gat",240,179; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor3) { goto L_Sorry; } warp "lhz_fild02.gat",185,235; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "lhz_fild03.gat",240,226; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+dhufild1:
+	menu "Field 1 [^0000ff"+getmapusers("hu_fild01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 2 [^0000ff"+getmapusers("hu_fild02.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 3 [^0000ff"+getmapusers("hu_fild03.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 4 [^0000ff"+getmapusers("hu_fild04.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 5 [^0000ff"+getmapusers("hu_fild05.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 6 [^0000ff"+getmapusers("hu_fild06.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 7 [^0000ff"+getmapusers("hu_fild07.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "hu_fild01.gat",268,101; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor3) { goto L_Sorry; } warp "hu_fild02.gat",222,193; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "hu_fild03.gat",232,185; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end;  }
+	if(@menu == 4) { if(Zeny < @floor3) { goto L_Sorry; } warp "hu_fild04.gat",252,189; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 5) { if(Zeny < @floor3) { goto L_Sorry; } warp "hu_fild05.gat",196,106; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 6) { if(Zeny < @floor3) { goto L_Sorry; } warp "hu_fild06.gat",216,220; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 7) { if(Zeny < @floor3) { goto L_Sorry; } warp "hu_fild07.gat",227,197; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+wodtemp1:
+	menu "Temple 1 [^0000ff"+getmapusers("odin_tem01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Temple 2 [^0000ff"+getmapusers("odin_tem02.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Temple 3 [^0000ff"+getmapusers("odin_tem03.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "odin_tem01.gat",298,167; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 2) { if(Zeny < @floor3) { goto L_Sorry; } warp "odin_tem02.gat",224,149; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "odin_tem03.gat",266,280; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+dvfild1:
+	menu "Field 1 [^0000ff"+getmapusers("ve_fild01.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 2 [^0000ff"+getmapusers("ve_fild02.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 3 [^0000ff"+getmapusers("ve_fild03.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 4 [^0000ff"+getmapusers("ve_fild04.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 5 [^0000ff"+getmapusers("ve_fild05.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 6 [^0000ff"+getmapusers("ve_fild06.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-,
+	"Field 7 [^0000ff"+getmapusers("ve_fild07.gat")+"^000000] [^66CC33"+@floor3+"z^000000]",-;
+	if(@menu == 1) { if(Zeny < @floor3) { goto L_Sorry; } warp "ve_fild01.gat",186,175; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end;  }
+	if(@menu == 2) { if(Zeny < @floor3) { goto L_Sorry; } warp "ve_fild02.gat",196,370; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 3) { if(Zeny < @floor3) { goto L_Sorry; } warp "ve_fild03.gat",222,45; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end;  }
+	if(@menu == 4) { if(Zeny < @floor3) { goto L_Sorry; } warp "ve_fild04.gat",51,250; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 5) { if(Zeny < @floor3) { goto L_Sorry; } warp "ve_fild05.gat",202,324; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 6) { if(Zeny < @floor3) { goto L_Sorry; } warp "ve_fild06.gat",150,223; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+	if(@menu == 7) { if(Zeny < @floor3) { goto L_Sorry; } warp "ve_fild07.gat",149,307; set Zeny, Zeny - @floor3; set @fieldwarp, @fieldwarp + 1; getmapxy(@map$,x,y,0); end; }
+}
+
+//----------------Towns----------------\\
+prontera,158,193,4	duplicate(Warp Agent#01)	Warp Agent#02	859
+alberta,31,240,4	duplicate(Warp Agent#01)	Warp Agent#03	859
+aldebaran,145,118,4	duplicate(Warp Agent#01)	Warp Agent#04	859
+amatsu,192,81,1	duplicate(Warp Agent#01)	Warp Agent#05	859
+ayothaya,144,117,6	duplicate(Warp Agent#01)	Warp Agent#06	859
+comodo,194,158,4	duplicate(Warp Agent#01)	Warp Agent#07	859
+einbroch,59,205,4	duplicate(Warp Agent#01)	Warp Agent#08	859
+einbroch,243,189,2	duplicate(Warp Agent#01)	Warp Agent#09	859
+einbech,135,249,4	duplicate(Warp Agent#01)	Warp Agent#10	859
+geffen,124,68,4	duplicate(Warp Agent#01)	Warp Agent#11	859
+gonryun,151,130,4	duplicate(Warp Agent#01)	Warp Agent#12	859
+izlude,133,117,4	duplicate(Warp Agent#01)	Warp Agent#13	859
+hugel,88,151,5	duplicate(Warp Agent#01)	Warp Agent#14	859
+lighthalzen,155,79,6	duplicate(Warp Agent#01)	Warp Agent#15	859
+louyang,210,106,4	duplicate(Warp Agent#01)	Warp Agent#16	859
+morocc,154,97,4	duplicate(Warp Agent#01)	Warp Agent#17	859
+payon,182,110,4	duplicate(Warp Agent#01)	Warp Agent#18	859
+umbala,132,130,4	duplicate(Warp Agent#01)	Warp Agent#19	859
+xmas,150,136,4	duplicate(Warp Agent#01)	Warp Agent#20	859
+yuno,137,162,4	duplicate(Warp Agent#01)	Warp Agent#21	859
+
+
+//----------------Dungeons----------------\\
+ama_dun01,233,9,1	duplicate(Warp Agent#01)	Warp Agent#23	859
+moc_fild04,207,331,4	duplicate(Warp Agent#01)	Warp Agent#24	859
+ayo_fild02,279,154,4	duplicate(Warp Agent#01)	Warp Agent#25	859
+izlu2dun,104,82,4	duplicate(Warp Agent#01)	Warp Agent#26	859
+prt_sewb1,125,253,4	duplicate(Warp Agent#01)	Warp Agent#27	859
+mjolnir_02,85,363,4	duplicate(Warp Agent#01)	Warp Agent#28	859
+einbech,81,101,1	duplicate(Warp Agent#01)	Warp Agent#29	859
+glast_01,370,308,4	duplicate(Warp Agent#01)	Warp Agent#30	859
+yuno_fild03,37,135,4	duplicate(Warp Agent#01)	Warp Agent#31	859
+niflheim,32,161,4	duplicate(Warp Agent#01)	Warp Agent#32	859
+gef_fild10,71,339,4	duplicate(Warp Agent#01)	Warp Agent#33	859
+pay_arche,39,135,4	duplicate(Warp Agent#01)	Warp Agent#34	859
+moc_ruins,64,166,4	duplicate(Warp Agent#01)	Warp Agent#35	859
+moc_fild19,106,97,4	duplicate(Warp Agent#01)	Warp Agent#36	859
+alb2trea,73,101,4	duplicate(Warp Agent#01)	Warp Agent#37	859
+tur_dun01,148,239,4	duplicate(Warp Agent#01)	Warp Agent#38	859
+lhz_dun01,157,285,4	duplicate(Warp Agent#01)	Warp Agent#39	859
+hu_fild05,186,210,4	duplicate(Warp Agent#01)	Warp Agent#40	859
+yuno_fild07,221,179,4	duplicate(Warp Agent#01)	Warp Agent#41	859
+tha_scene01,139,194,1	duplicate(Warp Agent#01)	Warp Agent#42	859
+odin_tem01,96,149,4	duplicate(Warp Agent#01)	Warp Agent#43	859
+prt_vilg00,92,97,6	duplicate(Warp Agent#01)	Warp Agent#44	859
+

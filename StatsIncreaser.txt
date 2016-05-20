@@ -1,0 +1,16 @@
+prontera,154,174,5	script	YourNPC	100,{
+setarray .@slots$[1],"Str","Agi","Vit","Int","Dex","Luk","Cancel";
+for(set .@a,1; .@a<getarraysize(.@slots$); set .@a,.@a+1){
+set .@menu$,.@menu$+.@slots$[.@a]+((.@a!=(getarraysize(.@slots$)-1))?" ("+readparam((12+.@a))+")":"")+":";
+}
+mes "[YourNPC]";
+mes "Select the stat to be changed.";
+if(select(.@menu$)){
+if(@menu!=(getarraysize(.@slots$)-1)){
+statusup2 (12+@menu),(readparam((12+@menu))*-1);
+atcommand "@"+.@slots$[@menu]+" 998";
+mes .@slots$[@menu]+" has increased to "+readparam((12+@menu));
+}
+close;
+}
+}

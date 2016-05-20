@@ -1,0 +1,29 @@
+-	shop	custom_seller2	-1,501:20
+prontera.gat,95,99,5	script	WoE Shop	100,{
+mes "I will sell you items for " + getitemname(.CoinID) + ".";
+callshop "custom_seller2",1;
+npcshopattach "custom_seller2";
+end;
+OnBuyItem:
+for(set @i,0; @i<getarraysize(.customs); set @i,@i+1) {
+for(set @d,0; @d<getarraysize(@bought_nameid); set @d,@d+1){
+if(@bought_nameid[@d]==.customs[@i]){
+if(countitem(.CoinID) >= .Price[@i]*@bought_quantity[@d]) {
+	delitem .CoinID,.Price[@i]*@bought_quantity[@d];
+	getitem @bought_nameid[@d],@bought_quantity[@d];
+}
+}
+}
+}
+deletearray @bought_quantity, getarraysize(@bought_quantity);
+deletearray @bought_nameid, getarraysize(@bought_nameid);
+close;
+
+OnInit:
+setarray .customs[0],12103,607,678;// Enter the ID of customs here
+set .CoinID,7227; // Enter the ID of the coin here.
+setarray .Price[0],20,40,300; // Price for each custom is set to 20 coins
+npcshopitem "custom_seller2",0,0; // Don't touch any coding beyond here
+for(set .i,0; .customs[.i]; set .i,.i+1) npcshopadditem "custom_seller2",.customs[.i],.Price[.i];
+end;
+}

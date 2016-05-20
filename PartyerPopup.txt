@@ -1,0 +1,64 @@
+//By Skorm
+//guild_vs2,50,50,5	script	Party-Summoner	100,{
+-	script	Party-Summoner	-1,{
+OnWhisperGlobal:
+//if(countitem(7929)<10){ mes "I'm sorry you need 10 "+getitemname(7929)+" to use this npc.";}
+mes "Would you like me to summon your party memebers?";
+if(select("Yes:No")-1) close;
+set $s,0; set $ss,0; set $@sss,0;
+deletearray $@partymemberaid[0],128;
+getpartymember getcharid(1),2;
+//set $@maps$,strcharinfo(3);
+getmapxy($@map$,$@x,$@y,0);
+attachnpctimer;
+startnpctimer;
+close2;
+L_Recall:
+if($s<=$@partymembercount)
+	callfunc "PartyWarper",$@map$,$@partymemberaid[$s],$@x,$@y;
+end;
+OnTimer1000:
+OnTimer2000:
+OnTimer3000:
+OnTimer4000:
+OnTimer5000:
+OnTimer6000:
+OnTimer7000:
+OnTimer8000:
+OnTimer9000:
+set $@sss,1;
+//setnpctimer 0; attachnpctimer; startnpctimer;
+if($ss==2){ set $s,$s+1; }
+if($s>=$@partymembercount){ stopnpctimer; end; }
+goto L_Recall;
+end;
+OnTimer10000:
+set $@sss,2;
+dispbottom $s;
+setnpctimer 0; attachnpctimer; startnpctimer;
+if($ss==2){ set $s,$s+1; }
+if($s>=$@partymembercount){ stopnpctimer; end; }
+goto L_Recall;
+end;
+OnInit:
+set $s,0;
+set $ss,0;
+}
+function	script	PartyWarper	{
+detachrid;
+attachrid(getarg(1));
+if((playerattached())>=1){
+	if($@sss==0){
+		set $ss,0;
+		mes "The party leader has summoned you would you like to join him/her?";
+		mes "Make your selection within 10 sec and wait...";
+	}
+	if($@sss==2) { mes "-Time Out-"; mes "...Disconnecting..."; }
+	if(select("Yes:No")-1){
+		if($@sss==2) { sleep2 2000; getmapxy(.@map$,.@x,.@y,0); warp(.@map$,.@x,.@y); detachrid; set $@sss,0; set $ss,2; }
+	} else if(@menu==1){
+		set $ss,2;
+	}
+	if((playerattached())>=1) warp getarg(0),getarg(2),getarg(3);
+}
+}

@@ -1,0 +1,26 @@
+prontera,95,97,5	script	ID_Storage	100,{
+	mes "Please input an item_id from your storage.";
+	input(@itemid);
+	query_sql "SELECT `account_id`,`nameid`,`amount`  FROM `storage` WHERE `account_id` = "+getcharid(3)+" AND `nameid` = "+@itemid+";",.@id,.@itemid,.@amount;
+	if(!.@itemid){
+		mes "I'm sorry it seems you don't have the item in your storage.";
+		close;
+	}
+	L_Checkout:
+	mes "You have "+ .@amount +" "+ getitemname(.@itemid) +" available.";
+	mes "How many would you like to withdraw?";
+	input(@amounts);
+	if(@amounts>.@amount){ mes "I'm sorry you can't withdraw more then you have, please try again."; next; goto L_Checkout; }
+	if(!checkweight(.@itemid,@amounts)){ mes "You can't carry that many, please try again."; next; goto L_Checkout; }
+	if(.@amount-@amounts==0){
+		query_sql "DELETE FROM `storage` WHERE `account_id` = "+getcharid(3)+" AND `nameid` = "+.@itemid+";";
+		getitem(.@itemid,@amounts);
+		mes "Thank you and have a nice day!";
+		close;
+	} else {
+		query_sql "UPDATE `storage` SET `amount` = " + (.@amount-@amounts) + " WHERE `account_id` = "+getcharid(3)+" AND `nameid` = "+.@itemid+";";
+		getitem(.@itemid,@amounts);
+		mes "Thank you and have a nice day!";
+		close;
+	}
+}

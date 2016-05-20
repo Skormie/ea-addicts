@@ -1,0 +1,102 @@
+prontera.gat,149,180,5	script	Explosion Sample	753,{
+	set .@len,callfunc("str_explode2","@explosion$","Hello strcharinfo(0) you can have this free item.", 3, " ", "(", ")");
+	npctalk "Length of String: "+.@len;
+	for(set .@a,0;.@a<.@len;set .@a,.@a+1) {
+		npctalk "String"+.@a+": "+@explosion$[.@a];
+	}
+	end;
+}
+
+/// callfunc "str_explode2" , "<array output>", "<string>" {, <Amount of delemiter>{, "<delemiter>"{, "<delemiter>"}}}; 
+function	script	str_explode2	{
+
+	if ( !getarg(2) )
+		return callfunc("str_toarray", getarg(1), getarg(0) );
+
+	sleep2 1;
+
+	setarray .@char$[0],
+		" ", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+		"e", "i", "a", "s", "r", "n", "t", "o", "u", "l", "c",
+		"p", "m", "d", "v", "h", "g", "f", "b", "y", "q", "k",
+		"z", "x", "j", "w", "_", "-", "(", ")", ";", ",", ":",
+		".";
+
+	set .@charsize,	getarraysize(.@char$);
+	set .@tmp$,	"|~key~|";
+	set .@str$,	.@tmp$ + getarg(1) ;
+	set .@len,	getstrlen(getarg(1));
+	set .@delem_len,	getarg(2);
+	for( set .@g,0;.@g<.@delem_len;set .@g,.@g+1 ){
+		setd(".@parse_len"+.@g, getstrlen(getarg(3+.@g)));
+	}
+	
+	while( .@len > .@s ) {
+		set .@i, 0 ; 
+		while( .@i < .@charsize  ) {
+			if ( ! ( set(.@l,.@l+1) % 600) )
+				sleep2 1;
+			if ( compare( .@str$ , .@tmp$ + .@char$[.@i] ) ) {
+				set .@tmp$, .@tmp$ + .@char$[.@i];
+				set .@g, 0; 
+				while( .@g < .@delem_len ) {
+					if ( ! ( set(.@l,.@l+1) % 600) )
+						sleep2 1;
+					if ( .@char$[.@i] == getarg((3+.@g)) ) {
+						set .@p, .@p + 1;
+						set .@s, .@s + (getd(".@parse_len"+.@g)-1) ;
+						break;
+					}
+					set .@g,.@g+1;
+				}
+				if ( .@delem_len == .@g )
+					set .@arr$[.@p], .@arr$[.@p] + .@char$[.@i];
+				break;
+			}
+			set .@i, .@i+1 ;
+		}
+		if ( .@i == .@charsize ) return 0;
+		else set .@s, .@s+1 ;
+	}
+	deletearray getd(getarg(0));
+	copyarray getd(getarg(0)), .@arr$, .@p+1;
+	return .@p+1;
+}
+
+///callfunc "str_toarray", "<string>", "<array output>";
+function	script	str_toarray	{
+
+	sleep2 1;
+
+	if ( getstrlen( getarg(0) ) > 128 ) return 0;
+
+	setarray .@char$[ 0 ],
+		" ", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+		"e", "i", "a", "s", "r", "n", "t", "o", "u", "l", "c",
+		"p", "m", "d", "v", "h", "g", "f", "b", "y", "q", "k",
+		"z", "x", "j", "w", "_", "-";
+
+	set .@charsize, getarraysize(.@char$);
+	set .@tmp$, "|~key~|";
+	set .@str$, .@tmp$ + getarg(0) ;
+	set .@len, getstrlen(getarg(0));
+
+	while( .@len>.@s ) {
+		set .@i,0;
+		while( .@i<.@charsize ) {
+			if ( ! ( set(.@l,.@l+1) % 650) )
+				sleep2 1;
+			if ( compare( .@str$ , .@tmp$ + .@char$[.@i] ) ) {
+				set .@tmp$, .@tmp$ + .@char$[.@i];
+				set .@arr$[.@s], .@char$[.@i];
+				break;
+			}
+			set .@i, .@i+1;
+		}
+		if ( .@i == .@charsize ) return 0;
+		else set .@s, .@s+1;
+	}
+	deletearray getd(getarg(1));
+	copyarray getd(getarg(1)), .@arr$, .@len;
+	return .@len;
+}

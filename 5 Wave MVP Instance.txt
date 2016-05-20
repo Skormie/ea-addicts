@@ -1,0 +1,88 @@
+//By Skorm
+prontera,102,102,5	script	MvP Warper	100,{
+if(countitem(501)<1){mes "I'm sorry you need at least one "+getitemname(501)+"."; close;}
+setarray $@maps$[1], "guild_vs2", "guild_vs2-1", "guild_vs2-2";
+for(set .@b,1; .@b < getarraysize($@maps$); set .@b,.@b + 1) {
+	set .@menu$, .@menu$  + "Room["+(.@b-1)+"]- "+((getmapusers(""+$@maps$[.@b]+""))?"^CD0000Closed^000000("+getmapusers($@maps$[.@b])+")":"^007700Open^000000("+getmapusers($@maps$[.@b])+")")+":";
+}
+if(select(.@menu$)) {
+if(getmapusers($@maps$[@menu])){ mes "This room is currently occupied."; close; }
+set $@menu,@menu;
+killmonsterall $@maps$[$@menu];
+if(countitem(501)>=10){
+if(select("Warp:PartyWarp requires- "+getitemname(501)+"x10")-1) {
+	delitem 501,10;
+	set @id,getcharid(1);
+	warpparty $@maps$[$@menu],0,0,@id;
+} else {delitem 501,1; warp $@maps$[$@menu],0,0;}
+} else {delitem 501,1; warp $@maps$[$@menu],0,0;}
+sleep2 3000;
+Onround:
+	set $@mob,30;
+	areamonster $@maps$[$@menu],34,67,67,34,"--ja--",-3,30,"MvP Warper::OnroundDeath";
+	end;
+Onround2:
+	set $@mob,30;
+	areamonster $@maps$[$@menu],34,67,67,34,"--ja--",-3,30,"MvP Warper::OnroundDeath2";
+	end;
+Onround3:
+	set $@mob,30;
+	areamonster $@maps$[$@menu],34,67,67,34,"--ja--",-3,30,"MvP Warper::OnroundDeath3";
+	end;
+Onround4:
+	set $@mob,30;
+	areamonster $@maps$[$@menu],34,67,67,34,"--ja--",-3,30,"MvP Warper::OnroundDeath4";
+	end;
+Onround5:
+	set $@mob,30;
+	areamonster $@maps$[$@menu],34,67,67,34,"--ja--",-3,30,"MvP Warper::OnroundDeath5";
+	end;
+OnroundDeath:
+	set $@mob,$@mob - 1;
+	if(getmapusers($@maps$[$@menu])){
+		if($@mob == 25) mapannounce $@maps$[$@menu],"Mvper: 25 MvPs remaining!",0;
+		if($@mob == 5) mapannounce $@maps$[$@menu],"Mvper: 5 MvPs remaining!",0;
+		if($@mob == 0){ mapannounce $@maps$[$@menu],"Round 1 complete! Round 2 has started!",0; goto Onround2; }
+	}
+	end;
+OnroundDeath2:
+	set $@mob,$@mob - 1;
+	if(getmapusers($@maps$[$@menu])){
+		if($@mob == 25) mapannounce $@maps$[$@menu],"Mvper: 25 MvPs remaining!",0;
+		if($@mob == 5) mapannounce $@maps$[$@menu],"Mvper: 5 MvPs remaining!",0;
+		if($@mob == 0){ mapannounce $@maps$[$@menu],"Round 2 complete! Round 3 has started!",0; goto Onround3; }
+	}
+	end;
+OnroundDeath3:
+	set $@mob,$@mob - 1;
+	if(getmapusers($@maps$[$@menu])){
+		if($@mob == 25) mapannounce $@maps$[$@menu],"Mvper: 25 MvPs remaining!",0;
+		if($@mob == 5) mapannounce $@maps$[$@menu],"Mvper: 5 MvPs remaining!",0;
+		if($@mob == 0){ mapannounce $@maps$[$@menu],"Round 3 complete! Round 4 has started!",0; goto Onround4; }
+	}
+	end;
+OnroundDeath4:
+	set $@mob,$@mob - 1;
+	if(getmapusers($@maps$[$@menu])){
+		if($@mob == 25) mapannounce $@maps$[$@menu],"Mvper: 25 MvPs remaining!",0;
+		if($@mob == 5) mapannounce $@maps$[$@menu],"Mvper: 5 MvPs remaining!",0;
+		if($@mob == 0){ mapannounce $@maps$[$@menu],"Round 4 complete! Round 5 has started!",0; goto Onround5; }
+	}
+	end;
+OnroundDeath5:
+	set $@mob,$@mob - 1;
+	if(getmapusers($@maps$[$@menu])){
+		if($@mob == 25) mapannounce $@maps$[$@menu],"Mvper: 25 MvPs remaining!",0;
+		if($@mob == 5) mapannounce $@maps$[$@menu],"Mvper: 5 MvPs remaining!",0;
+		if($@mob == 0){ mapannounce $@maps$[$@menu],"You Win!",0; mapwarp $@maps$[$@menu],"prontera",156,212; end; }
+	}
+	end;
+}
+close;
+OnPCDieEvent:
+if(strcharinfo(3)=="guild_vs2"||strcharinfo(3)=="guild_vs2-1"||strcharinfo(3)=="guild_vs2-2"){
+announce strcharinfo(3)+" has Just become available.",bc_all;
+warp "prontera",156,212;
+end;
+}
+}

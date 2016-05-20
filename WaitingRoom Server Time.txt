@@ -1,0 +1,9 @@
+prontera,150,150,5	script	Server Time	100,{
+end;
+OnInit:
+	while ( 1 ) {
+		delwaitingroom strnpcinfo(0);
+		waitingroom gettimestr( "%dd %r",21 ),0;
+		sleep 1000;
+	}
+}

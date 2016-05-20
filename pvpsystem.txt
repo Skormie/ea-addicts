@@ -1,0 +1,28 @@
+pvp_n_1-1,0,0,0	script	pvpsystem	111,{
+OnPCLoadMapEvent:
+getmapxy(.@map$,.@x,.@y,0);
+if(.@map$!="pvp_y_1-2") end;
+set .@playerinfo$,strcharinfo(0);
+set @killed,0;
+set .@playerinfo2,getcharid(3);
+sleep2 120000;
+callfunc "Func-time",@killed,.@playerinfo$,.@playerinfo2;
+OnPCKillEvent:
+getmapxy(.@map$,.@x,.@y,0);
+if(.@map$!="pvp_y_1-2") end;
+set @killed,killedrid;
+set @pvpPoints,@pvpPoints+100;
+mapannounce "pvp_y_1-2","["+rid2name(getcharid(3))+"] killed ["+rid2name(@killed)+"] Gained +100 points.",bc_map | bc_blue;
+atcommand "@size 2";
+}
+function	script	Func-time	{
+attachrid(getarg(2));
+if(getarg(0)==0&&getarg(1)==strcharinfo(0)&&Hp!=0){
+atcommand "@size 1";
+donpcevent "pvpsystem::OnPCLoadMapEvent";
+}
+donpcevent "pvpsystem::OnPCLoadMapEvent";
+}
+// killedrid
+pvp_n_1-1	mapflag	loadevent
+

@@ -1,0 +1,93 @@
+//By Skorm
+prontera.gat,162,194,6	script	Healer	435,{
+
+	if(($@h_last$==strcharinfo(0)) && (getnpctimer(1))  ) goto L_doubleclick;
+
+	if (buff == 1) {set $@h_last$,strcharinfo(0); percentheal 100,100; dispbottom "Successfully healed."; dispbottom "Double-click me to change your choice of healing."; if(!getnpctimer(1)){setnpctimer 0; startnpctimer;} end;}
+	if (buff == 2) {set $@h_last$,strcharinfo(0); if (zeny < 5000) {dispbottom "You do not have enough zeny."; dispbottom "Double-click me to change your choice of healing."; if(!getnpctimer(1)){setnpctimer 0; startnpctimer;} end;} set Zeny, Zeny-5000; skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10; percentheal 100,100; dispbottom "Successfully healed and buffed."; dispbottom "Double-click me to change your choice of healing."; if(!getnpctimer(1)){setnpctimer 0; startnpctimer;} end;}
+	if (buff == 3) {set $@h_last$,strcharinfo(0); if (zeny < 10000) {dispbottom "You do not have enough zeny."; dispbottom "Double-click me to change your choice of healing."; if(!getnpctimer(1)){setnpctimer 0; startnpctimer;} end;} set Zeny, Zeny-10000; skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10; skilleffect 34,0; sc_start SC_BLESSING,240000,10; percentheal 100,100; dispbottom "Successfully healed and buffed."; dispbottom "Double-click me to change your choice of healing."; if(!getnpctimer(1)){setnpctimer 0; startnpctimer;} end;}
+
+	mes "[Healer]";
+	mes "Hello ^0000FF"+strcharinfo(0)+"^000000, please choose 1 of the options below:";
+	menu "^FF0000Heal [Free]^000000",-,"^0000FFHeal + Increase Agi [5,000z]^000000",L_agi,"^00FF00Heal + Increase Agi + Blessing [10,000z]^000000",L_bless;
+	next;
+	set buff, 1;
+	mes "[Healer]";
+	mes "Your choice have been saved.";
+	mes "If you want to change your choice, you can ^FF0000DOUBLE-CLICK^000000 on me again.";
+	mes "Have a nice day!";
+	close;
+	
+L_agi:
+   next;
+	set buff, 2;
+	mes "[Healer]";
+	mes "Your choice have been saved.";
+	mes "If you want to change your choice, you can ^FF0000DOUBLE-CLICK^000000 on me again.";
+	mes "Have a nice day!";
+	close;
+
+L_bless:
+   next;
+	set buff, 3;
+	mes "[Healer]";
+	mes "Your choice have been saved.";
+	mes "If you want to change your choice, you can ^FF0000DOUBLE-CLICK^000000 on me again.";
+	mes "Have a nice day!";
+	close;
+
+L_doubleclick:
+	mes "[Healer]";
+	mes "Hello ^0000FF"+strcharinfo(0)+"^000000, welcome back!";
+	mes " ";
+	mes "Your current choice:";
+	if (buff == 1) mes "^FF0000Heal [Free]^000000";
+	if (buff == 2) mes "^FF0000Heal + Increase Agi [5,000z]^000000";
+	if (buff == 3) mes "^FF0000Heal + Increase Agi + Blessing [10,000z]^000000";
+	menu "Leave",-,"Change option",L_option;
+	close;
+
+L_option:
+	next;
+	mes "[Healer]";
+	mes "Please choose 1 of the options below:";
+	menu "^FF0000Heal [Free]^000000",-,"^0000FFHeal + Increase Agi [5,000z]^000000",L_agi,"^00FF00Heal + Increase Agi + Blessing [10,000z]^000000",L_bless;
+	next;
+	set buff, 1;
+	mes "[Healer]";
+	mes "Your choice have been saved.";
+	mes "If you want to change your choice, you can ^FF0000DOUBLE-CLICK^000000 on me again.";
+	mes "Have a nice day!";
+	close;
+
+OnInit:
+	initnpctimer;
+	end;
+
+OnTimer2000:
+	set $@h_last$,"";
+	stopnpctimer;
+	end;
+}
+
+//----------------Towns----------------\\
+prontera.gat,161,192,5 duplicate(Healer)	Healer#02	435
+alberta,196,142,4	duplicate(Healer)	Healer#03	435
+aldebaran,135,120,4	duplicate(Healer)	Healer#04	435
+amatsu,204,88,1	duplicate(Healer)	Healer#05	435
+ayothaya,155,117,6	duplicate(Healer)	Healer#06	435
+comodo,207,148,4	duplicate(Healer)	Healer#07	435
+einbroch,58,199,4	duplicate(Healer)	Healer#08	435
+einbech,70,95,4	duplicate(Healer)	Healer#10	435
+geffen,127,65,4	duplicate(Healer)	Healer#11	435
+gonryun,156,121,4	duplicate(Healer)	Healer#12	435
+izlude,126,118,4	duplicate(Healer)	Healer#13	435
+hugel,93,149,5	duplicate(Healer)	Healer#14	859
+lighthalzen,154,98,6	duplicate(Healer)	Healer#15	435
+louyang,206,104,4	duplicate(Healer)	Healer#16	435
+morocc,158,97,4	duplicate(Healer)	Healer#17	435
+niflheim,27,157,4	duplicate(Healer)	Healer#22	435
+payon,176,113,4	duplicate(Healer)	Healer#18	435
+rachel,130,117,4	duplicate(Healer)	Healer#23	435
+xmas,147,136,4	duplicate(Healer)	Healer#20	435
+yuno,170,186,4	duplicate(Healer)	Healer#21	435

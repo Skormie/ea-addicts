@@ -1,0 +1,17 @@
+prontera,96,100,5	script	TCG-$P Converter	100,{
+//Variables
+set .@handler,1; //0=Cashpoint to TCG - 1=TCG to Cashpoint
+set .@TCG,10; //The TCG Price.
+set .@Cashpoints,10; //The TCG Price.
+//For example: Right now this is set so every 10(TCG) you get (10)Cashpoints 
+
+mes "Would you like me to convert your "+((.@handler)?"Cashpoint's":"TCG's")+" to "+((!.@handler)?"Cashpoint's":"TCG's");
+mes ((.@handler)?.@Cashpoints:.@TCG)+"("+((.@handler)?"Cashpoint's":"TCG's")+") = "+((!.@handler)?.@Cashpoints:.@TCG)+"("+((!.@handler)?"Cashpoint's":"TCG's")+").";
+if(select("Yes:No")==1) {
+for(set .@a,((.@handler)?#CASHPOINTS:countitem(7227)); .@a >= ((.@handler)?.@Cashpoints:.@TCG); set .@a,.@a-((.@handler)?.@Cashpoints:.@TCG)){
+if(.@handler){ getitem 7227,.@TCG; set #CASHPOINTS,#CASHPOINTS-.@Cashpoints; } else { set #CASHPOINTS,#CASHPOINTS+.@Cashpoints; delitem 7227,.@TCG; }
+}
+mes "Your "+((.@handler)?"Cashpoint's":"TCG's")+" have been converted, you now have [^0000FF"+((.@handler)?#CASHPOINTS:countitem(7227))+"^000000] "+((!.@handler)?"Cashpoint's":"TCG's")+".";
+}
+close;
+}

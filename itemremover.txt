@@ -1,0 +1,20 @@
+aethra,165,203,4	script	Item Remover	85,{
+mes "Would you like to delete an item?";
+menu "Yes.",-,"No.",gtfo;
+mes "Enter the ID of the item that you would like to delete.";
+input itemid;
+next;
+mes "How many do you want to delete?";
+input itemnumber;
+if (itemnumber <= 0) {
+mes "Invalid number.";
+close;
+}
+delitem itemid,itemnumber;
+next;
+mes "All done.";
+close;
+
+gtfo:
+close;
+}

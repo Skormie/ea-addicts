@@ -1,0 +1,26 @@
+prontera,97,100,5	script	POD Refiner	100,{
+//--variables--
+set .@amount,10;//The amount you want refine to cost.
+set .@itemid,7179;//ID of the item you want to spend.
+set .@max,10;// max refine rate.
+
+if(countitem(.@itemid)<.@amount){mes "I'm sorry you don't have enough "+getitemname(.@itemid)+"."; close;}
+set @menu$,"";
+setarray .@slots$[1],"Upper headgear","Armor","Left hand","Right hand","Garment","Footgear","Middle Headgear","Lower Headgear";
+for(set .@a,1; .@a<getarraysize(.@slots$); set .@a,.@a+1){
+set .@b,.@b+1;
+if(getequipid(.@a)){ set @menu$,@menu$+.@slots$[.@a]+" ("+getequipname(.@b)+"):";}
+if(.@a==6){set .@b,.@a+2;}
+}
+select(@menu$);
+if(@menu>6){set @menu,@menu+2;}
+if(@menu==EQI_ACC_L||@menu==EQI_ACC_R){mes "You can not refine accessories."; close;}
+if(getequiprefinerycnt(@menu)>=10){mes "Your item already has the maximum refine rate."; close;}
+if(atoi(getequipname(@menu))==-1){mes "I'm sorry you don't have an item equipped there."; close;}
+for(set .@i,0; .@i<10&&getequiprefinerycnt(@menu)<.@max; set .@i,.@i+1){
+successrefitem(@menu);
+}
+delitem .@itemid,.@amount;
+mes "done";
+close;
+}

@@ -1,0 +1,30 @@
+//By Skorm
+prontera.gat,155,185,5	script	Event Random	757,{
+
+setarray .@items[0],20,5738,20,5443,25,2294,33,5509,50,5150,100,5426;
+setarray .@items_announce[0],5738,5150;
+set .@item_required,1201;
+
+mes "Do you want to use your "+getitemname( .@item_required )+" to try and get something awesome?"; next;
+if( select("- Yes:- No")-1 ) close;
+	if( !countitem( .@item_required ) ){
+		mes "You don't have any "+getitemname( .@item_required )+".";
+		mes "Please come back soon, if you have already them";
+	} else {
+	delitem .@item_required,1;
+		for(set .@a,0; .@a < getarraysize(.@items); set .@a,.@a+2){
+			if(rand(.@items[.@a])==1){
+				getitem (.@items[.@a+1]),1;
+				mes "Congratulations!";
+				for(set .@b,0; .@b < getarraysize(.@items); set .@b,.@b+1){
+					if(.@items[.@a+1]==.@items_announce[.@b]) { announce "[Event Random]: Player " + strcharinfo(0) +", has obtain "+ ((.@items[.@a]>=50)?"Low":"High") +" "+getitemname( .@items[.@a+1] )+" with ["+ (100/.@items[.@a]) +"%] Chance.",bc_all,0xBA55D3; }
+				}
+				specialeffect 154;
+				close;
+			}
+		}
+	specialeffect 155;
+	mes "lt's failed, sorry.";
+	}
+close;
+}

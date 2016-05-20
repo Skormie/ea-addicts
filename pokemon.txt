@@ -1,0 +1,253 @@
+//Version 1.5
+// ===========================================================
+// = Element Guide
+// ===========================================================
+// = *All elements below are in order starting from 2^0
+// = NORMAL
+// = FIRE
+// = WATER
+// = ELECTRIC
+// = GRASS
+// = ICE (2^5)
+// = FIGHTING
+// = POSION
+// = GROUND
+// = FLYING
+// = PSYCHIC (2^10)
+// = BUG
+// = ROCK
+// = GHOST
+// = DRAGON
+// = DARK (2^15)
+// = STEEL
+// = 
+// = Add numbers to get more than one element
+// = Example: 2^10 + 2^15 = Psychic + Dark
+// ===========================================================
+// = By Miz & Skorm
+// ===========================================================
+-	script	Choose	-1,{
+Oninit:
+// Clear in case of changed values
+cleararray $pokemon1$[0],"",127;
+cleararray $pokemon2$[0],"",127;
+cleararray $pokemon3$[0],"",127;
+cleararray $pokemon4$[0],"",127;
+cleararray $pokemon5$[0],"",127;
+cleararray $pokemon6$[0],"",127;
+cleararray $pokemon7$[0],"",127;
+cleararray $pokemon8$[0],"",127;
+cleararray $pokemon9$[0],"",127;
+cleararray $pokemon10$[0],"",127;
+// Elements
+setarray $elements$[0],"^999966NORMAL^000000","^CC3300FIRE^000000","^3366FFWATER^000000","^CCCC00ELECTRIC^000000","^339933GRASS^000000";
+setarray $elements$[5],"^99CCFFICE^000000","^990000FIGHTING^000000","^9900CCPOSION^000000","^CC9933GROUND^000000","^9999CCFLYING^000000";
+setarray $elements$[10],"^CC3366PSYCHIC^000000","^669900BUG^000000","^996600ROCK^000000","^6633FFGHOST^000000","^6600CCDRAGON^000000";
+setarray $elements$[15],"^663333DARK^000000","^333333STEEL^000000";
+// Sprite Names
+setarray $pokemon1$[0],"charmander","torchic","cyndaquil","vulpix","squirtle","totodile","mudkip","horsea","treecko","piplup";
+setarray $pokemon1$[10],"growlithe","pichu","larvitar","aron","beldum","eevee","tyrogue","dratini","gastly","pidgey";
+setarray $pokemon1$[20],"bulbasaur","chikorita","magikarp","riolu","bagon","quilava","prinplup","charmeleon","charizard","combusken";
+setarray $pokemon1$[30],"blaziken","grovyle","raichu","ivysaur","venusaur","bayleef","meganium","pupitar","tyranitar","salamence";
+setarray $pokemon1$[40],"haunter","metang","metgross","lucario","shelgon","gengar","vaporeon","gyarados","hitmontop","espeon";
+setarray $pokemon1$[50],"umbreon","pidgeotto","pidgeot","feraligatr","marshtomp","ninetales","sceptile","dragonite","hitmonchan","hitmonlee";
+setarray $pokemon1$[60],"typhlosion","dragonair","wartortle","blastoise","empoleon","arcanine","seadra","kingdra","lairon","flareon";
+setarray $pokemon1$[70],"jolteon","aggron","swampert","pikachu","croconaw";
+// Element
+setarray $pokemon2[0],2,2,2,2,4,4,4,4,16,4;
+setarray $pokemon2[10],2,8,4096,69632,66560,1,64,16384,8320,513;
+setarray $pokemon2[20],144,16,4,64,16384,2,4,2,514,66;
+setarray $pokemon2[30],66,16,8,144,144,16,16,4096,36864,16896;
+setarray $pokemon2[40],8320,66560,66560,65600,16384,8320,4,5,64,1024;
+setarray $pokemon2[50],32768,513,513,4,260,2,16,16896,64,64;
+setarray $pokemon2[60],2,16384,4,4,65540,2,4,16388,69632,2;
+setarray $pokemon2[70],8,69632,260,8,4;
+// Skill ID 1
+setarray $pokemon3[0],17,17,404,10,86,86,86,88,516,86;
+setarray $pokemon3[10],80,20,91,90,156,5,11,535,13,540;
+setarray $pokemon3[20],16,49,0,261,17,18,62,16,540,19;
+setarray $pokemon3[30],285,516,20,16,16,49,49,91,91,17;
+setarray $pokemon3[40],13,156,156,261,17,13,5,535,11,5;
+setarray $pokemon3[50],5,540,540,87,25,17,540,535,11,11;
+setarray $pokemon3[60],534,535,15,89,89,81,88,88,90,5;
+setarray $pokemon3[70],5,90,91,20,253;
+// Skill Level 1
+setarray $pokemon4[0],3,3,1,1,3,3,3,2,1,3;
+setarray $pokemon4[10],2,2,2,2,3,3,3,1,4,3;
+setarray $pokemon4[20],3,3,0,3,2,3,4,4,8,6;
+setarray $pokemon4[30],10,1,8,6,10,3,3,4,4,8;
+setarray $pokemon4[40],6,6,10,5,4,10,10,6,6,10;
+setarray $pokemon4[50],10,6,6,8,5,10,3,6,6,6;
+setarray $pokemon4[60],8,3,6,6,8,6,4,8,4,10;
+setarray $pokemon4[70],10,8,8,4,5;
+// Skill ID 2
+setarray $pokemon5[0],5,58,19,81,5,14,90,538,5,58;
+setarray $pokemon5[10],536,5,5,7,7,7,34,14,400,58;
+setarray $pokemon5[20],469,16,0,7,83,368,400,114,19,80;
+setarray $pokemon5[30],415,5,5,469,469,16,16,5,5,83;
+setarray $pokemon5[40],400,7,7,7,83,400,7,14,34,7;
+setarray $pokemon5[50],7,58,58,406,255,53,58,14,34,34;
+setarray $pokemon5[60],258,14,88,250,397,531,538,538,7,7;
+setarray $pokemon5[70],7,7,110,5,136;
+// Skill Level 2
+setarray $pokemon6[0],3,3,3,1,3,2,2,1,3,2;
+setarray $pokemon6[10],1,3,3,3,3,3,3,2,2,3;
+setarray $pokemon6[20],1,3,0,3,2,1,4,3,10,6;
+setarray $pokemon6[30],10,6,10,3,6,6,10,6,6,8;
+setarray $pokemon6[40],4,6,10,10,4,8,10,8,6,10;
+setarray $pokemon6[50],10,6,6,10,4,1,3,8,6,6;
+setarray $pokemon6[60],10,4,6,8,8,8,3,6,6,10;
+setarray $pokemon6[70],10,10,6,6,3;
+// Skill ID 3
+setarray $pokemon7[0],18,56,5,18,25,7,92,86,7,286;
+setarray $pokemon7[10],5,7,8,8,259,12,7,20,364,29;
+setarray $pokemon7[20],364,469,0,267,62,47,58,51,83,419;
+setarray $pokemon7[30],428,7,7,364,364,469,469,8,8,62;
+setarray $pokemon7[40],364,259,259,267,62,364,12,20,7,12;
+setarray $pokemon7[50],12,29,29,110,538,366,29,20,7,7;
+setarray $pokemon7[60],536,20,257,12,15,400,86,86,8,12;
+setarray $pokemon7[70],12,8,539,7,47;
+// Skill Level 3
+setarray $pokemon8[0],1,2,3,1,1,2,1,3,2,1;
+setarray $pokemon8[10],3,2,2,1,3,1,2,2,1,1;
+setarray $pokemon8[20],2,1,0,3,2,5,6,3,6,4;
+setarray $pokemon8[30],1,4,8,4,8,3,6,4,4,8;
+setarray $pokemon8[40],3,6,10,5,4,6,6,8,4,6;
+setarray $pokemon8[50],6,3,3,6,4,6,1,8,4,4;
+setarray $pokemon8[60],6,4,3,5,8,6,6,10,3,6;
+setarray $pokemon8[70],6,6,5,4,5;
+// Skill ID 4
+setarray $pokemon9[0],62,18,7,5,61,286,15,12,29,88;
+setarray $pokemon9[10],18,148,25,62,62,16,24,366,12,129;
+setarray $pokemon9[20],0,12,0,29,8,400,14,7,490,426;
+setarray $pokemon9[30],421,29,148,0,,12,12,25,25,8;
+setarray $pokemon9[40],12,62,62,29,8,12,16,366,24,16;
+setarray $pokemon9[50],16,129,129,91,286,379,129,366,24,24;
+setarray $pokemon9[60],531,366,14,8,8,7,12,12,62,16;
+setarray $pokemon9[70],16,62,47,148,62;
+// Skill Level 4
+setarray $pokemon10[0],2,1,2,3,3,2,2,1,5,2;
+setarray $pokemon10[10],1,3,1,2,2,1,1,1,1,2;
+setarray $pokemon10[20],0,3,0,2,1,6,6,4,4,3;
+setarray $pokemon10[30],6,7,10,0,,10,10,3,3,6;
+setarray $pokemon10[40],3,4,8,8,3,6,6,6,2,6;
+setarray $pokemon10[50],6,4,4,8,5,6,2,6,2,2;
+setarray $pokemon10[60],5,3,4,7,8,6,3,6,4,6;
+setarray $pokemon10[70],6,8,10,6,5;
+// Beginner
+cleararray $pokemon11[0],1,25;
+// Evolution Level
+setarray $pokemon12$[15],"25","25";
+setarray $pokemon12$[25],"14","16","16","36","16";
+setarray $pokemon12$[30],"36","16","Thunder Stone","16","36","16","32","30","55","50";
+setarray $pokemon12$[40],"25","20","45","30","30","36","Water Stone","20","equal","day";
+setarray $pokemon12$[50],"night","18","36","30","16","Fire Stone","36","55","greater","less";
+setarray $pokemon12$[60],"36","30","16","36","36","Fire Stone","32","36","32","Fire Stone";
+setarray $pokemon12$[70],"Thunder Stone","36","36","20","18";
+//Evolution Level 2
+setarray $pokemon14$[0],"16","16","14","Fire Stone","16","18","16","32","16","16";
+setarray $pokemon14$[10],"Fire Stone","25","30","32","20","eevee","tyrogue","30","25","18";
+setarray $pokemon14$[20],"16","16","20","25","30","36","36","36","","36";
+setarray $pokemon14$[30],"","36","","36","","36","","55","","";
+setarray $pokemon14$[40],"30","45","","","50","","","","","";
+setarray $pokemon14$[50],"","36","","","36","","","","","";
+setarray $pokemon14$[60],"","55","36","","","","40","","42","";
+setarray $pokemon14$[70],"","","","Thunder Stone","30";
+// Relationship
+setarray $pokemon13[0],1,2,3,4,5,6,7,9,10,8;
+setarray $pokemon13[10],11,12,13,14,15,19,20,18,21,22;
+setarray $pokemon13[20],23,24,25,16,17,3,8,1,1,2;
+setarray $pokemon13[30],2,10,12,23,23,24,24,13,13,17;
+setarray $pokemon13[40],21,15,15,16,17,21,19,25,20,19;
+setarray $pokemon13[50],19,22,22,6,7,4,10,18,20,20;
+setarray $pokemon13[60],3,18,5,5,8,11,9,9,14,19;
+setarray $pokemon13[70],19,14,7,12,6;
+end;
+
+OnPcLoginEvent:
+if(pkmndone) end;
+mes "Welcome.";
+next;
+mes "This is the portal leading to the world inhabitated by pokemon!";
+next;
+mes "But...before you get there...you have to choose a Pokemon!";
+for(set .@a,0; .@a != 9000; set .@a,.@a + 1) {
+	sleep2 1;
+	if((!(.@a % 10) && .@a) || (.@a == getarraysize($pokemon1$))) {
+		set .@menu$,.@menu$ + ((.@a != getarraysize($pokemon1$))?":Next 10.":":Go to beginning.") + ((.@a != 10 && getarraysize($pokemon1$) >= 10)?":Previous 10.":":Go to end.");
+		select(.@menu$);
+		if(.@a>=getarraysize($pokemon1$)){ set .@menu$,""; set .@a,-1; continue; }
+		if(((@menu == 11) || (@menu == ((getarraysize($pokemon1$) % 10) + 1)))) {
+			if(!(@menu == ((getarraysize($pokemon1$) % 10) + 1)) && (.@a != getarraysize($pokemon1$))) set .@menu$,"";
+			continue;
+		} else if((@menu == 12) || (@menu == ((getarraysize($pokemon1$) % 10) + 2))) {
+			if(!(@menu == ((getarraysize($pokemon1$) % 10) + 2)) && (.@a != 10)) {
+				set .@menu$,"";
+				set .@a,.@a - 20;
+				continue;
+			}
+			set .@a,getarraysize($pokemon1$) - 11;
+			set .@menu$,"";
+			continue;
+		}
+	}
+	if(!(.@a % 10)) set .@menu$,$pokemon1$[.@a] + callfunc("F_PokeEle",$pokemon2[.@a]);
+	else set .@menu$,.@menu$ + ":" + $pokemon1$[.@a] + callfunc("F_PokeEle",$pokemon2[.@a]);
+}
+set .@index,.@a - 1;
+set pokemon$,$pokemon1$[.@index];
+atcommand "@disguise " + pokemon$;
+set pkmndone,1;
+set pokemon,.@a;
+for(set .@b,3; .@b < 11; set .@b,.@b + 2) {
+	skill getd("$pokemon" + .@b + "$[" + .@index + "]"),getd("$pokemon" + (.@b + 1) + "$[" + .@index + "]"),0;
+}
+savepoint "prontera",156,190;
+warp "Save",0,0;
+end;
+}
+
+-	script	disguiser	-1,{
+OnPCLoginEvent:
+atcommand "@disguise " + pokemon$;
+atcommand "@fakename " + strcharinfo(0) + " " + ((Sex)?"[M]":"[F]") + " Lv" + BaseLevel;
+end;
+}
+
+// I really don't see why you need this NPC unless the skills reset everytime you kill, get killed, log in, or level up
+-	script	skiller	-1,{
+OnPCKillEvent:
+OnNPCKillEvent:
+OnPCLoginEvent:
+OnPCBaseLvUpEvent:
+for(set .@a,0; .@a<getarraysize($pokemon1$); set .@a,.@a+1;){
+	if(pokemon$==$pokemon1$[.@a]){
+		if(atoi($pokemon14$[.@a])==BaseLevel)
+			for(set .@x,(.@a+1); .@x<getarraysize($pokemon13$); set .@x,.@x+1;){
+				if($pokemon13$[.@a]==$pokemon13$[.@x]){
+					set pokemon$,$pokemon1$[.@x];
+					set pokemon,.@x;
+					atcommand "@disguise " + pokemon$;
+				}
+			}
+	}
+}
+set .@index,pokemon - 1;
+for(set .@b,3; .@b < 11; set .@b,.@b + 2) {
+	skill getd("$pokemon" + .@b + "$[" + .@index + "]"),getd("$pokemon" + (.@b + 1) + "$[" + .@index + "]"),0;
+}
+}
+
+// Getarg values
+// 0 - Element Number (large binary thing)
+function	script	F_PokeEle	{
+set .@eles,getarg(0,0);
+for(set .@a,16; .@a > 0; set .@a,.@a - 1) {
+	if((.@eles % pow(2,.@a)) != .@eles) {
+		if(.@return$ != "") set .@return$,.@return$ + " " + $elements$[.@a];
+		else set .@return$,$elements$[.@a];
+		set .@eles,.@eles % pow(2,.@a);
+	}
+}
+return .@return$;
+}

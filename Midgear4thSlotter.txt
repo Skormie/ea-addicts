@@ -1,0 +1,59 @@
+//By Skorm
+new_1-2,95,71,4	script	Bling	100,{
+//Character Variables
+	set .@geid,	getequipid(9);
+	set .@cout,	countitem(.item);
+	set .@gin$,	getitemname(.item);
+	set .@gerf,	getequiprefinerycnt(9);
+	set .@crd1,	getequipcardid(9,0);
+	set .@crd2,	getequipcardid(9,1);
+	set .@crd3,	getequipcardid(9,2);
+	set .@crd4,	getequipcardid(9,3);
+
+//Checks & Dialogue
+	mes .npc$;
+	mes "I can endow your glasses with mystical powers, but It'll cost yah "+.pric+" "+((.pric-1)?.@gin$+"s":.@gin$)+"."; next;
+	if(!.@cout) { mes .npc$; mes "Sorry come back when you have "+.@gin$+"(s)."; close; }
+	if(select("Yes:No")&2) { mes .npc$; mes "Alright, thanks anyways!"; close; }
+	if(.@cout<.pric) { mes .npc$; mes "I'm sorry you don't have enough "+.@gin$+"(s) to for me to endow your specticals, please come back later."; close; }
+	mes .npc$;
+
+//Workhorse
+	query_sql("SELECT FIND_IN_SET('"+.@geid+"', '"+.uit$+"');",.@a);
+	if(.@a) {
+		delitem .item,.pric;
+		delitem2 .@geid, 1, 1, .@gerf, 0, .@crd1, .@crd2, .@crd3, .@crd4;
+		getitem2 .@geid, 1, 1, .@gerf, 0, .@crd1, .@crd2, .@crd3,
+			callfunc("F_RandMes", 50,
+				4700, 4701, 4702, 4703, 4704, 4705,
+				4706, 4707, 4708, 4709, 4710, 4711,
+				4712, 4713, 4714, 4715, 4716, 4717,
+				4718, 4719, 4720, 4721, 4722, 4723,
+				4724, 4725, 4726, 4727, 4728, 4729,
+				4730, 4731, 4732, 4733, 4734, 4735,
+				4736, 4737, 4738, 4739, 4740, 4741,
+				4742, 4743, 4744, 4745, 4746, 4747,
+				4748, 4749, 4750, 4751, 4752, 4753,
+				4754, 4755, 4756, 4757, 4758, 4759);
+		misceffect .efet;
+		mes "All done!";
+		equip .@geid;
+		close;
+	}
+	mes "I'm sorry but you need to equipped a slotted mid-range headgear before we can continue.";
+	close;
+
+//NPC Constants
+	OnInit:
+		//=-=-=-=-=-=-=Configuration=-=-=-=-=-=-=
+		set .npc$,	"[^0000FFBlinger^000000]";	// NPC Name
+		set .pric,	1;							// Price
+		set .efet,	154;						// Effect Number
+		set .item,	6242;						// Item Number
+		set .uit$,	"5074,5401,5104,18507,5068,2204,2260,5085,2202";// Item List
+		/*18603(Black Devil Mask), Not included because it wasn't in my DB*/ 
+		/*2286 Unslotted version of 18507*/
+		/*2203 Unslotted version of 2204*/
+		/*2201 Unslotted version of 2202*/
+		//=-=-=-=-=-=-=-=-Skorm-=-=-=-=-=-=-=-=-=
+}

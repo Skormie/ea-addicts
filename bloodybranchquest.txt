@@ -1,0 +1,51 @@
+function	script	timeleft__	{
+	set .@left, getarg(0);
+	if ( .@left <= 0 ) return getarg(0);
+	set .@day, .@left / 86400;
+	set .@hour, .@left % 86400 / 3600;
+	set .@min, .@left % 3600 / 60;
+	set .@sec, .@left % 60;
+	return ( ( .@day )?.@day +" day ":"" )+( ( .@day || .@hour )?.@hour +" hour ":"" )+( ( .@day == 0 && ( .@hour || .@min ) )?.@min +" min ":"" )+( ( .@day || .@hour )?"":.@sec +" sec" );
+}
+prontera,95,96,2	script	Bloody Branch Quest	76,{
+if(!#Bloody_b_Q){ set .QNPC$,"[^0000FF???^000000]"; } else { set .QNPC$,"[^0000FFAlice^000000]"; }
+if(!mobcount("prontera","Bloody Branch Quest::OnPoringDead")&&#Bloody_b_Q==1){ npctalk "Hmm... *looks around* Ahh, I see one over there!"; monster "prontera",0,0,"Poring",1002,1,"Bloody Branch Quest::OnPoringDead"; emotion e_gasp; end; }
+if(#Bloody_b_Q==2){ npctalk "Thanks again, come back in 3 hours and I'm sure another one will slip through!"; getitem 12103,2; set #Bloody_b_Q,(gettimetick(0)+(3*60*60*1000)); end; }
+if(#Bloody_b_Q==1) { mes .QNPC$; mes "There's already a Poring out there with your name on it!"; close; }
+if(((#Bloody_b_Q-gettimetick(0))/1000)>0&&#Bloody_b_Q){ mes .QNPC$; mes strcharinfo(0)+" you have "+callfunc("timeleft__",((#Bloody_b_Q-gettimetick(0))/1000))+"left."; close; }
+if(BaseLevel<150){ mes .QNPC$; mes "I'm sorry, but only the truly strong can do this quest. Come back with a base level of 255 or higher."; close; }
+mes .QNPC$;
+mes "Hello I need your help, Porings from the surounding feilds slip past our lazy guards, and I'm to cute to hunt them down now they're running a muk!";
+next;
+mes .QNPC$;
+mes "Would you like to participate in our daily Poring Hunt?";
+mes "Oh- I almost forgot to mention, we need 300m to cover any casualities.";
+if(select("Yes:No")-1){ next; mes .QNPC$; mes "What!- You expect me to just kill all these porings bymyself?!"; emotion e_sob; close; }
+if(Zeny<3000000) { next; mes .QNPC$; mes "Look I can't just let you loose swinging a sword at everything you think is a poring without some funding!"; mes "Come back when you get some more cash!"; close; }
+emotion e_no1;
+set Zeny,Zeny-3000000;
+next;
+if(!#Bloody_b_Q){
+	mes "[^0000FFAlice^000000]";
+	mes "Thanks for your patronage.";
+	mes "You can call me ^0000FFAlice^000000 from now on...";
+	mes "Now get to work rookie!";
+} else {
+	mes .QNPC$;
+	mes "Welcome back!";
+	mes "Good luck on your hunt!";
+}
+set #Bloody_b_Q,1;
+monster "prontera",0,0,"Poring",1002,1,"Bloody Branch Quest::OnPoringDead";
+close;
+OnPoringDead:
+if(#Bloody_b_Q==1){
+	mapannounce "prontera",strcharinfo(0)+" has found the poring!",bc_map,"0xFFCE00";
+	set #Bloody_b_Q,2;
+	end;
+}
+if(!#Bloody_b_Q||((#Bloody_b_Q-gettimetick(0))/1000)>0&&#Bloody_b_Q&&Bloody_b_Q!=1){
+	mapannounce "prontera",strcharinfo(0)+" accidentally killed the poring!",bc_map,"0xFFCE00";
+}
+end;
+}

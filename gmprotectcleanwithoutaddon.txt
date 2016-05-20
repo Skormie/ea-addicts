@@ -1,0 +1,91 @@
+prontera.gat,100,100,5	script	GMPROTECT	100,{
+    
+    OnPCLoginEvent:
+        if(getgmlevel() >= 5 && getgmlevel() <= 99) {
+			initnpctimer;
+			getmapxy(.@map$,.@x,.@y,0);
+			if($player$[0]!=""){
+				for(set .@a,0; .@a < getarraysize($player$); set .@a,.@a + 1) {
+					set .@b,.@a + 1;
+					setarray $player$[.@a],$player$[.@b];
+					setarray $playerinfo$[.@a],$playerinfo$[.@b];
+				}
+			}
+			setarray $player$[0],strcharinfo(0);
+			setarray $playerinfo$[0],getcharid(3);
+			//set .@player$,strcharinfo(0);
+			//set .@playerinfo$,getcharid(3);
+			atcommand "@hide";
+			atcommand "@mute 100 "+strcharinfo(0);
+			sleep2 1000;
+			mes "Please input your password, before your 60 seconds are up.";
+			set @input$,"";
+			input(@input$);
+			if(@input$ == $@Password$) {
+				//set .@player$,strcharinfo(0);
+				//set .@playerinfo$,getcharid(3);
+				mes "Welcome to our Server.";
+				close2;
+				stopnpctimer;
+				for( set $a,0; $a < getarraysize($player$); set $a,$a + 1){
+					attachrid($playerinfo$[$a]);
+					if(playerattached()){
+						if($player$[$a]==strcharinfo(0)) { callfunc "unlocker",$player$[$a],$playerinfo$[$a]; }
+						detachrid;
+					}
+				}
+				//callfunc "unlocker",.@player$,.@playerinfo$;
+            } else {
+				//set .@player$,strcharinfo(0);
+				//set .@playerinfo$,getcharid(3);
+				mes "Incorrect!";
+				close2;
+				for( set $a,0; $a < getarraysize($player$); set $a,$a + 1){
+					attachrid($playerinfo$[$a]);
+					if(playerattached()){
+						if($player$[$a]==strcharinfo(0)) { callfunc "locker",$player$[$a],$playerinfo$[$a]; }
+						detachrid;
+					}
+				}
+				//callfunc "kicker",.@player$,.@playerinfo$;
+			}
+        }
+	end;
+	OnTimer60000:
+		for( set $a,0; $a < getarraysize($player$); set $a,$a + 1){
+			attachrid($playerinfo$[$a]);
+			if(playerattached()){
+				if($player$[$a]==strcharinfo(0)) { callfunc "kicker",$player$[$a],$playerinfo$[$a]; }
+				detachrid;
+			}
+		}
+		end;
+    OnInit:
+        set $@Password$, "gothic";
+		end;
+	OnInterIfInit:
+		setarray $player$[0],"","","","","","";
+		setarray $playerinfo$[0],"","","","","","";
+		end;
+}
+
+function	script	unlocker	{
+detachrid;
+atcommand "@unmute "+getarg(0);
+attachrid(getarg(1));
+atcommand "@hide";
+//set .@player$,"";
+//set .@playerinfo$,"";
+close;
+end;
+}
+
+
+function	script	kicker	{
+detachrid;
+atcommand "@unmute "+getarg(0);
+attachrid(getarg(1));
+atcommand "@kick "+strcharinfo(0);
+close;
+end;
+}

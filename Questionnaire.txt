@@ -1,0 +1,45 @@
+//By Skorm
+aethra,100,100,2	script	Questionnaire	100,{
+
+//Start the timer.
+if(getgmlevel()>20) {mes "Would you like to start the event?"; if(select("Yes:No")-1){close;} startnpctimer; close;}
+
+if(!getnpctimer(0)) end;
+
+//Create the list.
+setarray .@questions$[0],"Where does FBH spawn?","What's Kiels full name?","Where is Waldo?","Who gives you the Hot-blooded Headband.","Who's the best GM ever?!";
+setarray .@answers1$[0],"abbey02","Kiel Hyre","No clue","Npc in Yuno","Faerie"; //Correct answers go here.
+setarray .@answers2$[0],"abbey2","Kiel Hyrule","Nifelhiem","Npc in Prontera","BlahBlah";
+setarray .@answers3$[0],"abby03","Kiel-D-01","Prontera","Npc in Umbala","Everyone!";
+setarray .@answers4$[0],"abbey03","Kiel-D-10","Islude","Npc in Gonryun","I like apples.";
+
+//Group Answers
+cleararray .@answers$[0],"",128;
+for(set .@a,0; .@a < 4; set .@a,.@a + 1) {
+	set .@answers$[.@a], .@answers$ + getd(".@answers"+.@a+"$["+$question+"]") + ":";
+}
+
+// Randomize Answer Order
+set .@r, rand(0,getarraysize(.@answers$)-1);
+for (set .@i,getarraysize(.@answers$) - 1; .@i > 0;set .@i,.@i-1){
+    set .@n, rand(.@r,.@i);
+    set .@temp, .@answers$[.@i];
+    set .@answers$[.@i], .@answers$[.@n];
+    set .@answers$[.@n], .@temp;
+}
+
+//Create user friendly menu.
+set .@menu$,"";
+for(set .@a,0; .@a < 4; set .@a,.@a + 1) {
+	set .@menu$, .@menu$ + "[" + .@a + "] " + getd(".@answers$["+.@a+"]") + ":";
+}
+select(.@menu$);
+set answer,@menu;
+mes "Your answer has been recorded.";
+close;
+
+OnTimer60000:
+if(playerattached()){ dispbottom "I'm sorry your times up!"; getmapxy(.@mapname$,.@mapx,.@mapy,0); warp(.@mapname$,.@mapx,.@mapy); }
+set answer,0; //reset answers
+set $question,rand(getarraysize(.@questions)); //select a new question
+}
